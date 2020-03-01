@@ -1,12 +1,13 @@
-package com.e.truehomemobile
+package com.e.truehomemobile.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.e.truehomemobile.R
 
-class MainActivity : AppCompatActivity() {
+class LogoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_logo)
     }
 }
