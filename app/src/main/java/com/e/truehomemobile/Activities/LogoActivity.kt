@@ -14,8 +14,7 @@ class LogoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logo)
 
-        val spinRight = AnimationUtils.loadAnimation(this, R.anim.spinright)
-        spinRight.repeatCount = 10
+        val spinRight = AnimationUtils.loadAnimation(this, R.anim.spin_right)
         val loadingBar = findViewById(R.id.loadingBar) as ImageView
 
 
