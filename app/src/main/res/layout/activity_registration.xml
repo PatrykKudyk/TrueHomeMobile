@@ -11,7 +11,7 @@
         android:id="@+id/logoImageView"
         android:layout_width="130dp"
         android:layout_height="124dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fields_button_layout"
         android:layout_width="350dp"
-        android:layout_height="420dp"
+        android:layout_height="450dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
