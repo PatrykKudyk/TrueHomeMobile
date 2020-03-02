@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.LoginActivity"></activity>
+        <activity android:name=".Activities.RegistrationActivity"></activity>
+        <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.LogoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
