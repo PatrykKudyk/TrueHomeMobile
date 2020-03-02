@@ -17,12 +17,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         startAnimations()
+        passwordFontSetting()
 
+    }
+
+    private fun passwordFontSetting() {
         val password_field_layout : TextInputLayout = findViewById(R.id.password_field_layout)
         val typeface = ResourcesCompat.getFont(this, R.font.josefinsansregular)
         password_field_layout.setTypeface(typeface)
-
-
     }
 
     private fun startAnimations() {
