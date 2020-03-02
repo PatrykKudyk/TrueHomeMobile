@@ -1,10 +1,13 @@
 package com.e.truehomemobile.Activities
 
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.R
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -14,6 +17,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         startAnimations()
+
+        val password_field_layout : TextInputLayout = findViewById(R.id.password_field_layout)
+        val typeface = ResourcesCompat.getFont(this, R.font.josefinsansregular)
+        password_field_layout.setTypeface(typeface)
+
+
     }
 
     private fun startAnimations() {
