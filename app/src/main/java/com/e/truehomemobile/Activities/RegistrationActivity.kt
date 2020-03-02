@@ -17,6 +17,10 @@ class RegistrationActivity : AppCompatActivity() {
         openingAnimations()
         passwordFontSetting()
 
+        register_button.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun passwordFontSetting() {
