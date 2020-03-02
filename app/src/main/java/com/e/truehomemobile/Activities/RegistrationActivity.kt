@@ -21,6 +21,10 @@ class RegistrationActivity : AppCompatActivity() {
             finish()
         }
 
+        backTextView.setOnClickListener{
+            finish()
+        }
+
     }
 
     private fun passwordFontSetting() {
