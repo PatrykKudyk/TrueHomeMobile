@@ -7,18 +7,96 @@
     android:background="@color/colorBaseBackground"
     tools:context=".Activities.LoginActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:fontFamily="@font/josefinsansbold"
-        android:text="@string/login_activity_title"
-        android:textSize="30sp"
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login_field_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/josefinsansregular"
+            android:hint="@string/hint_login"
+            android:inputType="text"
+            android:textSize="22sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_field_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_field_layout"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/josefinsansregular"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:textSize="22sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="130dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon" />
+
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:id="@+id/login_button"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/ligh_purple_button_background"
+        android:fontFamily="@font/josefinsansbold"
+        android:text="@string/login_button"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBaseBackground"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.819"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_field_layout" />
+
+    <Button
+        android:id="@+id/register_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/dark_purple_button_background"
+        android:fontFamily="@font/josefinsansbold"
+        android:text="@string/registration_button"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBaseBackground"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_field_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

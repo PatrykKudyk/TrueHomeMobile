@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">TrueHomeMobile</string>
+    <string name="app_name">TrueHome</string>
     <string name="app_logo_name">True Home</string>
     <string name="login_activity_title">Logowanie</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Hasło</string>
+    <string name="login_button">Zaloguj</string>
+    <string name="register_button">Zarejestruj</string>
+    <string name="registration_button">Rejestracja</string>
 </resources>
