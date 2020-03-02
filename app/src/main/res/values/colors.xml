@@ -3,5 +3,6 @@
     <color name="colorPrimary">#5F41B0</color>
     <color name="colorPrimaryDark">#503187</color>
     <color name="colorBaseBackground">#ECE7F5</color>
+    <color name="colorLayoutBackgroundLightPurple">#E1D7EB</color>
 
 </resources>
