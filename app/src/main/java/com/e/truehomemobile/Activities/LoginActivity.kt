@@ -1,5 +1,6 @@
 package com.e.truehomemobile.Activities
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -28,11 +29,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         startAnimations()
-        passwordFontSetting()
+        initFonts()
 
         register_button.setOnClickListener {
             val intent = Intent(this, RegistrationActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 0)
         }
 
         loginButton.setOnClickListener{
@@ -40,7 +41,8 @@ class LoginActivity : AppCompatActivity() {
                 loginEditText.text.clear()
                 passwordEditText.text.clear()
             }else{
-                Toast.makeText(this,"Wypełnij wszystkie pola", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(getStringIdentifier(this,
+                    "toast_fill_all_fields")), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -49,18 +51,18 @@ class LoginActivity : AppCompatActivity() {
     private fun areFieldsFilled(login: EditText, password: EditText): Boolean{
         var isCorrect = false
         if(login.text.toString().equals("")){
-            login.setError("Pole nie może być puste")
+            login.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
         }else{
             isCorrect = true
         }
         if(password.text.toString().equals("")) {
-            password.setError("Pole nie może być puste")
+            password.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
             isCorrect = false
         }
         return isCorrect
     }
 
-    private fun passwordFontSetting() {
+    private fun initFonts() {
         val password_field_layout : TextInputLayout = findViewById(R.id.password_field_layout)
         val typeface = ResourcesCompat.getFont(this, R.font.josefinsansregular)
         password_field_layout.setTypeface(typeface)
@@ -77,6 +79,10 @@ class LoginActivity : AppCompatActivity() {
         password_field_layout.startAnimation(topToBottom)
         login_button.startAnimation(bottomToTop)
         register_button.startAnimation(bottomToTop)
+    }
+
+    private fun getStringIdentifier(context: Context, name: String): Int {
+        return context.getResources().getIdentifier(name, "string", context.getPackageName())
     }
 
     override fun onBackPressed() {

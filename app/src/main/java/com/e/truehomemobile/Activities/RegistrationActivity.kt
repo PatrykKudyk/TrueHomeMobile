@@ -15,7 +15,7 @@ class RegistrationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_registration)
 
         openingAnimations()
-        passwordFontSetting()
+        initFonts()
 
         register_button.setOnClickListener {
             finish()
@@ -27,7 +27,7 @@ class RegistrationActivity : AppCompatActivity() {
 
     }
 
-    private fun passwordFontSetting() {
+    private fun initFonts() {
         val passwordFieldLayout : TextInputLayout = findViewById(R.id.password_field_layout)
         val passwordRepeatFieldLayout : TextInputLayout = findViewById(R.id.password_repeat_field_layout)
         val typeface = ResourcesCompat.getFont(this, R.font.josefinsansregular)
