@@ -9,4 +9,7 @@
     <string name="login_button">Zaloguj</string>
     <string name="register_button">Zarejestruj</string>
     <string name="registration_button">Rejestracja</string>
+    <string name="back_text">Wróć do logowania</string>
+    <string name="toast_fill_all_fields">Wypełnij wszystkie pola</string>
+    <string name="field_error_empty_field">Pole nie może być puste</string>
 </resources>

@@ -11,7 +11,7 @@
         android:id="@+id/logoImageView"
         android:layout_width="130dp"
         android:layout_height="124dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,13 +22,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fields_button_layout"
         android:layout_width="350dp"
-        android:layout_height="420dp"
+        android:layout_height="470dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoImageView"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/fields_background_ligt"
-        >
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalBottom"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVerticalRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVerticalLeft"
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_field_layout"
@@ -56,18 +57,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayout.OutlineBox.CustomFont"
             android:id="@+id/password_field_layout"
+            style="@style/TextInputLayout.OutlineBox.CustomFont"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/login_field_layout"
-            app:boxStrokeColor="@color/colorPrimaryDark"
-            app:passwordToggleEnabled="true"
-            >
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_field"
@@ -76,25 +76,23 @@
                 android:layout_marginTop="60dp"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:textSize="22sp"
                 android:textColor="@color/colorPrimaryDark"
-                />
+                android:textSize="22sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayout.OutlineBox.CustomFont"
             android:id="@+id/password_repeat_field_layout"
+            style="@style/TextInputLayout.OutlineBox.CustomFont"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_field_layout"
-            app:boxStrokeColor="@color/colorPrimaryDark"
-            app:passwordToggleEnabled="true"
-            >
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_repeat_field"
@@ -103,26 +101,23 @@
                 android:layout_marginTop="60dp"
                 android:hint="@string/hint_repeat_password"
                 android:inputType="textPassword"
-                android:textSize="22sp"
                 android:textColor="@color/colorPrimaryDark"
-                />
-
+                android:textSize="22sp" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/TextInputLayout.OutlineBox.CustomFont"
             android:id="@+id/email_field_layout"
+            style="@style/TextInputLayout.OutlineBox.CustomFont"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_repeat_field_layout"
-            app:boxStrokeColor="@color/colorPrimaryDark"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/password_repeat_field_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_field"
@@ -131,9 +126,8 @@
                 android:layout_marginTop="60dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
-                android:textSize="22sp"
                 android:textColor="@color/colorPrimaryDark"
-                />
+                android:textSize="22sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -144,7 +138,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/dark_purple_button_background"
             android:fontFamily="@font/josefinsansbold"
-            android:text="@string/registration_button"
+            android:text="@string/register_button"
             android:textAllCaps="false"
             android:textColor="@color/colorBaseBackground"
             android:textSize="16sp"
@@ -152,7 +146,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_field_layout" />
 
+        <TextView
+            android:id="@+id/backTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/josefinsansregular"
+            android:text="@string/back_text"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_button" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerticalLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="25dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVerticalRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="25dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontalBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="25dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
