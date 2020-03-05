@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
         register_button.setOnClickListener {
             val intent = Intent(this, RegistrationActivity::class.java)
             startActivityForResult(intent, 0)
+            clearFields()
         }
 
         loginButton.setOnClickListener{
@@ -46,6 +47,19 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun clearFields() {
+        clearFieldsErrors()
+        login_field.text = null
+        password_field.text = null
+    }
+
+    private fun clearFieldsErrors() {
+        login_field.setError(null)
+        login_field.clearFocus()
+        password_field.setError(null)
+        password_field.clearFocus()
     }
 
     private fun areFieldsFilled(login: EditText, password: EditText): Boolean{
