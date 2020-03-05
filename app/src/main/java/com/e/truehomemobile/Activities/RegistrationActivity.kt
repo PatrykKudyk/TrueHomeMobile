@@ -18,7 +18,7 @@ class RegistrationActivity : AppCompatActivity() {
         initFonts()
 
         register_button.setOnClickListener {
-            finish()
+//            finish()
         }
 
         backTextView.setOnClickListener{
