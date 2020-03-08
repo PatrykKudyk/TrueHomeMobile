@@ -20,8 +20,13 @@ class RegistrationActivity : AppCompatActivity() {
         initFonts()
 
         register_button.setOnClickListener {
+            clearFieldErrors()
             if(areFieldsCorrect()){
-                finish()
+                if(arePasswordsEqual() && areEmailsEqual() && isLoginLengthCorrect()){
+                    if(isPasswordCorrect() && isEmailCorrect()){
+                        finish()
+                    }
+                }
             }else{
                 Toast.makeText(this,getString(getStringIdentifier(this,
                     "toast_fill_all_fields")), Toast.LENGTH_SHORT).show()
@@ -32,6 +37,76 @@ class RegistrationActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun isEmailCorrect(): Boolean {
+        val email = email_field.text.toString()
+        val emailSplitted = email.split("@")
+        if(emailSplitted.size != 2){
+            email_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_email_incorrect"))
+            return false
+        }
+        val secondEmailSplit = emailSplitted[1].split(".")
+        if(secondEmailSplit.size < 2){
+            email_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_email_incorrect"))
+            return false
+        }
+        return true
+    }
+
+    private fun isPasswordCorrect(): Boolean {
+        val password = password_field.text.toString().toCharArray()
+        var lowerCaseFlag = false
+        var upperCaseFlag = false
+        var numberFlag = false
+        for( c in password){
+            if(Character.isDigit(c)){
+                numberFlag = true
+            }else if(Character.isLowerCase(c)){
+                lowerCaseFlag = true
+            }else if(Character.isUpperCase(c)){
+                upperCaseFlag = true
+            }
+        }
+        if(numberFlag && lowerCaseFlag && upperCaseFlag){
+            return true
+        }
+        password_field_layout.error = getString(getStringIdentifier(this,
+            "field_error_password_incorrect_symbols"))
+//        password_repeat_field_layout.error = getString(getStringIdentifier(this,
+//            "field_error_password_incorrect_symbols"))
+        return false
+    }
+
+    private fun isLoginLengthCorrect(): Boolean {
+        if(login_field.text.toString().length >= 4){
+            return true
+        }
+        login_field_layout.error = getString(getStringIdentifier(this,
+            "field_error_login_incorrect_length"))
+        return false
+    }
+
+    private fun areEmailsEqual(): Boolean {
+        if(email_field.text.toString() == email_repeat_field.text.toString()){
+            return true
+        }
+        email_repeat_field_layout.error = getString(getStringIdentifier(this,
+            "field_error_emails_not_equal"))
+        return false
+    }
+
+    private fun arePasswordsEqual(): Boolean {
+        if(password_field.text.toString() == password_repeat_field.text.toString()){
+            return true
+        }
+        password_repeat_field_layout.error = getString(getStringIdentifier(this,
+            "field_error_passwords_not_equal"))
+        password_field.text = null
+        password_repeat_field.text = null
+        return false
     }
 
     private fun areFieldsCorrect(): Boolean {
@@ -71,6 +146,19 @@ class RegistrationActivity : AppCompatActivity() {
                 "field_error_empty_field"))
         }
         return isCorrect
+    }
+
+    private fun clearFieldErrors(){
+        login_field_layout.error = null
+        login_field.clearFocus()
+        email_field_layout.error = null
+        email_field.clearFocus()
+        email_repeat_field_layout.error = null
+        email_repeat_field.clearFocus()
+        password_field_layout.error = null
+        password_field.clearFocus()
+        password_repeat_field_layout.error = null
+        password_repeat_field.clearFocus()
     }
 
     private fun initFonts() {

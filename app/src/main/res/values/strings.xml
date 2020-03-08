@@ -13,4 +13,9 @@
     <string name="back_text">Wróć do logowania</string>
     <string name="toast_fill_all_fields">Wypełnij wszystkie pola</string>
     <string name="field_error_empty_field">Pole nie może być puste</string>
+    <string name="field_error_passwords_not_equal">Podane hasła muszą być takie same</string>
+    <string name="field_error_emails_not_equal">Podane e-maile muszą być takie same</string>
+    <string name="field_error_login_incorrect_length">Login musi posiadać conajmniej 4 znaki</string>
+    <string name="field_error_password_incorrect_symbols">Hasło musi zawierać conajmniej jedną dużą i małą literę oraz cyfrę</string>
+    <string name="field_error_email_incorrect">Podany e-mail jest niepoprawny</string>
 </resources>
