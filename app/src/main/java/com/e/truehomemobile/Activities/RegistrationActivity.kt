@@ -1,6 +1,8 @@
 package com.e.truehomemobile.Activities
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +27,10 @@ class RegistrationActivity : AppCompatActivity() {
             if(areFieldsCorrect()){
                 makeSuccessActions()
                 Handler().postDelayed({
+                    val intent = Intent()
+                    intent.putExtra("login", login_field.text.toString())
+
+                    setResult(Activity.RESULT_OK, intent)
                     finish()
                 }, 2000)
             }

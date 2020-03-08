@@ -1,5 +1,6 @@
 package com.e.truehomemobile.Activities
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
@@ -95,6 +96,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getStringIdentifier(context: Context, name: String): Int {
         return context.resources.getIdentifier(name, "string", context.packageName)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == 0){
+            if(resultCode == Activity.RESULT_OK){
+                val login = data?.getStringExtra("login")
+                login_field.setText(login)
+            }
+        }else{
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onBackPressed() {
