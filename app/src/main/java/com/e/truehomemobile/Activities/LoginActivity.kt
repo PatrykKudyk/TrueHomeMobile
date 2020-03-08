@@ -38,7 +38,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener{
-            if(areFieldsFilled(loginEditText, passwordEditText)){
+            clearFieldsErrors()
+            if(areFieldsFilled()){
                 loginEditText.text.clear()
                 passwordEditText.text.clear()
             }else{
@@ -56,21 +57,21 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun clearFieldsErrors() {
-        login_field.setError(null)
+        login_field_layout.setError(null)
         login_field.clearFocus()
-        password_field.setError(null)
+        password_field_layout.setError(null)
         password_field.clearFocus()
     }
 
-    private fun areFieldsFilled(login: EditText, password: EditText): Boolean{
+    private fun areFieldsFilled(): Boolean{
         var isCorrect = false
-        if(login.text.toString().equals("")){
-            login.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
+        if(login_field.text.toString().equals("")){
+            login_field_layout.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
         }else{
             isCorrect = true
         }
-        if(password.text.toString().equals("")) {
-            password.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
+        if(password_field.text.toString().equals("")) {
+            password_field_layout.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
             isCorrect = false
         }
         return isCorrect
