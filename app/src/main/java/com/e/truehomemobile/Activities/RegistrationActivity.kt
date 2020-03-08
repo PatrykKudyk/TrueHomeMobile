@@ -22,14 +22,7 @@ class RegistrationActivity : AppCompatActivity() {
         register_button.setOnClickListener {
             clearFieldErrors()
             if(areFieldsCorrect()){
-                if(arePasswordsEqual() && areEmailsEqual() && isLoginLengthCorrect()){
-                    if(isPasswordCorrect() && isEmailCorrect()){
-                        finish()
-                    }
-                }
-            }else{
-                Toast.makeText(this,getString(getStringIdentifier(this,
-                    "toast_fill_all_fields")), Toast.LENGTH_SHORT).show()
+               finish()
             }
         }
 
@@ -45,11 +38,15 @@ class RegistrationActivity : AppCompatActivity() {
         if(emailSplitted.size != 2){
             email_field_layout.error = getString(getStringIdentifier(this,
                 "field_error_email_incorrect"))
+            email_repeat_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_email_incorrect"))
             return false
         }
         val secondEmailSplit = emailSplitted[1].split(".")
         if(secondEmailSplit.size < 2){
             email_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_email_incorrect"))
+            email_repeat_field_layout.error = getString(getStringIdentifier(this,
                 "field_error_email_incorrect"))
             return false
         }
@@ -75,8 +72,10 @@ class RegistrationActivity : AppCompatActivity() {
         }
         password_field_layout.error = getString(getStringIdentifier(this,
             "field_error_password_incorrect_symbols"))
-//        password_repeat_field_layout.error = getString(getStringIdentifier(this,
-//            "field_error_password_incorrect_symbols"))
+        password_repeat_field_layout.error = getString(getStringIdentifier(this,
+            "field_error_password_incorrect_symbols"))
+        password_field.text = null
+        password_repeat_field.text = null
         return false
     }
 
@@ -109,12 +108,36 @@ class RegistrationActivity : AppCompatActivity() {
         return false
     }
 
+    private fun makeFirstLayerFieldTests(): Boolean{
+        var isPassed = arePasswordsEqual()
+        if(!areEmailsEqual()){
+            isPassed = false
+        }
+        if(!isLoginLengthCorrect()){
+            isPassed = false
+        }
+        return isPassed
+    }
+
+    private fun makeSecondLayerFieldTests(): Boolean{
+        var isPassed = isPasswordCorrect()
+        if(!isEmailCorrect())
+        {
+            isPassed = false
+        }
+        return isPassed
+    }
+
     private fun areFieldsCorrect(): Boolean {
         if(areAllFieldsFilled()){
-            return true
+            if(makeFirstLayerFieldTests()){  //i had to create a method there otherwise, the test were not ran simultaneously
+                if(makeSecondLayerFieldTests()){                        //same as previously
+                    return true
+                }
+                return false
+            }
+            return false
         }
-        Toast.makeText(this, getString(getStringIdentifier(this,
-            "toast_fill_all_fields")), Toast.LENGTH_SHORT).show()
         return false
     }
 
