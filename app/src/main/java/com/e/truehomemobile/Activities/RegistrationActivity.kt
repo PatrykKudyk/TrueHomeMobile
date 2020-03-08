@@ -3,8 +3,9 @@ package com.e.truehomemobile.Activities
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.R
 import com.google.android.material.textfield.TextInputLayout
@@ -22,7 +23,10 @@ class RegistrationActivity : AppCompatActivity() {
         register_button.setOnClickListener {
             clearFieldErrors()
             if(areFieldsCorrect()){
-               finish()
+                makeSuccessActions()
+                Handler().postDelayed({
+                    finish()
+                }, 2000)
             }
         }
 
@@ -32,10 +36,25 @@ class RegistrationActivity : AppCompatActivity() {
 
     }
 
+    private fun makeSuccessActions() {
+        val layoutAnimation = AnimationUtils.loadAnimation(this,
+            R.anim.gone_to_down)
+        fields_button_layout.startAnimation(layoutAnimation)
+        fields_button_layout.visibility = View.GONE
+        registeredTextView.visibility = View.VISIBLE
+    }
+
     private fun isEmailCorrect(): Boolean {
         val email = email_field.text.toString()
         val emailSplitted = email.split("@")
         if(emailSplitted.size != 2){
+            email_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_email_incorrect"))
+            email_repeat_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_email_incorrect"))
+            return false
+        }
+        if(emailSplitted[1].isEmpty()){
             email_field_layout.error = getString(getStringIdentifier(this,
                 "field_error_email_incorrect"))
             email_repeat_field_layout.error = getString(getStringIdentifier(this,
@@ -49,6 +68,14 @@ class RegistrationActivity : AppCompatActivity() {
             email_repeat_field_layout.error = getString(getStringIdentifier(this,
                 "field_error_email_incorrect"))
             return false
+        }
+        for(string in secondEmailSplit){
+            if(string.isEmpty()){
+                email_field_layout.error = getString(getStringIdentifier(this,
+                    "field_error_email_incorrect"))
+                email_repeat_field_layout.error = getString(getStringIdentifier(this,
+                    "field_error_email_incorrect"))
+            }
         }
         return true
     }
@@ -121,8 +148,7 @@ class RegistrationActivity : AppCompatActivity() {
 
     private fun makeSecondLayerFieldTests(): Boolean{
         var isPassed = isPasswordCorrect()
-        if(!isEmailCorrect())
-        {
+        if(!isEmailCorrect()) {
             isPassed = false
         }
         return isPassed
