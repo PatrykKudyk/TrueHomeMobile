@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="130dp"
-        android:layout_height="124dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -22,8 +22,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fields_button_layout"
         android:layout_width="350dp"
-        android:layout_height="470dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="485dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/fields_background_ligt"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalBottom"
@@ -48,11 +48,10 @@
                 android:id="@+id/login_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
                 android:hint="@string/hint_login"
                 android:inputType="text"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,18 +65,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_field_layout"
+            app:layout_constraintTop_toBottomOf="@+id/email_repeat_field_layout"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -98,11 +96,10 @@
                 android:id="@+id/password_repeat_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
                 android:hint="@string/hint_repeat_password"
                 android:inputType="textPassword"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -117,17 +114,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_repeat_field_layout">
+            app:layout_constraintTop_toBottomOf="@+id/login_field_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_repeat_field_layout"
+            style="@style/TextInputLayout.OutlineBox.CustomFont"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/colorPrimaryDark"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_field_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_repeat_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_repeat_email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -135,7 +153,6 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="320dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/dark_purple_button_background"
             android:fontFamily="@font/josefinsansbold"
             android:text="@string/register_button"
@@ -144,7 +161,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email_field_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/password_repeat_field_layout" />
 
         <TextView
             android:id="@+id/backTextView"

@@ -6,6 +6,7 @@
     <string name="hint_password">Hasło</string>
     <string name="hint_repeat_password">Powtórz hasło</string>
     <string name="hint_email">E-mail</string>
+    <string name="hint_repeat_email">Powtórz e-mail</string>
     <string name="login_button">Zaloguj</string>
     <string name="register_button">Zarejestruj</string>
     <string name="registration_button">Rejestracja</string>
