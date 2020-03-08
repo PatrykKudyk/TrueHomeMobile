@@ -42,9 +42,6 @@ class LoginActivity : AppCompatActivity() {
             if(areFieldsFilled()){
                 loginEditText.text.clear()
                 passwordEditText.text.clear()
-            }else{
-                Toast.makeText(this,getString(getStringIdentifier(this,
-                    "toast_fill_all_fields")), Toast.LENGTH_SHORT).show()
             }
         }
 
