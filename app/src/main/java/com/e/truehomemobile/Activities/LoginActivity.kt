@@ -57,21 +57,21 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun clearFieldsErrors() {
-        login_field_layout.setError(null)
+        login_field_layout.error = null
         login_field.clearFocus()
-        password_field_layout.setError(null)
+        password_field_layout.error = null
         password_field.clearFocus()
     }
 
     private fun areFieldsFilled(): Boolean{
         var isCorrect = false
-        if(login_field.text.toString().equals("")){
-            login_field_layout.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
+        if(login_field.text.toString() == ""){
+            login_field_layout.error = getString(getStringIdentifier(this, "field_error_empty_field"))
         }else{
             isCorrect = true
         }
-        if(password_field.text.toString().equals("")) {
-            password_field_layout.setError(getString(getStringIdentifier(this, "field_error_empty_field")))
+        if(password_field.text.toString() == "") {
+            password_field_layout.error = getString(getStringIdentifier(this, "field_error_empty_field"))
             isCorrect = false
         }
         return isCorrect
@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initFonts() {
         val password_field_layout : TextInputLayout = findViewById(R.id.password_field_layout)
         val typeface = ResourcesCompat.getFont(this, R.font.josefinsansregular)
-        password_field_layout.setTypeface(typeface)
+        password_field_layout.typeface = typeface
     }
 
     private fun startAnimations() {
@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun getStringIdentifier(context: Context, name: String): Int {
-        return context.getResources().getIdentifier(name, "string", context.getPackageName())
+        return context.resources.getIdentifier(name, "string", context.packageName)
     }
 
     override fun onBackPressed() {
