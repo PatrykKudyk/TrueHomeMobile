@@ -1,8 +1,10 @@
 package com.e.truehomemobile.Activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.R
 import com.google.android.material.textfield.TextInputLayout
@@ -18,13 +20,57 @@ class RegistrationActivity : AppCompatActivity() {
         initFonts()
 
         register_button.setOnClickListener {
-//            finish()
+            if(areFieldsCorrect()){
+                finish()
+            }else{
+                Toast.makeText(this,getString(getStringIdentifier(this,
+                    "toast_fill_all_fields")), Toast.LENGTH_SHORT).show()
+            }
         }
 
         backTextView.setOnClickListener{
             finish()
         }
 
+    }
+
+    private fun areFieldsCorrect(): Boolean {
+        if(areAllFieldsFilled()){
+            return true
+        }
+        Toast.makeText(this, getString(getStringIdentifier(this,
+            "toast_fill_all_fields")), Toast.LENGTH_SHORT).show()
+        return false
+    }
+
+    private fun areAllFieldsFilled(): Boolean {
+        var isCorrect = true
+        if(login_field.text.toString() == ""){
+            isCorrect = false
+            login_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_empty_field"))
+        }
+        if(password_field.text.toString() == ""){
+            isCorrect = false
+            password_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_empty_field"))
+        }
+        if(password_repeat_field.text.toString() == ""){
+            isCorrect = false
+            password_repeat_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_empty_field"))
+        }
+        if(email_field.text.toString() == ""){
+            isCorrect = false
+            email_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_empty_field"))
+        }
+        if(email_repeat_field.text.toString() == ""){
+            isCorrect = false
+            email_repeat_field_layout.error = getString(getStringIdentifier(this,
+                "field_error_empty_field"))
+        }
+        return isCorrect
     }
 
     private fun initFonts() {
@@ -41,6 +87,10 @@ class RegistrationActivity : AppCompatActivity() {
 
         logoImageView.startAnimation(imageAnimation)
         fields_button_layout.startAnimation(layoutAnimation)
+    }
+
+    private fun getStringIdentifier(context: Context, name: String): Int {
+        return context.resources.getIdentifier(name, "string", context.packageName)
     }
 
     override fun onBackPressed() {

@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,14 +22,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fields_button_layout"
         android:layout_width="350dp"
-        android:layout_height="485dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="520dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/fields_background_ligt"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontalBottom"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVerticalRight"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toStartOf="@+id/guidelineVerticalLeft"
-        app:layout_constraintTop_toBottomOf="@+id/logoImageView">
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView"
+        app:layout_constraintVertical_bias="0.172">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_field_layout"
@@ -159,6 +160,7 @@
             android:textAllCaps="false"
             android:textColor="@color/colorBaseBackground"
             android:textSize="16sp"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_repeat_field_layout" />
@@ -167,13 +169,15 @@
             android:id="@+id/backTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/josefinsansregular"
             android:text="@string/back_text"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_button" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -197,6 +201,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="25dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
