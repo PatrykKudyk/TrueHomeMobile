@@ -57,8 +57,8 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
     }
 
     private fun clearFieldsErrors(){
-        errorsHandler.clearErrors(activity.login_field_layout)
-        errorsHandler.clearErrors(activity.password_field_layout)
+        errorsHandler.clearError(activity.login_field_layout)
+        errorsHandler.clearError(activity.password_field_layout)
         activity.login_field.clearFocus()
         activity.password_field.clearFocus()
     }
