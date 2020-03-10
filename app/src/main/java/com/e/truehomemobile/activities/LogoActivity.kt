@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.e.truehomemobile.activityHolders.AnimationsHolder
 import com.e.truehomemobile.R
+import com.e.truehomemobile.activityHolders.logic.LogoLogicHolder
 import kotlinx.android.synthetic.main.activity_logo.*
 
 class LogoActivity : AppCompatActivity() {
@@ -14,13 +15,8 @@ class LogoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logo)
 
-        val animationHolder = AnimationsHolder(this)
-        animationHolder.spin(loadingBar,800, 0)
-
-        Handler().postDelayed({
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        },3700)
+        val logicHolder = LogoLogicHolder(this, this)
+        logicHolder.handleActivity()
     }
 
     override fun onBackPressed() {
