@@ -1,4 +1,4 @@
-package com.e.truehomemobile.Activities
+package com.e.truehomemobile.activities
 
 import android.app.Activity
 import android.content.Context

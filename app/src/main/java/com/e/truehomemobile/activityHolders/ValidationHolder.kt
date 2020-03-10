@@ -1,6 +1,5 @@
-package com.e.truehomemobile.ActivityHolders.LogicHolders
+package com.e.truehomemobile.activityHolders
 
-import android.view.View
 import android.widget.EditText
 
 class ValidationHolder {

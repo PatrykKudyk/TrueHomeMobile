@@ -1,4 +1,4 @@
-package com.e.truehomemobile.ActivityHolders
+package com.e.truehomemobile.activityHolders
 
 import android.content.Context
 import android.view.View

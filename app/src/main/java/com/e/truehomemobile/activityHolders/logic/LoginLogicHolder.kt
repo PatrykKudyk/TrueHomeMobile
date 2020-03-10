@@ -1,11 +1,13 @@
-package com.e.truehomemobile.ActivityHolders.LogicHolders
+package com.e.truehomemobile.activityHolders.logic
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.res.ResourcesCompat
-import com.e.truehomemobile.Activities.RegistrationActivity
-import com.e.truehomemobile.ActivityHolders.AnimationsHolder
+import com.e.truehomemobile.activities.RegistrationActivity
+import com.e.truehomemobile.activityHolders.AnimationsHolder
+import com.e.truehomemobile.activityHolders.ErrorsHandler
+import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.R
 import kotlinx.android.synthetic.main.activity_login.*
 

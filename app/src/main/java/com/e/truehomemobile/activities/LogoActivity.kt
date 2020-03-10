@@ -1,12 +1,10 @@
-package com.e.truehomemobile.Activities
+package com.e.truehomemobile.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import com.e.truehomemobile.ActivityHolders.AnimationsHolder
+import com.e.truehomemobile.activityHolders.AnimationsHolder
 import com.e.truehomemobile.R
 import kotlinx.android.synthetic.main.activity_logo.*
 

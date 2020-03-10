@@ -1,10 +1,10 @@
-package com.e.truehomemobile.Activities
+package com.e.truehomemobile.activities
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.e.truehomemobile.ActivityHolders.LogicHolders.LoginLogicHolder
+import com.e.truehomemobile.activityHolders.logic.LoginLogicHolder
 import com.e.truehomemobile.R
 import kotlinx.android.synthetic.main.activity_login.*
 

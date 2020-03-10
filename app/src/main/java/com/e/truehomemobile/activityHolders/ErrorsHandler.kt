@@ -1,4 +1,4 @@
-package com.e.truehomemobile.ActivityHolders.LogicHolders
+package com.e.truehomemobile.activityHolders
 
 import android.content.Context
 import com.google.android.material.textfield.TextInputEditText
