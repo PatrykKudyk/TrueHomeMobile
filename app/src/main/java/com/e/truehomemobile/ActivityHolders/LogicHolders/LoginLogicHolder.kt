@@ -9,9 +9,11 @@ import com.e.truehomemobile.ActivityHolders.AnimationsHolder
 import com.e.truehomemobile.R
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginLogicHolder(val context: Context, val activity: Activity) {
+class LoginLogicHolder(private val context: Context, private val activity: Activity) {
 
-    val animationHolder = AnimationsHolder(context)
+    private val animationHolder = AnimationsHolder(context)
+    private val validationHolder = ValidationHolder()
+    private val errorsHandler = ErrorsHandler(context)
 
     fun initActivity(){
         makeStartAnimations()
@@ -34,15 +36,13 @@ class LoginLogicHolder(val context: Context, val activity: Activity) {
 
     private fun areFieldsFilled(): Boolean {
         var isCorrect = false
-        if(activity.login_field.text.toString() == ""){
-            activity.login_field_layout.error = context.getString(getStringIdentifier(context,
-                "field_error_empty_field"))
+        if(!validationHolder.isFieldFilled(activity.login_field)){
+            errorsHandler.setEmptyFieldError(activity.login_field_layout)
         }else{
             isCorrect = true
         }
-        if(activity.password_field.text.toString() == "") {
-            activity.password_field_layout.error = context.getString(getStringIdentifier(context,
-                "field_error_empty_field"))
+        if(!validationHolder.isFieldFilled(activity.password_field)) {
+            errorsHandler.setEmptyFieldError(activity.password_field_layout)
             isCorrect = false
         }
         return isCorrect
@@ -55,9 +55,9 @@ class LoginLogicHolder(val context: Context, val activity: Activity) {
     }
 
     private fun clearFieldsErrors(){
-        activity.login_field_layout.error = null
+        errorsHandler.clearErrors(activity.login_field_layout)
+        errorsHandler.clearErrors(activity.password_field_layout)
         activity.login_field.clearFocus()
-        activity.password_field_layout.error = null
         activity.password_field.clearFocus()
     }
 
@@ -73,9 +73,4 @@ class LoginLogicHolder(val context: Context, val activity: Activity) {
         val typeface = ResourcesCompat.getFont(context, R.font.josefinsansregular)
         activity.password_field_layout.typeface = typeface
     }
-
-    private fun getStringIdentifier(context: Context, name: String): Int {
-        return context.resources.getIdentifier(name, "string", context.packageName)
-    }
-
 }
