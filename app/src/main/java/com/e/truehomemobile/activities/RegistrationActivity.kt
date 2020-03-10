@@ -23,6 +23,7 @@ class RegistrationActivity : AppCompatActivity() {
             finish()
         }
 
+        logicHolder.handleFieldsListeners()
     }
 
 

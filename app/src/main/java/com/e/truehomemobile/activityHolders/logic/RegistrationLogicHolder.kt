@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.R
@@ -24,7 +26,6 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     fun handleRegisterButton(){
-        clearFieldErrors()
         if(areFieldsCorrect()){
             makeSuccessActions()
             Handler().postDelayed({
@@ -36,29 +37,122 @@ class RegistrationLogicHolder(private val context: Context, private val activity
         }
     }
 
+    fun handleFieldsListeners(){
+        handleLoginField()
+        handleEmailField()
+        handleEmailRepeatField()
+        handlePasswordField()
+        handlePasswordRepeatField()
+    }
+
+    private fun handlePasswordRepeatField() {
+        activity.password_repeat_field.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                arePasswordsEqual()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+    }
+
+    private fun handlePasswordField() {
+        activity.password_field.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(isPasswordLengthCorrect()){
+                    isPasswordCorrect()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+    }
+
+    private fun handleEmailRepeatField() {
+        activity.email_repeat_field.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                areEmailsEqual()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+    }
+
+    private fun handleEmailField() {
+        activity.email_field.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                isEmailCorrect()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+
+    private fun handleLoginField(){
+        activity.login_field.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                isLoginLengthCorrect()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+
     private fun isEmailCorrect(): Boolean {
+        errorsHandler.clearError(activity.email_field_layout)
         if(validationHolder.isEmailCorrect(activity.email_field.text.toString())){
             return true
         }
         errorsHandler.setIncorrectEmailError(activity.email_field_layout)
-        errorsHandler.setIncorrectEmailError(activity.email_repeat_field_layout)
         return false
     }
 
     private fun isPasswordCorrect(): Boolean {
-        if(!validationHolder.isLengthCorrect(activity.password_field.text.toString(), 8)){
-            errorsHandler.setPasswordLengthError(activity.password_field_layout)
-            return false
-        }
         if(validationHolder.isPasswordCorrect(activity.password_field.text.toString())){
+            errorsHandler.clearError(activity.password_field_layout)
             return true
         }
         errorsHandler.setIncorrectPasswordError(activity.password_field_layout)
         return false
     }
 
+    private fun isPasswordLengthCorrect(): Boolean{
+        if(validationHolder.isLengthCorrect(activity.password_field.text.toString(), 8)){
+            errorsHandler.clearError(activity.password_field_layout)
+            return true
+        }
+        errorsHandler.setPasswordLengthError(activity.password_field_layout)
+        return false
+    }
+
     private fun isLoginLengthCorrect(): Boolean {
         if(validationHolder.isLengthCorrect(activity.login_field.text.toString(), 4)){
+            errorsHandler.clearError(activity.login_field_layout)
             return true
         }
         errorsHandler.setLoginLengthError(activity.login_field_layout)
@@ -67,15 +161,16 @@ class RegistrationLogicHolder(private val context: Context, private val activity
 
     private fun areEmailsEqual(): Boolean {
         if(validationHolder.areFieldsEqual(activity.email_field, activity.email_repeat_field)){
+            errorsHandler.clearError(activity.email_repeat_field_layout)
             return true
         }
         errorsHandler.setEmailsNotEqualError(activity.email_repeat_field_layout)
-        errorsHandler.setEmailsNotEqualError(activity.email_field_layout)
         return false
     }
 
     private fun arePasswordsEqual(): Boolean {
         if(validationHolder.areFieldsEqual(activity.password_field, activity.password_repeat_field)){
+            errorsHandler.clearError(activity.password_repeat_field_layout)
             return true
         }
         errorsHandler.setPasswordsNotEqualError(activity.password_repeat_field_layout)
@@ -115,6 +210,7 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     private fun areAllFieldsFilled(): Boolean {
+        clearFieldErrors()
         var isCorrect = true
         if(!validationHolder.isFieldFilled(activity.login_field)){
             isCorrect = false
