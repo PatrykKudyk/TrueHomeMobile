@@ -64,6 +64,7 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
     }
 
     private fun makeStartAnimations(){
+        animationHolder.popUp(activity.login_card_view, 300, 200)
         animationHolder.fallFromTop(activity.logoImageView,600, 200)
         animationHolder.fallFromTop(activity.login_field_layout, 600, 250)
         animationHolder.fallFromTop(activity.password_field_layout, 600, 250)

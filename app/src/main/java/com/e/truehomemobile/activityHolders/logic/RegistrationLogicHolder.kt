@@ -256,7 +256,8 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     private fun makeStartAnimations(){
-        animationHolder.fallFromTop(activity.registration_card_view, 600, 320)
+        animationHolder.popUp(activity.registration_card_view, 300, 200)
+//        animationHolder.fallFromTop(activity.registration_card_view, 600, 320)
         animationHolder.flyFromBottom(activity.logoImageView, 600, 250)
     }
 
