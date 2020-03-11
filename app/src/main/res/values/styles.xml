@@ -10,6 +10,7 @@
 
     <!-- region TextInputLayout & TextInputEditText styles -->
     <style name="TextInputLayout.OutlineBox.CustomFont" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:theme">@style/ThemeOverlay.TextInputEditText.OutlinedBox.CustomFont</item>
     </style>
 
