@@ -26,6 +26,7 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     fun handleRegisterButton(){
+
         if(areFieldsCorrect()){
             makeSuccessActions()
             Handler().postDelayed({
