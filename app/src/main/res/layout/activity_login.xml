@@ -45,6 +45,7 @@
                     app:srcCompat="@drawable/icon" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/login_card_view"
                     android:layout_width="350dp"
                     android:layout_height="370dp"
                     android:layout_marginTop="32dp"
