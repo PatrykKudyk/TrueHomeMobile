@@ -250,14 +250,14 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     private fun makeSuccessActions() {
-        animationHolder.flyaway(activity.fields_button_layout, 500, 0, 3)
-        activity.fields_button_layout.visibility = View.GONE
+        animationHolder.flyaway(activity.registration_card_view, 500, 0, 3)
+        activity.registration_card_view.visibility = View.GONE
         activity.registeredTextView.visibility = View.VISIBLE
     }
 
     private fun makeStartAnimations(){
-        animationHolder.fallFromTop(activity.fields_button_layout, 600, 320)
-        animationHolder.flyFromBottom(activity.logoImageView, 600, 250)
+        animationHolder.popUp(activity.registration_card_view, 700, 1000)
+        animationHolder.flyFromBottom(activity.logoImageView, 700, 900)
     }
 
     private fun initFonts(){

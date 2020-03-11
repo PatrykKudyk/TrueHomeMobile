@@ -43,4 +43,11 @@ class AnimationsHolder(val context: Context) {
         animation.startOffset = offset
         view.startAnimation(animation)
     }
+
+    fun popUp(view: View, duration: Long, offset: Long){
+        val animation = AnimationUtils.loadAnimation(context, R.anim.pop_up)
+        animation.duration = duration
+        animation.startOffset = offset
+        view.startAnimation(animation)
+    }
 }
