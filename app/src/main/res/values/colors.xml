@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#503187</color>
     <color name="colorBaseBackground">#ECE7F5</color>
     <color name="colorLayoutBackgroundLightPurple">#E1D7EB</color>
-
+    <color name="colorProgressBarStart">#38225e</color>
+    <color name="colorProgressBarEnd">#7e57c1</color>
 </resources>
