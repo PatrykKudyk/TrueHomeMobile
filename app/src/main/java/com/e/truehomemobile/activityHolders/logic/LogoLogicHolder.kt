@@ -13,8 +13,6 @@ class LogoLogicHolder(private val context: Context, private val activity: Activi
     private val animationsHolder = AnimationsHolder(context)
 
     fun handleActivity(){
-        animationsHolder.spin(activity.loadingBar,800, 0)
-
         Handler().postDelayed({
             val intent = Intent(context, LoginActivity::class.java)
             context.startActivity(intent)
