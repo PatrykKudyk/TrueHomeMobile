@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_registration.*
 class RegistrationLogicHolder(private val context: Context, private val activity: Activity) {
 
     private val animationHolder = AnimationsHolder(context)
-    private val errorsHandler = ErrorsHandler(context)
+    private val errorsHolder = ErrorsHandler(context)
     private val validationHolder = ValidationHolder()
 
     fun initActivity(){
@@ -125,56 +125,56 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     private fun isEmailCorrect(): Boolean {
-        errorsHandler.clearError(activity.email_field_layout)
+        errorsHolder.clearError(activity.email_field_layout)
         if(validationHolder.isEmailCorrect(activity.email_field.text.toString())){
             return true
         }
-        errorsHandler.setIncorrectEmailError(activity.email_field_layout)
+        errorsHolder.setIncorrectEmailError(activity.email_field_layout)
         return false
     }
 
     private fun isPasswordCorrect(): Boolean {
         if(validationHolder.isPasswordCorrect(activity.password_field.text.toString())){
-            errorsHandler.clearError(activity.password_field_layout)
+            errorsHolder.clearError(activity.password_field_layout)
             return true
         }
-        errorsHandler.setIncorrectPasswordError(activity.password_field_layout)
+        errorsHolder.setIncorrectPasswordError(activity.password_field_layout)
         return false
     }
 
     private fun isPasswordLengthCorrect(): Boolean{
         if(validationHolder.isLengthCorrect(activity.password_field.text.toString(), 8)){
-            errorsHandler.clearError(activity.password_field_layout)
+            errorsHolder.clearError(activity.password_field_layout)
             return true
         }
-        errorsHandler.setPasswordLengthError(activity.password_field_layout)
+        errorsHolder.setPasswordLengthError(activity.password_field_layout)
         return false
     }
 
     private fun isLoginLengthCorrect(): Boolean {
         if(validationHolder.isLengthCorrect(activity.login_field.text.toString(), 4)){
-            errorsHandler.clearError(activity.login_field_layout)
+            errorsHolder.clearError(activity.login_field_layout)
             return true
         }
-        errorsHandler.setLoginLengthError(activity.login_field_layout)
+        errorsHolder.setLoginLengthError(activity.login_field_layout)
         return false
     }
 
     private fun areEmailsEqual(): Boolean {
         if(validationHolder.areFieldsEqual(activity.email_field, activity.email_repeat_field)){
-            errorsHandler.clearError(activity.email_repeat_field_layout)
+            errorsHolder.clearError(activity.email_repeat_field_layout)
             return true
         }
-        errorsHandler.setEmailsNotEqualError(activity.email_repeat_field_layout)
+        errorsHolder.setEmailsNotEqualError(activity.email_repeat_field_layout)
         return false
     }
 
     private fun arePasswordsEqual(): Boolean {
         if(validationHolder.areFieldsEqual(activity.password_field, activity.password_repeat_field)){
-            errorsHandler.clearError(activity.password_repeat_field_layout)
+            errorsHolder.clearError(activity.password_repeat_field_layout)
             return true
         }
-        errorsHandler.setPasswordsNotEqualError(activity.password_repeat_field_layout)
+        errorsHolder.setPasswordsNotEqualError(activity.password_repeat_field_layout)
         return false
     }
 
@@ -215,37 +215,37 @@ class RegistrationLogicHolder(private val context: Context, private val activity
         var isCorrect = true
         if(!validationHolder.isFieldFilled(activity.login_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.login_field_layout)
+            errorsHolder.setEmptyFieldError(activity.login_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.email_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.email_field_layout)
+            errorsHolder.setEmptyFieldError(activity.email_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.email_repeat_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.email_repeat_field_layout)
+            errorsHolder.setEmptyFieldError(activity.email_repeat_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.password_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.password_field_layout)
+            errorsHolder.setEmptyFieldError(activity.password_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.password_repeat_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.password_repeat_field_layout)
+            errorsHolder.setEmptyFieldError(activity.password_repeat_field_layout)
         }
         return isCorrect
     }
 
     private fun clearFieldErrors(){
-        errorsHandler.clearError(activity.login_field_layout)
+        errorsHolder.clearError(activity.login_field_layout)
         activity.login_field.clearFocus()
-        errorsHandler.clearError(activity.email_field_layout)
+        errorsHolder.clearError(activity.email_field_layout)
         activity.email_field.clearFocus()
-        errorsHandler.clearError(activity.email_repeat_field_layout)
+        errorsHolder.clearError(activity.email_repeat_field_layout)
         activity.email_repeat_field.clearFocus()
-        errorsHandler.clearError(activity.password_field_layout)
+        errorsHolder.clearError(activity.password_field_layout)
         activity.password_field.clearFocus()
-        errorsHandler.clearError(activity.password_repeat_field_layout)
+        errorsHolder.clearError(activity.password_repeat_field_layout)
         activity. password_repeat_field.clearFocus()
     }
 
