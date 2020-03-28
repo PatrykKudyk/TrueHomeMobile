@@ -1,7 +1,6 @@
 package com.e.truehomemobile.activityHolders.logic
 
-import com.e.truehomemobile.models.Request.LoginRequest
-import kotlin.reflect.KType
+import com.e.truehomemobile.models.authorization.LoginRequest
 
 class JsonHolder {
 

@@ -1,9 +1,12 @@
 package com.e.truehomemobile
 
 import android.app.Application
+import com.e.truehomemobile.models.authorization.LoginResponse
 
 class MyApp(): Application() {
     companion object{
-        val apiUrl = "https://127.0.0.1:2137/"
+        const val apiUrl = "https://10.0.2.2:2137/"
+        lateinit var loginResponse: LoginResponse
+        var isRequestReceived: Boolean = false
     }
 }
