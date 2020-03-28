@@ -184,8 +184,4 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
 
     }
 
-
-
-
-
 }
