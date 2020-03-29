@@ -285,11 +285,11 @@ class RegistrationLogicHolder(private val context: Context, private val activity
             activity.password_field.text.toString(),
             activity.email_field.text.toString()
         )
-        MyApp.isRequestReceived = false
+        MyApp.isResponseReceived = false
         fetchApiResponse(registrationRequest)
         do{
             Thread.sleep(100)
-        }while(!MyApp.isRequestReceived)
+        }while(!MyApp.isResponseReceived)
 
         return true
     }
@@ -326,7 +326,7 @@ class RegistrationLogicHolder(private val context: Context, private val activity
 
                     }
                 }
-                MyApp.isRequestReceived = true
+                MyApp.isResponseReceived = true
             }
         })
     }
