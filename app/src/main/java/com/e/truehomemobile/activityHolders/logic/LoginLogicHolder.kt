@@ -97,12 +97,12 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
             activity.password_field.text.toString()
         )
 
-        MyApp.isRequestReceived = false
+        MyApp.isResponseReceived = false
         fetchApiLoginResponse(loginRequest)
 
         do{
         Thread.sleep(100)
-        }while(!MyApp.isRequestReceived)
+        }while(!MyApp.isResponseReceived)
 
         if(MyApp.loginResponse.token != ""){
             return true
@@ -143,7 +143,7 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
                             NULL,ArrayList())
                     }
                 }
-                MyApp.isRequestReceived = true
+                MyApp.isResponseReceived = true
             }
         })
     }
@@ -183,9 +183,5 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
         }
 
     }
-
-
-
-
 
 }

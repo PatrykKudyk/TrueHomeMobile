@@ -7,6 +7,6 @@ class MyApp(): Application() {
     companion object{
         const val apiUrl = "https://10.0.2.2:2137/"
         lateinit var loginResponse: LoginResponse
-        var isRequestReceived: Boolean = false
+        var isResponseReceived: Boolean = false
     }
 }
