@@ -15,6 +15,12 @@ import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.models.authorization.RegistrationRequest
 import kotlinx.android.synthetic.main.activity_registration.*
+import kotlinx.android.synthetic.main.activity_registration.login_field
+import kotlinx.android.synthetic.main.activity_registration.login_field_layout
+import kotlinx.android.synthetic.main.activity_registration.logoImageView
+import kotlinx.android.synthetic.main.activity_registration.password_field
+import kotlinx.android.synthetic.main.activity_registration.password_field_layout
+import kotlinx.android.synthetic.main.activity_registration.progressBar
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -39,7 +45,9 @@ class RegistrationLogicHolder(private val context: Context, private val activity
 
     fun handleRegisterButton(){
         if(areFieldsCorrect()){
+            makeApiLoadingBar()
             if(checkApiResponse()){
+                removeApiLoadingBar()
                 makeSuccessActions()
                 Handler().postDelayed({
                     val intent = Intent()
@@ -271,6 +279,20 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     private fun makeStartAnimations(){
         animationHolder.popUp(activity.registration_card_view, 700, 1000)
         animationHolder.flyFromBottom(activity.logoImageView, 700, 900)
+    }
+
+    private fun removeApiLoadingBar(){
+        activity.progressBar.visibility = View.INVISIBLE
+        animationHolder.fadeIn(activity.registration_card_view,50,50)
+        animationHolder.fadeOut(activity.progressBar,50,50)
+        activity.registration_card_view.bringToFront()
+    }
+
+    private fun makeApiLoadingBar(){
+        activity.progressBar.visibility = View.VISIBLE
+        animationHolder.fadeOut(activity.registration_card_view,50,0)
+        animationHolder.fadeIn(activity.progressBar,50,0)
+        activity.progressBar.bringToFront()
     }
 
     private fun initFonts(){
