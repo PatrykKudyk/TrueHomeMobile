@@ -9,9 +9,6 @@ import com.e.truehomemobile.activityHolders.AnimationsHolder
 import kotlinx.android.synthetic.main.activity_logo.*
 
 class LogoLogicHolder(private val context: Context, private val activity: Activity) {
-
-    private val animationsHolder = AnimationsHolder(context)
-
     fun handleActivity(){
         Handler().postDelayed({
             val intent = Intent(context, LoginActivity::class.java)

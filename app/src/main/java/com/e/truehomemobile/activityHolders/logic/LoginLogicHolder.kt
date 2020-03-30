@@ -3,6 +3,11 @@ package com.e.truehomemobile.activityHolders.logic
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
+import android.view.animation.AnimationUtils
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.activities.RegistrationActivity
@@ -43,10 +48,12 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
     fun handleLoginButton(){
         clearFieldsErrors()
         if(areFieldsFilled()){
+            makeApiLoadingBar()
             if(checkUserDataCorrectness()){
                 activity.login_field.text = null
                 activity.password_field.text = null
             }
+            removeApiLoadingBar()
         }
     }
 
@@ -101,13 +108,28 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
         fetchApiLoginResponse(loginRequest)
 
         do{
-        Thread.sleep(100)
+//            Thread.sleep(20)
         }while(!MyApp.isResponseReceived)
 
         if(MyApp.loginResponse.token != ""){
             return true
         }
+
         return false
+    }
+
+    private fun removeApiLoadingBar(){
+        activity.progressBar.visibility = View.INVISIBLE
+        animationHolder.fadeIn(activity.login_card_view,50,50)
+        animationHolder.fadeOut(activity.progressBar,50,50)
+        activity.login_card_view.bringToFront()
+    }
+
+    private fun makeApiLoadingBar(){
+        activity.progressBar.visibility = View.VISIBLE
+        animationHolder.fadeOut(activity.login_card_view,50,0)
+        animationHolder.fadeIn(activity.progressBar,50,0)
+        activity.progressBar.bringToFront()
     }
 
     private fun fetchApiLoginResponse(loginRequest: LoginRequest){

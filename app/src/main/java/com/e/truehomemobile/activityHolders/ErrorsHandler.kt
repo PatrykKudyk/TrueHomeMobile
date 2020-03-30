@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class ErrorsHandler(val context: Context) {
+class ErrorsHandler(private val context: Context) {
 
     fun setEmptyFieldError(view: TextInputLayout){
         view.error = context.getString(getStringIdentifier(context,

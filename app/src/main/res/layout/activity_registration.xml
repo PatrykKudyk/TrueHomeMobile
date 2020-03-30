@@ -7,7 +7,6 @@
     tools:context=".activities.RegistrationActivity"
     android:background="@color/colorBaseBackground">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -218,6 +217,7 @@
     </LinearLayout>
 
 
+
     <TextView
         android:id="@+id/registeredTextView"
         android:layout_width="wrap_content"
@@ -235,6 +235,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.385" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="invisible"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="256dp"
+        android:indeterminateDrawable="@drawable/progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

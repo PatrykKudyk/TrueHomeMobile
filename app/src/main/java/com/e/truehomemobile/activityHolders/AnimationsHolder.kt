@@ -6,7 +6,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.e.truehomemobile.R
 
-class AnimationsHolder(val context: Context) {
+class AnimationsHolder(private val context: Context) {
 
 
     fun spin(view: View, duration: Long, offset: Long){
@@ -50,4 +50,19 @@ class AnimationsHolder(val context: Context) {
         animation.startOffset = offset
         view.startAnimation(animation)
     }
+
+    fun fadeIn(view: View, duration: Long, offset: Long){
+        val animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        animation.duration = duration
+        animation.startOffset = offset
+        view.startAnimation(animation)
+    }
+
+    fun fadeOut(view: View, duration: Long, offset: Long){
+        val animation = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+        animation.duration = duration
+        animation.startOffset = offset
+        view.startAnimation(animation)
+    }
+
 }
