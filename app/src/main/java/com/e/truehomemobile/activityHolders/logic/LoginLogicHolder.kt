@@ -35,6 +35,7 @@ class LoginLogicHolder(context: Context,activity: Activity):
     }
 
     fun handleLoginButton(){
+        MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
         clearFieldsErrors()
         if(areFieldsFilled()){
             if(checkUserDataCorrectness()){
@@ -99,6 +100,7 @@ class LoginLogicHolder(context: Context,activity: Activity):
         }while(!MyApp.isResponseReceived)
 
         if(MyApp.loginResponse.token != ""){
+            MyApp.isLogged = true
             return true
         }
         return false
