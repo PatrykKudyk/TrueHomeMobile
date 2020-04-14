@@ -7,7 +7,7 @@ import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.JsonHolder
 import com.e.truehomemobile.activityHolders.ValidationHolder
 
-open class LogicHolder(private val context: Context, private val activity: Activity) {
+open class LogicHolder(protected val context: Context, protected val activity: Activity) {
 
     protected val animationHolder = AnimationsHolder(context)
     protected val validationHolder = ValidationHolder()

@@ -23,7 +23,7 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-class RegistrationLogicHolder(private val context: Context, private val activity: Activity):
+class RegistrationLogicHolder(context: Context, activity: Activity):
         LogicHolder(context, activity){
 
     fun initActivity(){

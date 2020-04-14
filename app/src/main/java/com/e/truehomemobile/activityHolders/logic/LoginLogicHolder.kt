@@ -20,7 +20,7 @@ import java.security.cert.CertificateException
 import java.sql.Types.NULL
 import javax.net.ssl.*
 
-class LoginLogicHolder(private val context: Context, private val activity: Activity):
+class LoginLogicHolder(context: Context,activity: Activity):
     LogicHolder(context, activity) {
 
     fun initActivity(){

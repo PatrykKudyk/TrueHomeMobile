@@ -7,7 +7,7 @@ import android.os.Handler
 import com.e.truehomemobile.activities.LoginActivity
 import com.e.truehomemobile.models.classes.LogicHolder
 
-class LogoLogicHolder(private val context: Context, private val activity: Activity):
+class LogoLogicHolder(context: Context, activity: Activity):
         LogicHolder(context, activity){
 
     fun handleActivity(){
