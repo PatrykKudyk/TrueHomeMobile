@@ -1,4 +1,4 @@
-package com.e.truehomemobile.activityHolders.logic
+package com.e.truehomemobile.activityHolders
 
 import com.e.truehomemobile.models.authorization.LoginRequest
 import com.e.truehomemobile.models.authorization.RegistrationRequest

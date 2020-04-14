@@ -5,12 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import com.e.truehomemobile.activities.LoginActivity
-import com.e.truehomemobile.activityHolders.AnimationsHolder
-import kotlinx.android.synthetic.main.activity_logo.*
+import com.e.truehomemobile.models.classes.LogicHolder
 
-class LogoLogicHolder(private val context: Context, private val activity: Activity) {
-
-    private val animationsHolder = AnimationsHolder(context)
+class LogoLogicHolder(private val context: Context, private val activity: Activity):
+        LogicHolder(context, activity){
 
     fun handleActivity(){
         Handler().postDelayed({
