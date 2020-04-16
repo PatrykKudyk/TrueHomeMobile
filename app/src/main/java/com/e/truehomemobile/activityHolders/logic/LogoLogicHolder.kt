@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import com.e.truehomemobile.activities.ApartmentListActivitty
 import com.e.truehomemobile.activities.LoginActivity
 import com.e.truehomemobile.models.classes.LogicHolder
 
@@ -12,7 +13,7 @@ class LogoLogicHolder(context: Context, activity: Activity):
 
     fun handleActivity(){
         Handler().postDelayed({
-            val intent = Intent(context, LoginActivity::class.java)
+            val intent = Intent(context, ApartmentListActivitty::class.java)
             context.startActivity(intent)
         },3700)
     }

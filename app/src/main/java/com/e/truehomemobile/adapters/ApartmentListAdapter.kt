@@ -8,9 +8,11 @@ import com.e.truehomemobile.R
 import com.e.truehomemobile.models.apartment.Apartment
 import com.e.truehomemobile.viewHolders.ApartmentListViewHolder
 
-class ApartmentListAdapter(val apartmentList: Array<Apartment>): RecyclerView.Adapter<ApartmentListViewHolder>() {
+
+//val apartmentList: Array<Apartment>
+class ApartmentListAdapter(): RecyclerView.Adapter<ApartmentListViewHolder>() {
     override fun getItemCount(): Int {
-        return 3
+        return 5
     }
 
     override fun onBindViewHolder(holder: ApartmentListViewHolder, position: Int) {
@@ -22,7 +24,6 @@ class ApartmentListAdapter(val apartmentList: Array<Apartment>): RecyclerView.Ad
         if(MyApp.isLogged){
             val cellForRow = laoutInflater.inflate(R.layout.apartment_cell_logged, parent, false)
             return ApartmentListViewHolder(cellForRow)
-
         } else {
             val cellForRow = laoutInflater.inflate(R.layout.apartment_cell_not_logged, parent, false)
             return ApartmentListViewHolder(cellForRow)

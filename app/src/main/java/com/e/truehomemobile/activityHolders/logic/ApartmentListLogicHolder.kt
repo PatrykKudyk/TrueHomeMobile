@@ -3,6 +3,7 @@ package com.e.truehomemobile.activityHolders.logic
 import android.app.Activity
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.e.truehomemobile.adapters.ApartmentListAdapter
 import com.e.truehomemobile.models.classes.LogicHolder
 import kotlinx.android.synthetic.main.activity_apartment_list_activitty.*
 
@@ -11,6 +12,6 @@ class ApartmentListLogicHolder(context: Context, activity: Activity) : LogicHold
 
     fun initActivity(){
         activity.apartment_list_recycler_view.layoutManager = LinearLayoutManager(context)
-
+        activity.apartment_list_recycler_view.adapter = ApartmentListAdapter()
     }
 }
