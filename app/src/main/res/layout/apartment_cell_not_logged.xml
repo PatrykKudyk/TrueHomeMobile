@@ -5,11 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/registration_card_view"
+        android:id="@+id/apartment_not_logged_cell_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -50,52 +50,60 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <LinearLayout
-                    android:id="@+id/apartment_info_linear_layout"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
                     >
-                    <TextView
-                        android:id="@+id/apartment_name_text_view"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="apartamentapartamentapartament"
-                        android:fontFamily="@font/josefinsansbold"
-                        android:gravity="center"
-                        android:textSize="16sp"
-                        android:textAllCaps="true"
-                        />
-                    <TextView
-                        android:id="@+id/address_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Wrocław ul.Papieska"
-                        android:fontFamily="@font/josefinsansregular"
-                        android:layout_gravity="center"
-                        />
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/price_text_view"
-                        android:layout_marginTop="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="300 zł"
-                        android:fontFamily="@font/josefinsanslight"
-                        android:layout_gravity="center"
-                        />
+                        <TextView
+                            android:id="@+id/apartment_name_text_view"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/josefinsansbold"
+                            android:gravity="center"
+                            android:textAllCaps="true"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/apartment_address_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsansregular"
+                            android:layout_marginTop="3dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/apartment_name_text_view" />
+
+                        <TextView
+                            android:id="@+id/apartment_price_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsanslight"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/description_cart_view"
+                android:id="@+id/description_card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -132,7 +140,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/josefinsansregular"
                         android:textSize="14sp"
-                        android:text="asfbaosfnoqeainfo djbwueifnwejofnwowe fo qowe uhwoasfbaosfnoqeainfo djbwueifnwejofnwowe fo qowe uhwo asfbaosfnoqeainfo djbwueifnwejofnwowe fo qowe uhwo asfbaosfnoqeainfo djbwueifnwejofnwowe fo qowe uhwo asfbaosfnoqeainfo djbwueifnwejofnwowe fo qowe uhwo"
                         android:gravity="center"
                         />
 
