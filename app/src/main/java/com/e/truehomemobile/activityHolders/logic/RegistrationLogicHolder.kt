@@ -8,17 +8,23 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
-import com.e.truehomemobile.activityHolders.AnimationsHolder
-import com.e.truehomemobile.activityHolders.ErrorsHandler
-import com.e.truehomemobile.activityHolders.ValidationHolder
+import com.e.truehomemobile.models.authorization.RegistrationRequest
+import com.e.truehomemobile.models.classes.LogicHolder
 import kotlinx.android.synthetic.main.activity_registration.*
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
+import java.security.cert.CertificateException
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
-class RegistrationLogicHolder(private val context: Context, private val activity: Activity) {
-
-    private val animationHolder = AnimationsHolder(context)
-    private val errorsHandler = ErrorsHandler(context)
-    private val validationHolder = ValidationHolder()
+class RegistrationLogicHolder(context: Context, activity: Activity):
+        LogicHolder(context, activity){
 
     fun initActivity(){
         makeStartAnimations()
@@ -26,15 +32,16 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     fun handleRegisterButton(){
-
         if(areFieldsCorrect()){
-            makeSuccessActions()
-            Handler().postDelayed({
-                val intent = Intent()
-                intent.putExtra("login", activity.login_field.text.toString())
-                activity.setResult(Activity.RESULT_OK, intent)
-                activity.finish()
-            }, 2000)
+            if(checkApiResponse()){
+                makeSuccessActions()
+                Handler().postDelayed({
+                    val intent = Intent()
+                    intent.putExtra("login", activity.login_field.text.toString())
+                    activity.setResult(Activity.RESULT_OK, intent)
+                    activity.finish()
+                }, 2000)
+            }
         }
     }
 
@@ -125,56 +132,56 @@ class RegistrationLogicHolder(private val context: Context, private val activity
     }
 
     private fun isEmailCorrect(): Boolean {
-        errorsHandler.clearError(activity.email_field_layout)
+        errorsHolder.clearError(activity.email_field_layout)
         if(validationHolder.isEmailCorrect(activity.email_field.text.toString())){
             return true
         }
-        errorsHandler.setIncorrectEmailError(activity.email_field_layout)
+        errorsHolder.setIncorrectEmailError(activity.email_field_layout)
         return false
     }
 
     private fun isPasswordCorrect(): Boolean {
         if(validationHolder.isPasswordCorrect(activity.password_field.text.toString())){
-            errorsHandler.clearError(activity.password_field_layout)
+            errorsHolder.clearError(activity.password_field_layout)
             return true
         }
-        errorsHandler.setIncorrectPasswordError(activity.password_field_layout)
+        errorsHolder.setIncorrectPasswordError(activity.password_field_layout)
         return false
     }
 
     private fun isPasswordLengthCorrect(): Boolean{
         if(validationHolder.isLengthCorrect(activity.password_field.text.toString(), 8)){
-            errorsHandler.clearError(activity.password_field_layout)
+            errorsHolder.clearError(activity.password_field_layout)
             return true
         }
-        errorsHandler.setPasswordLengthError(activity.password_field_layout)
+        errorsHolder.setPasswordLengthError(activity.password_field_layout)
         return false
     }
 
     private fun isLoginLengthCorrect(): Boolean {
         if(validationHolder.isLengthCorrect(activity.login_field.text.toString(), 4)){
-            errorsHandler.clearError(activity.login_field_layout)
+            errorsHolder.clearError(activity.login_field_layout)
             return true
         }
-        errorsHandler.setLoginLengthError(activity.login_field_layout)
+        errorsHolder.setLoginLengthError(activity.login_field_layout)
         return false
     }
 
     private fun areEmailsEqual(): Boolean {
         if(validationHolder.areFieldsEqual(activity.email_field, activity.email_repeat_field)){
-            errorsHandler.clearError(activity.email_repeat_field_layout)
+            errorsHolder.clearError(activity.email_repeat_field_layout)
             return true
         }
-        errorsHandler.setEmailsNotEqualError(activity.email_repeat_field_layout)
+        errorsHolder.setEmailsNotEqualError(activity.email_repeat_field_layout)
         return false
     }
 
     private fun arePasswordsEqual(): Boolean {
         if(validationHolder.areFieldsEqual(activity.password_field, activity.password_repeat_field)){
-            errorsHandler.clearError(activity.password_repeat_field_layout)
+            errorsHolder.clearError(activity.password_repeat_field_layout)
             return true
         }
-        errorsHandler.setPasswordsNotEqualError(activity.password_repeat_field_layout)
+        errorsHolder.setPasswordsNotEqualError(activity.password_repeat_field_layout)
         return false
     }
 
@@ -215,55 +222,142 @@ class RegistrationLogicHolder(private val context: Context, private val activity
         var isCorrect = true
         if(!validationHolder.isFieldFilled(activity.login_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.login_field_layout)
+            errorsHolder.setEmptyFieldError(activity.login_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.email_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.email_field_layout)
+            errorsHolder.setEmptyFieldError(activity.email_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.email_repeat_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.email_repeat_field_layout)
+            errorsHolder.setEmptyFieldError(activity.email_repeat_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.password_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.password_field_layout)
+            errorsHolder.setEmptyFieldError(activity.password_field_layout)
         }
         if(!validationHolder.isFieldFilled(activity.password_repeat_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(activity.password_repeat_field_layout)
+            errorsHolder.setEmptyFieldError(activity.password_repeat_field_layout)
         }
         return isCorrect
     }
 
     private fun clearFieldErrors(){
-        errorsHandler.clearError(activity.login_field_layout)
+        errorsHolder.clearError(activity.login_field_layout)
         activity.login_field.clearFocus()
-        errorsHandler.clearError(activity.email_field_layout)
+        errorsHolder.clearError(activity.email_field_layout)
         activity.email_field.clearFocus()
-        errorsHandler.clearError(activity.email_repeat_field_layout)
+        errorsHolder.clearError(activity.email_repeat_field_layout)
         activity.email_repeat_field.clearFocus()
-        errorsHandler.clearError(activity.password_field_layout)
+        errorsHolder.clearError(activity.password_field_layout)
         activity.password_field.clearFocus()
-        errorsHandler.clearError(activity.password_repeat_field_layout)
+        errorsHolder.clearError(activity.password_repeat_field_layout)
         activity. password_repeat_field.clearFocus()
     }
 
     private fun makeSuccessActions() {
-        animationHolder.flyaway(activity.fields_button_layout, 500, 0, 3)
-        activity.fields_button_layout.visibility = View.GONE
+        animationHolder.flyaway(activity.registration_card_view, 500, 0, 3)
+        activity.registration_card_view.visibility = View.GONE
         activity.registeredTextView.visibility = View.VISIBLE
     }
 
     private fun makeStartAnimations(){
-        animationHolder.fallFromTop(activity.fields_button_layout, 600, 320)
-        animationHolder.flyFromBottom(activity.logoImageView, 600, 250)
+        animationHolder.popUp(activity.registration_card_view, 700, 1000)
+        animationHolder.flyFromBottom(activity.logoImageView, 700, 900)
     }
 
     private fun initFonts(){
         val typeface = ResourcesCompat.getFont(context, R.font.josefinsansregular)
         activity.password_field_layout.typeface = typeface
         activity.password_repeat_field_layout.typeface = typeface
+    }
+
+    private fun checkApiResponse(): Boolean {
+        val registrationRequest = RegistrationRequest(
+            activity.login_field.text.toString(),
+            activity.password_field.text.toString(),
+            activity.email_field.text.toString()
+        )
+        MyApp.isResponseReceived = false
+        fetchApiResponse(registrationRequest)
+        do{
+            Thread.sleep(100)
+        }while(!MyApp.isResponseReceived)
+
+        return true
+    }
+
+    private fun fetchApiResponse(registrationRequest: RegistrationRequest){
+        val url = MyApp.apiUrl + "security/registration"
+        val json = jsonHolder.createRegistrationRequestJson(registrationRequest).trimIndent()
+        val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody)
+            .build()
+
+        val client: OkHttpClient = getUnsafeOkHttpClient().build()
+
+        val response = client.newCall(request).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                when (response.code) {
+
+                    200 -> {
+
+
+
+                    }
+
+                    else -> {
+
+
+
+                    }
+                }
+                MyApp.isResponseReceived = true
+            }
+        })
+    }
+
+    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder{
+
+        try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+                @Throws(CertificateException::class)
+                override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                }
+
+                @Throws(CertificateException::class)
+                override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                }
+
+                override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {
+                    return arrayOf()
+                }
+            })
+
+            // Install the all-trusting trust manager
+            val sslContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+            // Create an ssl socket factory with our all-trusting manager
+            val sslSocketFactory = sslContext.socketFactory
+
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier(HostnameVerifier { _, _ -> true })
+
+            return builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+
     }
 
 }
