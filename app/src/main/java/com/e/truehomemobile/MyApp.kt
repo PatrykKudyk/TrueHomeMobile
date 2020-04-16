@@ -8,5 +8,6 @@ class MyApp(): Application() {
         const val apiUrl = "https://10.0.2.2:2137/"
         lateinit var loginResponse: LoginResponse
         var isResponseReceived: Boolean = false
+        var isLogged: Boolean = false
     }
 }

@@ -6,12 +6,10 @@ import android.content.Intent
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.activities.RegistrationActivity
-import com.e.truehomemobile.activityHolders.AnimationsHolder
-import com.e.truehomemobile.activityHolders.ErrorsHandler
-import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.R
 import com.e.truehomemobile.models.authorization.LoginRequest
 import com.e.truehomemobile.models.authorization.LoginResponse
+import com.e.truehomemobile.models.classes.LogicHolder
 import kotlinx.android.synthetic.main.activity_login.*
 import com.google.gson.GsonBuilder
 import okhttp3.*
@@ -22,12 +20,8 @@ import java.security.cert.CertificateException
 import java.sql.Types.NULL
 import javax.net.ssl.*
 
-class LoginLogicHolder(private val context: Context, private val activity: Activity) {
-
-    private val animationHolder = AnimationsHolder(context)
-    private val validationHolder = ValidationHolder()
-    private val errorsHolder = ErrorsHandler(context)
-    private val jsonHolder = JsonHolder()
+class LoginLogicHolder(context: Context,activity: Activity):
+    LogicHolder(context, activity) {
 
     fun initActivity(){
         makeStartAnimations()
@@ -41,6 +35,7 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
     }
 
     fun handleLoginButton(){
+        MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
         clearFieldsErrors()
         if(areFieldsFilled()){
             if(checkUserDataCorrectness()){
@@ -105,6 +100,7 @@ class LoginLogicHolder(private val context: Context, private val activity: Activ
         }while(!MyApp.isResponseReceived)
 
         if(MyApp.loginResponse.token != ""){
+            MyApp.isLogged = true
             return true
         }
         return false

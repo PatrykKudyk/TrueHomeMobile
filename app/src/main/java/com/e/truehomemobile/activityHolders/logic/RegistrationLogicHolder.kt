@@ -10,10 +10,8 @@ import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
-import com.e.truehomemobile.activityHolders.AnimationsHolder
-import com.e.truehomemobile.activityHolders.ErrorsHandler
-import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.models.authorization.RegistrationRequest
+import com.e.truehomemobile.models.classes.LogicHolder
 import kotlinx.android.synthetic.main.activity_registration.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -25,12 +23,8 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
-class RegistrationLogicHolder(private val context: Context, private val activity: Activity) {
-
-    private val animationHolder = AnimationsHolder(context)
-    private val errorsHolder = ErrorsHandler(context)
-    private val validationHolder = ValidationHolder()
-    private val jsonHolder = JsonHolder()
+class RegistrationLogicHolder(context: Context, activity: Activity):
+        LogicHolder(context, activity){
 
     fun initActivity(){
         makeStartAnimations()
