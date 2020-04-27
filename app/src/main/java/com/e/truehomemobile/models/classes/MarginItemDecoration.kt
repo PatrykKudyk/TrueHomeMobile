@@ -1,4 +1,4 @@
-package com.e.truehomemobile.activityHolders
+package com.e.truehomemobile.models.classes
 
 import android.graphics.Rect
 import android.view.View
