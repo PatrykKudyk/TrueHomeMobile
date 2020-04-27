@@ -20,4 +20,7 @@
     <string name="field_error_password_incorrect_length">Hasło musi posiadać conajmniej 8 znaków</string>
     <string name="field_error_email_incorrect">Podany e-mail jest niepoprawny</string>
     <string name="prompt_registration_successful">Pomyślnie zarejestrowano</string>
+    <string name="lang_polish">Polski</string>
+    <string name="lang_english">Angielski</string>
+    <string name="language">Język</string>
 </resources>
