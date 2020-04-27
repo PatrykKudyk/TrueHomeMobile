@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBaseBackground"
     android:gravity="center"
-    tools:context=".activities.LoginActivity" >
+    tools:context=".activities.LoginActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center|top"
         android:layout_alignParentBottom="true"
-        >
+        android:gravity="center|top"
+        android:orientation="vertical">
 
 
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,10 +25,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center|top"
                 android:layout_alignParentBottom="true"
-                >
+                android:gravity="center|top"
+                android:orientation="vertical">
 
 
                 <ImageView
@@ -49,11 +46,10 @@
                     android:layout_width="350dp"
                     android:layout_height="370dp"
                     android:layout_marginTop="32dp"
-                    app:strokeColor="@color/colorPrimaryDark"
-                    app:strokeWidth="2dp"
                     app:cardBackgroundColor="@color/colorLayoutBackgroundLightPurple"
                     app:cardCornerRadius="20dp"
-                    >
+                    app:strokeColor="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
