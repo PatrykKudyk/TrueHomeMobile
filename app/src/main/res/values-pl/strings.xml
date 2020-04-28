@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">TrueHome</string>
+    <string name="app_logo_name">True Home</string>
+    <string name="login_activity_title">Logowanie</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Hasło</string>
+    <string name="hint_repeat_password">Powtórz hasło</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_repeat_email">Powtórz e-mail</string>
+    <string name="login_button">Zaloguj</string>
+    <string name="register_button">Zarejestruj</string>
+    <string name="registration_button">Rejestracja</string>
+    <string name="back_text">Wróć do logowania</string>
+    <string name="toast_fill_all_fields">Wypełnij wszystkie pola</string>
+    <string name="field_error_empty_field">Pole nie może być puste</string>
+    <string name="field_error_passwords_not_equal">Podane hasła muszą być takie same</string>
+    <string name="field_error_emails_not_equal">Podane e-maile muszą być takie same</string>
+    <string name="field_error_login_incorrect_length">Login musi posiadać conajmniej 4 znaki</string>
+    <string name="field_error_password_incorrect_symbols">Hasło musi zawierać dużą i małą literę oraz cyfrę</string>
+    <string name="field_error_password_incorrect_length">Hasło musi posiadać conajmniej 8 znaków</string>
+    <string name="field_error_email_incorrect">Podany e-mail jest niepoprawny</string>
+    <string name="prompt_registration_successful">Pomyślnie zarejestrowano</string>
+    <string name="lang_polish">Polski</string>
+    <string name="lang_english">Angielski</string>
+    <string name="language">Język</string>
+</resources>
