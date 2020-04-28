@@ -14,9 +14,10 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustResize"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.ApartmentListActivitty"></activity>
-        <activity android:name=".activities.RegistrationActivity"></activity>
-        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.LanguageActivity"></activity>
+        <activity android:name=".activities.ApartmentListActivitty" />
+        <activity android:name=".activities.RegistrationActivity" />
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.LogoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
