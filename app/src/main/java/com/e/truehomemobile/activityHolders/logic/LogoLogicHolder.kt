@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import com.e.truehomemobile.activities.ApartmentListActivitty
+import com.e.truehomemobile.activities.LanguageActivity
 import com.e.truehomemobile.activities.LoginActivity
 import com.e.truehomemobile.models.classes.LogicHolder
 
