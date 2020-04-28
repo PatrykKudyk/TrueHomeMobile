@@ -23,4 +23,10 @@
     <string name="lang_polish">Polski</string>
     <string name="lang_english">Angielski</string>
     <string name="language">Język</string>
+    <string name="menu_language">Język</string>
+    <string name="menu_apartments">Apartamenty</string>
+    <string name="menu_login">Zaloguj</string>
+    <string name="menu_account">Konto</string>
+    <string name="nav_open">Otwórz Navigation Drawer</string>
+    <string name="nav_close">Zamknij Navigation Drawer</string>
 </resources>

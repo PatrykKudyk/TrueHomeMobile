@@ -11,10 +11,6 @@ import com.e.truehomemobile.models.classes.ApplicationLanguageHelper
 
 class LanguageActivity : AppCompatActivity() {
 
-//    val SELECTED_LANGUAGE = "language"
-//
-//    private lateinit var sharedPreferences: SharedPreferences
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,25 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item
-        android:id="@+id/menu_account"
-        android:title="@string/login_activity_title"
-        android:icon="@drawable/ic_account" />
 
-    <item android:title="@string/language">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/lang_polish"
-                    android:title="@string/lang_polish"
-                    android:icon="@drawable/poland_640" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_account"
+            android:icon="@drawable/ic_account"
+            android:title="@string/menu_login" />
 
-                <item
-                    android:id="@+id/lang_english"
-                    android:title="@string/lang_english"
-                    android:icon="@drawable/united_kingdom_640" />
-            </group>
-        </menu>
-    </item>
+        <item
+            android:id="@+id/menu_apartments"
+            android:icon="@drawable/ic_home"
+            android:title="@string/menu_apartments" />
 
+        <item
+            android:id="@+id/menu_language"
+            android:icon="@drawable/ic_language"
+            android:title="@string/menu_language" />
+    </group>
 </menu>

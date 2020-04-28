@@ -23,4 +23,13 @@
     <string name="lang_polish">Polish</string>
     <string name="lang_english">English</string>
     <string name="language">Language</string>
+    <string name="menu_language">Language</string>
+    <string name="menu_apartments">Apartments</string>
+    <string name="menu_login">Log in</string>
+    <string name="menu_account">Account</string>
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
