@@ -15,12 +15,12 @@ import com.e.truehomemobile.fragments.LoginFragment
 import com.e.truehomemobile.fragments.RegistrationFragment
 import com.google.android.material.navigation.NavigationView
 
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-        ApartmentListFragment.OnFragmentInteractionListener,
-        LanguageFragment.OnFragmentInteractionListener,
-        LoginFragment.OnFragmentInteractionListener,
-        RegistrationFragment.OnFragmentInteractionListener
-{
+    ApartmentListFragment.OnFragmentInteractionListener,
+    LanguageFragment.OnFragmentInteractionListener,
+    LoginFragment.OnFragmentInteractionListener,
+    RegistrationFragment.OnFragmentInteractionListener {
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_apartment_list_activitty)
+        setContentView(R.layout.activity_main_layout)
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -57,6 +57,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .beginTransaction()
             .add(R.id.frame_layout, apartmentListFragment)
             .commit()
+//        apartmentListFragment.initFragment()
+
+//        loginFragment.login_button.setOnClickListener {
+////            MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
+////            clearFieldsErrors()
+////            if(areFieldsFilled()){
+////                if(checkUserDataCorrectness()){
+////                    login_field.text = null
+////                    password_field.text = null
+//                    supportFragmentManager
+//                        .beginTransaction()
+//                        .replace(R.id.frame_layout, registrationFragment)
+//                        .addToBackStack(registrationFragment.toString())
+//                        .commit()
+////                }
+////            }
+//        }
+//
+//        registrationFragment.register_button.setOnClickListener {
+//            finish()
+//        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -66,6 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .beginTransaction()
                     .replace(R.id.frame_layout, apartmentListFragment)
                     .commit()
+//                apartmentListFragment.initFragment()
             }
             R.id.menu_language -> {
                 supportFragmentManager

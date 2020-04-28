@@ -1,4 +1,4 @@
-package com.e.truehomemobile.activityHolders.logic
+package com.e.truehomemobile.activityHolders
 
 import android.app.Activity
 import android.content.Context

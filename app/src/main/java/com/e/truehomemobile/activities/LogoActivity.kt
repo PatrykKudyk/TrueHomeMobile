@@ -1,13 +1,9 @@
 package com.e.truehomemobile.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import com.e.truehomemobile.activityHolders.AnimationsHolder
 import com.e.truehomemobile.R
-import com.e.truehomemobile.activityHolders.logic.LogoLogicHolder
-import kotlinx.android.synthetic.main.activity_logo.*
+import com.e.truehomemobile.activityHolders.LogoLogicHolder
 
 class LogoActivity : AppCompatActivity() {
 
