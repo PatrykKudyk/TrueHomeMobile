@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.MyApp
 
@@ -17,9 +19,13 @@ import com.e.truehomemobile.activityHolders.JsonHolder
 import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.models.authorization.LoginRequest
 import com.e.truehomemobile.models.authorization.LoginResponse
+import com.google.android.material.navigation.NavigationView
 import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.activity_main_layout.*
+import kotlinx.android.synthetic.main.activity_main_layout.view.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -41,10 +47,24 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    lateinit var animationHolder : AnimationsHolder
+    private lateinit var registrationFragment: RegistrationFragment
+    private lateinit var apartmentListFragment: ApartmentListFragment
+
+
+//    private lateinit var animationHolder : AnimationsHolder
     private val validationHolder = ValidationHolder()
-    lateinit var errorsHandler : ErrorsHandler
+    private lateinit var errorsHandler : ErrorsHandler
     private val jsonHolder = JsonHolder()
+
+
+    private lateinit var rootView: View
+//    private lateinit var loginField: View
+//    private lateinit var loginFieldLayout: View
+//    private lateinit var passwordField: View
+//    private lateinit var passwordFieldLayout: View
+    private lateinit var loginButton: Button
+    private lateinit var registerButton: Button
+    private lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +74,10 @@ class LoginFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_login, container, false);
+        initFragment()
+        return rootView
     }
 
     fun onButtonPressed(uri: Uri) {
@@ -96,22 +114,40 @@ class LoginFragment : Fragment() {
     }
 
 
-    fun initFragment(){
-        errorsHandler = ErrorsHandler(frame_layout.context)
-        animationHolder = AnimationsHolder(frame_layout.context)
-        makeStartAnimations()
+    private fun initFragment(){
+        errorsHandler = ErrorsHandler(rootView.context)
+//        animationHolder = AnimationsHolder(frame_layout.context)
+//        makeStartAnimations()
+
+//        loginField = rootView.findViewById(R.id.login_field)
+//        loginFieldLayout = rootView.findViewById(R.id.login_field_layout)
+//        passwordField = rootView.findViewById(R.id.password_field)
+//        passwordFieldLayout = rootView.findViewById(R.id.password_field_layout)
+        loginButton = rootView.findViewById(R.id.login_button)
+        registerButton = rootView.findViewById(R.id.register_button)
+
         initFonts()
+
+        registerButton.setOnClickListener {
+            handleRegisterButton()
+        }
+
+        loginButton.setOnClickListener {
+            handleLoginButton()
+        }
     }
 
-//    fun handleRegisterButton(){
-//        supportFragmentManager
-//            .beginTransaction()
-//            .add(R.id.frame_layout, apartmentListFragment)
-//            .commit()
-//        clearFields()
-//    }
+    private fun handleRegisterButton(){
+        registrationFragment = RegistrationFragment.newInstance()
+        clearFields()
+        fragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.frame_layout, registrationFragment)
+            ?.addToBackStack(RegistrationFragment.toString())
+            ?.commit()
+    }
 
-//    fun handleLoginButton(){
+    private fun handleLoginButton(){
 //        MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
 //        clearFieldsErrors()
 //        if(areFieldsFilled()){
@@ -120,7 +156,28 @@ class LoginFragment : Fragment() {
 //                password_field.text = null
 //            }
 //        }
-//    }
+        if(rootView.login_field.text.toString() == "admin" && rootView.password_field.text.toString() == "admin"){
+            Toast.makeText(rootView.context,"Pomyślnie zalogowano", Toast.LENGTH_SHORT).show()
+            clearFields()
+            MyApp.isLogged = true
+
+            apartmentListFragment = ApartmentListFragment.newInstance()
+            navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+
+            val menu = navigationView.menu
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+            navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
+
+            fragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.frame_layout, apartmentListFragment)
+                ?.commit()
+
+        }else{
+            clearFields()
+            Toast.makeText(rootView.context,"Błędne dane logowania", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun areFieldsFilled(): Boolean {
         var isCorrect = false
@@ -138,29 +195,29 @@ class LoginFragment : Fragment() {
 
     private fun clearFields(){
         clearFieldsErrors()
-        login_field.text = null
-        password_field.text = null
+        rootView.login_field.text = null
+        rootView.password_field.text = null
     }
 
     private fun clearFieldsErrors(){
-        errorsHandler.clearError(login_field_layout)
-        errorsHandler.clearError(password_field_layout)
-        login_field.clearFocus()
-        password_field.clearFocus()
+        errorsHandler.clearError(rootView.login_field_layout)
+        errorsHandler.clearError(rootView.password_field_layout)
+        rootView.login_field.clearFocus()
+        rootView.password_field.clearFocus()
     }
 
-    private fun makeStartAnimations(){
-        animationHolder.popUp(login_card_view, 1000, 250)
-        animationHolder.fallFromTop(logoImageView,750, 300)
-        animationHolder.popUp(login_field_layout, 600, 1000)
-        animationHolder.popUp(password_field_layout, 600, 1000)
-        animationHolder.flyFromBottom(login_button, 400, 1500)
-        animationHolder.flyFromBottom(register_button, 400, 1500)
-    }
+//    private fun makeStartAnimations(){
+//        animationHolder.popUp(login_card_view, 1000, 250)
+//        animationHolder.fallFromTop(logoImageView,750, 300)
+//        animationHolder.popUp(login_field_layout, 600, 1000)
+//        animationHolder.popUp(password_field_layout, 600, 1000)
+//        animationHolder.flyFromBottom(login_button, 400, 1500)
+//        animationHolder.flyFromBottom(register_button, 400, 1500)
+//    }
 
     private fun initFonts(){
-        val typeface = ResourcesCompat.getFont(frame_layout.context, R.font.josefinsansregular)
-        password_field_layout.typeface = typeface
+        val typeface = ResourcesCompat.getFont(rootView.context, R.font.josefinsansregular)
+        rootView.password_field_layout.typeface = typeface
     }
 
     private fun checkUserDataCorrectness(): Boolean{

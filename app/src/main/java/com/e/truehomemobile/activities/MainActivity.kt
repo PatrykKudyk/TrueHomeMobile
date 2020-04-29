@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var apartmentListFragment: ApartmentListFragment
     lateinit var languageFragment: LanguageFragment
     lateinit var loginFragment: LoginFragment
-    lateinit var registrationFragment: RegistrationFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +53,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         apartmentListFragment = ApartmentListFragment.newInstance()
         languageFragment = LanguageFragment.newInstance()
         loginFragment = LoginFragment.newInstance("param 1", "param 2")
-        registrationFragment = RegistrationFragment.newInstance()
 
         if(!MyApp.hasAppStarted){
             supportFragmentManager
@@ -106,10 +104,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commitAllowingStateLoss()
             }
             R.id.menu_account -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.frame_layout, loginFragment)
-                    .commit()
+                if(!MyApp.isLogged){
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, loginFragment)
+                        .commit()
+                }
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
