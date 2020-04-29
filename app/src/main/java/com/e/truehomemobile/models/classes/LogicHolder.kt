@@ -13,4 +13,5 @@ open class LogicHolder(protected val context: Context, protected val activity: A
     protected val validationHolder = ValidationHolder()
     protected val errorsHolder = ErrorsHandler(context)
     protected val jsonHolder = JsonHolder()
+    open fun attachBaseContext(newBase: Context?) {}
 }
