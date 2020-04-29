@@ -51,7 +51,7 @@
 
                 <LinearLayout
                     android:id="@+id/polish_linear_layout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:orientation="horizontal">
@@ -75,7 +75,7 @@
 
                 <LinearLayout
                     android:id="@+id/english_linear_layout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:orientation="horizontal">
@@ -95,12 +95,6 @@
                         android:text="@string/lang_english"
                         android:textSize="20sp" />
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/backbutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/back_text" />
 
             </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.adapters.ApartmentListAdapter
@@ -33,6 +34,8 @@ class ApartmentListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+    private lateinit var rootView: View
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +45,10 @@ class ApartmentListFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_apartment_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_apartment_list, container, false);
+        initFragment()
+        return rootView
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,15 +106,14 @@ class ApartmentListFragment : Fragment() {
 
 
     fun initFragment(){
-        apartment_list_recycler_view.layoutManager = LinearLayoutManager(context)
-        apartment_list_recycler_view.addItemDecoration(
+        recyclerView = rootView.findViewById(R.id.apartment_list_recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.addItemDecoration(
             MarginItemDecoration(
                 12
             )
         )
-        apartment_list_recycler_view.adapter = ApartmentListAdapter(initApartmentList())
-
-
+        recyclerView.adapter = ApartmentListAdapter(initApartmentList())
     }
 
 

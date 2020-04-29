@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.app.ActivityCompat.recreate
 
 import com.e.truehomemobile.R
@@ -15,6 +16,7 @@ import com.e.truehomemobile.activities.MainActivity
 import com.e.truehomemobile.activityHolders.AnimationsHolder
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_language.*
+import kotlinx.android.synthetic.main.fragment_language.view.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,8 +37,10 @@ class LanguageFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    lateinit var animationHolder: AnimationsHolder
-
+//    lateinit var animationHolder: AnimationsHolder
+    private lateinit var rootView: View
+    private lateinit var polishbutton: View
+    private lateinit var englishbutton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,16 +48,12 @@ class LanguageFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_language, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_language, container, false);
+        initFragment()
+        return rootView
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -113,24 +113,26 @@ class LanguageFragment : Fragment() {
 
 
     fun initFragment(){
-        animationHolder = AnimationsHolder(frame_layout.context)
-        makeStartAnimations()
+//        animationHolder = AnimationsHolder(context)
+//        makeStartAnimations()
 
-        polish_linear_layout.setOnClickListener {
+        polishbutton = rootView.findViewById(R.id.polish_linear_layout)
+        englishbutton = rootView.findViewById(R.id.english_linear_layout)
+
+        polishbutton.setOnClickListener {
             setLocale("pl")
-
         }
-        english_linear_layout.setOnClickListener {
+        englishbutton.setOnClickListener {
             setLocale("en")
         }
 
     }
 
-    private fun makeStartAnimations(){
-        animationHolder.fallFromTop(logoImageView, 200, 20)
-        animationHolder.popUp(language_text_view, 300,40)
-        animationHolder.popUp(languages_scroll_view, 400, 50)
-    }
+//    private fun makeStartAnimations(){
+//        animationHolder.fallFromTop(requireView().rootView.logoImageView, 200, 20)
+//        animationHolder.popUp(requireView().rootView.language_text_view, 300,40)
+//        animationHolder.popUp(requireView().rootView.languages_scroll_view, 400, 50)
+//    }
 
 
     private fun setLocale(langCode: String) {
@@ -141,5 +143,11 @@ class LanguageFragment : Fragment() {
         resources.updateConfiguration(config,
             resources.displayMetrics
         )
+        activity?.recreate()
+        fragmentManager
+            ?.beginTransaction()
+            ?.detach(this)
+            ?.attach(this)
+            ?.commit()
     }
 }

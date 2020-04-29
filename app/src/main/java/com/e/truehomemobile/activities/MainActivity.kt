@@ -7,13 +7,16 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.view.isEmpty
 import androidx.drawerlayout.widget.DrawerLayout
+import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
 import com.e.truehomemobile.fragments.ApartmentListFragment
 import com.e.truehomemobile.fragments.LanguageFragment
 import com.e.truehomemobile.fragments.LoginFragment
 import com.e.truehomemobile.fragments.RegistrationFragment
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.content_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -53,10 +56,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loginFragment = LoginFragment.newInstance("param 1", "param 2")
         registrationFragment = RegistrationFragment.newInstance()
 
-        supportFragmentManager
+        if(!MyApp.hasAppStarted){
+            supportFragmentManager
             .beginTransaction()
             .add(R.id.frame_layout, apartmentListFragment)
             .commit()
+            MyApp.hasAppStarted = true
+        }
+
+//        supportFragmentManager
+//            .beginTransaction()
+//            .add(R.id.frame_layout, apartmentListFragment)
+//            .commit()
 //        apartmentListFragment.initFragment()
 
 //        loginFragment.login_button.setOnClickListener {
@@ -87,13 +98,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .beginTransaction()
                     .replace(R.id.frame_layout, apartmentListFragment)
                     .commit()
-//                apartmentListFragment.initFragment()
             }
             R.id.menu_language -> {
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.frame_layout, languageFragment)
-                    .commit()
+                    .commitAllowingStateLoss()
             }
             R.id.menu_account -> {
                 supportFragmentManager
