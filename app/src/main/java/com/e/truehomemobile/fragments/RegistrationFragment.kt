@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.MyApp
 
@@ -23,6 +24,7 @@ import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.models.authorization.RegistrationRequest
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_registration.*
+import kotlinx.android.synthetic.main.fragment_registration.view.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -51,10 +53,14 @@ class RegistrationFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    lateinit var animationHolder : AnimationsHolder
+
+    private lateinit var animationHolder : AnimationsHolder
     private val validationHolder = ValidationHolder()
-    lateinit var errorsHandler: ErrorsHandler
+    private lateinit var errorsHandler : ErrorsHandler
     private val jsonHolder = JsonHolder()
+
+
+    private lateinit var rootView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,12 +71,10 @@ class RegistrationFragment : Fragment() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registration, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_registration, container, false);
+        initFragment()
+        return rootView
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -129,25 +133,31 @@ class RegistrationFragment : Fragment() {
 
 
     fun initFragment(){
-        errorsHandler = ErrorsHandler(frame_layout.context)
-        animationHolder = AnimationsHolder(frame_layout.context)
-        makeStartAnimations()
+        errorsHandler = ErrorsHandler(rootView.context)
+        animationHolder = AnimationsHolder(rootView.context)
+//        makeStartAnimations()
         initFonts()
+        rootView.register_button.setOnClickListener {
+            handleRegisterButton()
+        }
+        rootView.backTextView.setOnClickListener{
+            fragmentManager
+                ?.popBackStackImmediate()
+        }
+        handleFieldsListeners()
     }
 
-//    fun handleRegisterButton(){
-//        if(areFieldsCorrect()){
-//            if(checkApiResponse()){
+    fun handleRegisterButton(){
+        if(areFieldsCorrect()){
+            //if(checkApiResponse()){
 //                makeSuccessActions()
-//                Handler().postDelayed({
-//                    val intent = Intent()
-//                    intent.putExtra("login", login_field.text.toString())
-//                    setResult(Activity.RESULT_OK, intent)
-//                    finish()
-//                }, 2000)
-//            }
-//        }
-//    }
+                Toast.makeText(rootView.context, "Pomyślnie zarejestrowano", Toast.LENGTH_SHORT).show()
+                fragmentManager
+                    ?.popBackStackImmediate()
+
+            //}
+        }
+    }
 
     fun handleFieldsListeners(){
         handleLoginField()
@@ -158,7 +168,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun handlePasswordRepeatField() {
-        password_repeat_field.addTextChangedListener(object : TextWatcher {
+        rootView.password_repeat_field.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -174,7 +184,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun handlePasswordField() {
-        password_field.addTextChangedListener(object : TextWatcher {
+        rootView.password_field.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -192,7 +202,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun handleEmailRepeatField() {
-        email_repeat_field.addTextChangedListener(object : TextWatcher {
+        rootView.email_repeat_field.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -208,7 +218,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun handleEmailField() {
-        email_field.addTextChangedListener(object : TextWatcher {
+        rootView.email_field.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -222,7 +232,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun handleLoginField(){
-        login_field.addTextChangedListener(object : TextWatcher {
+        rootView.login_field.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -236,26 +246,26 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun isEmailCorrect(): Boolean {
-        errorsHandler.clearError(email_field_layout)
-        if(validationHolder.isEmailCorrect(email_field.text.toString())){
+        errorsHandler.clearError(rootView.email_field_layout)
+        if(validationHolder.isEmailCorrect(rootView.email_field.text.toString())){
             return true
         }
-        errorsHandler.setIncorrectEmailError(email_field_layout)
+        errorsHandler.setIncorrectEmailError(rootView.email_field_layout)
         return false
     }
 
     private fun isPasswordCorrect(): Boolean {
-        if(validationHolder.isPasswordCorrect(password_field.text.toString())){
-            errorsHandler.clearError(password_field_layout)
+        if(validationHolder.isPasswordCorrect(rootView.password_field.text.toString())){
+            errorsHandler.clearError(rootView.password_field_layout)
             return true
         }
-        errorsHandler.setIncorrectPasswordError(password_field_layout)
+        errorsHandler.setIncorrectPasswordError(rootView.password_field_layout)
         return false
     }
 
     private fun isPasswordLengthCorrect(): Boolean{
-        if(validationHolder.isLengthCorrect(password_field.text.toString(), 8)){
-            errorsHandler.clearError(password_field_layout)
+        if(validationHolder.isLengthCorrect(rootView.password_field.text.toString(), 8)){
+            errorsHandler.clearError(rootView.password_field_layout)
             return true
         }
         errorsHandler.setPasswordLengthError(password_field_layout)
@@ -263,29 +273,29 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun isLoginLengthCorrect(): Boolean {
-        if(validationHolder.isLengthCorrect(login_field.text.toString(), 4)){
-            errorsHandler.clearError(login_field_layout)
+        if(validationHolder.isLengthCorrect(rootView.login_field.text.toString(), 4)){
+            errorsHandler.clearError(rootView.login_field_layout)
             return true
         }
-        errorsHandler.setLoginLengthError(login_field_layout)
+        errorsHandler.setLoginLengthError(rootView.login_field_layout)
         return false
     }
 
     private fun areEmailsEqual(): Boolean {
-        if(validationHolder.areFieldsEqual(email_field, email_repeat_field)){
-            errorsHandler.clearError(email_repeat_field_layout)
+        if(validationHolder.areFieldsEqual(rootView.email_field, rootView.email_repeat_field)){
+            errorsHandler.clearError(rootView.email_repeat_field_layout)
             return true
         }
-        errorsHandler.setEmailsNotEqualError(email_repeat_field_layout)
+        errorsHandler.setEmailsNotEqualError(rootView.email_repeat_field_layout)
         return false
     }
 
     private fun arePasswordsEqual(): Boolean {
-        if(validationHolder.areFieldsEqual(password_field, password_repeat_field)){
-            errorsHandler.clearError(password_repeat_field_layout)
+        if(validationHolder.areFieldsEqual(rootView.password_field, rootView.password_repeat_field)){
+            errorsHandler.clearError(rootView.password_repeat_field_layout)
             return true
         }
-        errorsHandler.setPasswordsNotEqualError(password_repeat_field_layout)
+        errorsHandler.setPasswordsNotEqualError(rootView.password_repeat_field_layout)
         return false
     }
 
@@ -324,64 +334,64 @@ class RegistrationFragment : Fragment() {
     private fun areAllFieldsFilled(): Boolean {
         clearFieldErrors()
         var isCorrect = true
-        if(!validationHolder.isFieldFilled(login_field)){
+        if(!validationHolder.isFieldFilled(rootView.login_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(login_field_layout)
+            errorsHandler.setEmptyFieldError(rootView.login_field_layout)
         }
-        if(!validationHolder.isFieldFilled(email_field)){
+        if(!validationHolder.isFieldFilled(rootView.email_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(email_field_layout)
+            errorsHandler.setEmptyFieldError(rootView.email_field_layout)
         }
-        if(!validationHolder.isFieldFilled(email_repeat_field)){
+        if(!validationHolder.isFieldFilled(rootView.email_repeat_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(email_repeat_field_layout)
+            errorsHandler.setEmptyFieldError(rootView.email_repeat_field_layout)
         }
-        if(!validationHolder.isFieldFilled(password_field)){
+        if(!validationHolder.isFieldFilled(rootView.password_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(password_field_layout)
+            errorsHandler.setEmptyFieldError(rootView.password_field_layout)
         }
-        if(!validationHolder.isFieldFilled(password_repeat_field)){
+        if(!validationHolder.isFieldFilled(rootView.password_repeat_field)){
             isCorrect = false
-            errorsHandler.setEmptyFieldError(password_repeat_field_layout)
+            errorsHandler.setEmptyFieldError(rootView.password_repeat_field_layout)
         }
         return isCorrect
     }
 
     private fun clearFieldErrors(){
-        errorsHandler.clearError(login_field_layout)
-        login_field.clearFocus()
-        errorsHandler.clearError(email_field_layout)
-        email_field.clearFocus()
-        errorsHandler.clearError(email_repeat_field_layout)
-        email_repeat_field.clearFocus()
-        errorsHandler.clearError(password_field_layout)
-        password_field.clearFocus()
-        errorsHandler.clearError(password_repeat_field_layout)
-         password_repeat_field.clearFocus()
+        errorsHandler.clearError(rootView.login_field_layout)
+        rootView.login_field.clearFocus()
+        errorsHandler.clearError(rootView.email_field_layout)
+        rootView.email_field.clearFocus()
+        errorsHandler.clearError(rootView.email_repeat_field_layout)
+        rootView.email_repeat_field.clearFocus()
+        errorsHandler.clearError(rootView.password_field_layout)
+        rootView.password_field.clearFocus()
+        errorsHandler.clearError(rootView.password_repeat_field_layout)
+        rootView.password_repeat_field.clearFocus()
     }
 
     private fun makeSuccessActions() {
-        animationHolder.flyaway(registration_card_view, 500, 0, 3)
-        registration_card_view.visibility = View.GONE
-        registeredTextView.visibility = View.VISIBLE
+        animationHolder.flyaway(rootView.registration_card_view, 500, 0, 3)
+        rootView.registration_card_view.visibility = View.GONE
+        rootView.registeredTextView.visibility = View.VISIBLE
     }
 
-    private fun makeStartAnimations(){
-        animationHolder.popUp(registration_card_view, 700, 1000)
-        animationHolder.flyFromBottom(logoImageView, 700, 900)
-    }
+//    private fun makeStartAnimations(){
+//        animationHolder.popUp(registration_card_view, 700, 1000)
+//        animationHolder.flyFromBottom(logoImageView, 700, 900)
+//    }
 
     private fun initFonts(){
-        val typeface = ResourcesCompat.getFont(frame_layout.context, R.font.josefinsansregular)
-        password_field_layout.typeface = typeface
-        password_repeat_field_layout.typeface = typeface
+        val typeface = ResourcesCompat.getFont(rootView.context, R.font.josefinsansregular)
+        rootView.password_field_layout.typeface = typeface
+        rootView.password_repeat_field_layout.typeface = typeface
     }
 
     private fun checkApiResponse(): Boolean {
         val registrationRequest = RegistrationRequest(
-            login_field.text.toString(),
-            password_field.text.toString(),
-            email_field.text.toString()
+            rootView.login_field.text.toString(),
+            rootView.password_field.text.toString(),
+            rootView.email_field.text.toString()
         )
         MyApp.isResponseReceived = false
         fetchApiResponse(registrationRequest)

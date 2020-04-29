@@ -10,10 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.app.ActivityCompat.recreate
+import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activities.MainActivity
 import com.e.truehomemobile.activityHolders.AnimationsHolder
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_language.*
 import kotlinx.android.synthetic.main.fragment_language.view.*
@@ -144,6 +146,11 @@ class LanguageFragment : Fragment() {
             resources.displayMetrics
         )
         activity?.recreate()
+        if(MyApp.isLogged){
+            val navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+            val menu = navigationView.menu
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+        }
         fragmentManager
             ?.beginTransaction()
             ?.detach(this)
