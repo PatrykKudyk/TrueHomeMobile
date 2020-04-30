@@ -13,7 +13,7 @@ import com.e.truehomemobile.viewHolders.ApartmentListViewHolder
 import kotlinx.android.synthetic.main.apartment_cell_not_logged.view.*
 
 
-class ApartmentListAdapter(private val apartmentList: ArrayList<Apartment>): RecyclerView.Adapter<ApartmentListViewHolder>() {
+class ApartmentListAdapter(private val apartmentList: Array<Apartment>): RecyclerView.Adapter<ApartmentListViewHolder>() {
     override fun getItemCount(): Int {
         return apartmentList.size
     }

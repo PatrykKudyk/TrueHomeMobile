@@ -8,5 +8,6 @@ class Apartment(var apartmentId: Long,
                 var apartmentNumber: String,
                 var apartmentZipCode: String,
                 var apartmentPrice: Int,
-                var apartmentDescription: String) {
+                var apartmentDescription: String,
+                var apartmentImages: ArrayList<Picture>) {
 }
