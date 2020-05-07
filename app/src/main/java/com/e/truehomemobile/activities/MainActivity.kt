@@ -71,32 +71,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val menu = navigationView.menu
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_login)
         }
-
-//        supportFragmentManager
-//            .beginTransaction()
-//            .add(R.id.frame_layout, apartmentListFragment)
-//            .commit()
-//        apartmentListFragment.initFragment()
-//
-//        loginFragment.login_button.setOnClickListener {
-////            MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
-////            clearFieldsErrors()
-////            if(areFieldsFilled()){
-////                if(checkUserDataCorrectness()){
-////                    login_field.text = null
-////                    password_field.text = null
-//                    supportFragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.frame_layout, registrationFragment)
-//                        .addToBackStack(registrationFragment.toString())
-//                        .commit()
-////                }
-////            }
-//        }
-//
-//        registrationFragment.register_button.setOnClickListener {
-//            finish()
-//        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -119,6 +93,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         .beginTransaction()
                         .replace(R.id.frame_layout, loginFragment)
                         .commit()
+                }else{
+
                 }
             }
         }
