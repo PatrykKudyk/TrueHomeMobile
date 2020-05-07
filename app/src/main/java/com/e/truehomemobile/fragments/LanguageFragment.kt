@@ -8,17 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.core.app.ActivityCompat.recreate
 import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
-import com.e.truehomemobile.activities.MainActivity
-import com.e.truehomemobile.activityHolders.AnimationsHolder
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_language.*
-import kotlinx.android.synthetic.main.fragment_language.view.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,10 +33,13 @@ class LanguageFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-//    lateinit var animationHolder: AnimationsHolder
     private lateinit var rootView: View
-    private lateinit var polishbutton: View
-    private lateinit var englishbutton: View
+    private lateinit var navigationView: NavigationView
+
+    private lateinit var polishCardView: View
+    private lateinit var englishCardView: View
+    private lateinit var polishLinearLayout: View
+    private lateinit var englishLinearLayout: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,28 +111,39 @@ class LanguageFragment : Fragment() {
 
 
 
-    fun initFragment(){
-//        animationHolder = AnimationsHolder(context)
-//        makeStartAnimations()
+    private fun initFragment(){
+        polishCardView = rootView.findViewById(R.id.polish_card_view)
+        englishCardView = rootView.findViewById(R.id.english_card_view)
 
-        polishbutton = rootView.findViewById(R.id.polish_linear_layout)
-        englishbutton = rootView.findViewById(R.id.english_linear_layout)
+        polishLinearLayout = rootView.findViewById(R.id.polish_linear_layout)
+        englishLinearLayout = rootView.findViewById(R.id.english_linear_layout)
 
-        polishbutton.setOnClickListener {
-            setLocale("pl")
+        when(MyApp.language){
+            "pl" -> {
+                polishLinearLayout.setBackgroundColor(R.color.colorPrimary)
+            }
+            "en" -> {
+                englishLinearLayout.setBackgroundColor(R.color.colorPrimary)
+            }
+            else ->{
+
+            }
         }
-        englishbutton.setOnClickListener {
-            setLocale("en")
+
+        polishCardView.setOnClickListener {
+            if(MyApp.language != "pl"){
+                MyApp.language = "pl"
+                setLocale("pl")
+            }
+        }
+        englishCardView.setOnClickListener {
+            if(MyApp.language != "en"){
+                MyApp.language = "en"
+                setLocale("en")
+            }
         }
 
     }
-
-//    private fun makeStartAnimations(){
-//        animationHolder.fallFromTop(requireView().rootView.logoImageView, 200, 20)
-//        animationHolder.popUp(requireView().rootView.language_text_view, 300,40)
-//        animationHolder.popUp(requireView().rootView.languages_scroll_view, 400, 50)
-//    }
-
 
     private fun setLocale(langCode: String) {
         val locale = Locale(langCode)
@@ -145,16 +153,11 @@ class LanguageFragment : Fragment() {
         resources.updateConfiguration(config,
             resources.displayMetrics
         )
+
+        navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+        val menu = navigationView.menu
+        menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+        navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
         activity?.recreate()
-        if(MyApp.isLogged){
-            val navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
-            val menu = navigationView.menu
-            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
-        }
-        fragmentManager
-            ?.beginTransaction()
-            ?.detach(this)
-            ?.attach(this)
-            ?.commit()
     }
 }

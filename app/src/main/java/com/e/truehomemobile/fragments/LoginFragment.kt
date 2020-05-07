@@ -206,15 +206,6 @@ class LoginFragment : Fragment() {
         rootView.password_field.clearFocus()
     }
 
-//    private fun makeStartAnimations(){
-//        animationHolder.popUp(login_card_view, 1000, 250)
-//        animationHolder.fallFromTop(logoImageView,750, 300)
-//        animationHolder.popUp(login_field_layout, 600, 1000)
-//        animationHolder.popUp(password_field_layout, 600, 1000)
-//        animationHolder.flyFromBottom(login_button, 400, 1500)
-//        animationHolder.flyFromBottom(register_button, 400, 1500)
-//    }
-
     private fun initFonts(){
         val typeface = ResourcesCompat.getFont(rootView.context, R.font.josefinsansregular)
         rootView.password_field_layout.typeface = typeface

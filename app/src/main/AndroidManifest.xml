@@ -14,8 +14,7 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateVisible|adjustResize"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.LogoActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
