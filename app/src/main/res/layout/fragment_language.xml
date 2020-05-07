@@ -60,6 +60,7 @@
                     app:strokeWidth="2dp">
 
                     <LinearLayout
+                        android:id="@+id/polish_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorBaseBackground">
@@ -92,6 +93,7 @@
                     app:strokeWidth="2dp">
 
                     <LinearLayout
+                        android:id="@+id/english_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorBaseBackground">

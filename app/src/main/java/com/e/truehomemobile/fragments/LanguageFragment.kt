@@ -12,6 +12,7 @@ import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.fragment_language.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +38,8 @@ class LanguageFragment : Fragment() {
 
     private lateinit var polishCardView: View
     private lateinit var englishCardView: View
+    private lateinit var polishLinearLayout: View
+    private lateinit var englishLinearLayout: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,12 +115,15 @@ class LanguageFragment : Fragment() {
         polishCardView = rootView.findViewById(R.id.polish_card_view)
         englishCardView = rootView.findViewById(R.id.english_card_view)
 
+        polishLinearLayout = rootView.findViewById(R.id.polish_linear_layout)
+        englishLinearLayout = rootView.findViewById(R.id.english_linear_layout)
+
         when(MyApp.language){
             "pl" -> {
-
+                polishLinearLayout.setBackgroundColor(R.color.colorPrimary)
             }
             "en" -> {
-
+                englishLinearLayout.setBackgroundColor(R.color.colorPrimary)
             }
             else ->{
 
