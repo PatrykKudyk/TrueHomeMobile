@@ -62,6 +62,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             MyApp.hasAppStarted = true
         }
 
+        if(MyApp.isLogged){
+            val navigationView = findViewById<NavigationView>(R.id.nav_view)
+            val menu = navigationView.menu
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+        }else{
+            val navigationView = findViewById<NavigationView>(R.id.nav_view)
+            val menu = navigationView.menu
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_login)
+        }
+
 //        supportFragmentManager
 //            .beginTransaction()
 //            .add(R.id.frame_layout, apartmentListFragment)
