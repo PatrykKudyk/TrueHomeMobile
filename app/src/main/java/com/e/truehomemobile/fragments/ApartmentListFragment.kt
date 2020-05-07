@@ -147,23 +147,23 @@ class ApartmentListFragment : Fragment() {
 
         fetchApartments(pageNumber)
 
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                if (dy > 0) { //check for scroll down
-                    val visibleItemCount = mLayoutManager.childCount
-                    val totalItemCount = mLayoutManager.itemCount
-                    val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
-
-                    if (!loading) {
-                        if (visibleItemCount + pastVisibleItems >= totalItemCount) {
-                            pageNumber++
-                            fetchApartments(pageNumber)
-//                             Do pagination.. i.e. fetch new data
-                        }
-                    }
-                }
-//            }
-        })
+//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+////                if (dy > 0) { //check for scroll down
+//                    val visibleItemCount = mLayoutManager.childCount
+//                    val totalItemCount = mLayoutManager.itemCount
+//                    val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
+//
+//                    if (!loading) {
+//                        if (visibleItemCount + pastVisibleItems >= totalItemCount) {
+//                            pageNumber++
+//                            fetchApartments(pageNumber)
+////                             Do pagination.. i.e. fetch new data
+//                        }
+//                    }
+//                }
+////            }
+//        })
 
     }
 
@@ -175,12 +175,13 @@ class ApartmentListFragment : Fragment() {
         jsonHolder = JsonHolder()
         val url = MyApp.apiUrl +
                 "Apartments/GetAllApartments" +
-                "?PageNumber=" +
-                page.toString() +
+                "?PageNumber=1" +
+             //   page.toString() +
                 "&PageSize=6"
 
         val request = Request.Builder()
             .url(url)
+            .header("Content-Type", "application/json")
             .get()
             .build()
 
@@ -208,8 +209,7 @@ class ApartmentListFragment : Fragment() {
                                 recyclerView.adapter = ApartmentListAdapter(apartments)
                             } else{
                                 apartments += apartmentsFetched
-                                recyclerView.adapter = ApartmentListAdapter(apartments)
-                                recyclerView.scrollToPosition(pageNumber*6)
+                                recyclerView.adapter?.notifyDataSetChanged()
                             }
                             loading = false
                             rootView.secondProgressBar.visibility = View.GONE

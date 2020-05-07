@@ -1,7 +1,10 @@
 package com.e.truehomemobile.adapters
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +15,7 @@ import com.e.truehomemobile.models.apartment.Apartment
 import com.e.truehomemobile.viewHolders.ApartmentListViewHolder
 import kotlinx.android.synthetic.main.apartment_cell_not_logged.view.*
 
-
-class ApartmentListAdapter(private val apartmentList: Array<Apartment>): RecyclerView.Adapter<ApartmentListViewHolder>() {
+class ApartmentListAdapter(val apartmentList: Array<Apartment>): RecyclerView.Adapter<ApartmentListViewHolder>() {
     override fun getItemCount(): Int {
         return apartmentList.size
     }
@@ -43,9 +45,28 @@ class ApartmentListAdapter(private val apartmentList: Array<Apartment>): Recycle
         holder.view.apartment_name_text_view.text = apartmentList[position].apartmentName
         holder.view.apartment_address_text_view.text = apartmentList[position].apartmentCity + ", " +
                 apartmentList[position].apartmentStreet + " " + apartmentList[position].apartmentStreetNumber +
-                "/" + apartmentList[position].apartmentNumber
+                "/" //+ apartmentList[position].apartmentNumber
         holder.view.apartment_price_text_view.text = apartmentList[position].apartmentPrice.toString() + " zł"
         holder.view.description_text_view.text = apartmentList[position].apartmentDescription
+
+        if(apartmentList[position].apartmentImage != null){
+            val string = apartmentList[position].apartmentImage.substring(21)
+            val imageBytes = Base64.decode(string, Base64.DEFAULT)
+            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+            if(decodedImage != null){
+                holder.view.image_main_apartment.setImageBitmap(
+                    Bitmap.createScaledBitmap(
+                        decodedImage, 100, 100, false
+                    )
+                )
+            }else{
+                holder.view.image_main_apartment.setImageBitmap(decodedImage)
+            }
+
+        }else{
+            holder.view.image_main_apartment.setImageResource(R.drawable.icon)
+        }
 
         val mainCardView = holder.view.apartment_not_logged_cell_card_view
         val descriptionCardView = holder.view.description_card_view

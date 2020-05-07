@@ -45,8 +45,7 @@
                     <ImageView
                         android:id="@+id/image_main_apartment"
                         android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        app:srcCompat="@drawable/icon" />
+                        android:layout_height="100dp" />
                 </com.google.android.material.card.MaterialCardView>
 
 
