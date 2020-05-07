@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var languageFragment: LanguageFragment
     lateinit var loginFragment: LoginFragment
     lateinit var logoFragment: LogoFragment
+    lateinit var accountFragment: AccountFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         languageFragment = LanguageFragment.newInstance()
         loginFragment = LoginFragment.newInstance()
         logoFragment = LogoFragment.newInstance()
+        accountFragment = AccountFragment.newInstance()
 
         supportFragmentManager
             .beginTransaction()
@@ -91,7 +93,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         .replace(R.id.frame_layout, loginFragment)
                         .commit()
                 }else{
-
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, accountFragment)
+                        .commit()
                 }
             }
         }

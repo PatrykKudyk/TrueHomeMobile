@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
+import com.google.android.material.navigation.NavigationView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,8 +31,10 @@ class AccountFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    private lateinit var navigationView: NavigationView
     private lateinit var rootView: View
-
+    private lateinit var addButton: View
+    private lateinit var logoutButton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +83,20 @@ class AccountFragment : Fragment() {
     }
 
     private fun initFragment(){
+        addButton = rootView.findViewById(R.id.add_apartment_button)
+        logoutButton = rootView.findViewById(R.id.logout_text_view)
 
+        addButton.setOnClickListener {
+
+        }
+
+        logoutButton.setOnClickListener {
+            MyApp.isLogged = false
+            navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+            val menu = navigationView.menu
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+            navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
+            activity?.recreate()
+        }
     }
 }
