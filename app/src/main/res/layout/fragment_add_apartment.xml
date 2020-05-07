@@ -75,7 +75,6 @@
                             android:textSize="22sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/add_apartment_city_layout"
                         style="@style/TextInputLayout.OutlineBox.CustomFont"
@@ -97,47 +96,60 @@
                             android:textSize="22sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/add_apartment_street_layout"
-                        style="@style/TextInputLayout.OutlineBox.CustomFont"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="@color/colorPrimaryDark"
-                        app:errorEnabled="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_apartment_street"
-                            android:layout_width="match_parent"
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/add_apartment_street_layout"
+                            style="@style/TextInputLayout.OutlineBox.CustomFont"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="@string/add_apartment_street"
-                            android:inputType="text"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="22sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            app:boxStrokeColor="@color/colorPrimaryDark"
+                            app:errorEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/add_apartment_street_number_layout"
-                        style="@style/TextInputLayout.OutlineBox.CustomFont"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:boxStrokeColor="@color/colorPrimaryDark"
-                        app:errorEnabled="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/add_apartment_street"
+                                android:layout_width="230dp"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/add_apartment_street"
+                                android:inputType="text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="22sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/add_apartment_street_number"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/add_apartment_street_number_layout"
+                            style="@style/TextInputLayout.OutlineBox.CustomFont"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="@string/add_apartment_street_number"
-                            android:inputType="text"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="22sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            app:boxStrokeColor="@color/colorPrimaryDark"
+                            app:errorEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/add_apartment_street_number"
+                                android:layout_width="132dp"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/add_apartment_street_number"
+                                android:inputType="text"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="22sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+
+
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/add_apartment_price_layout"

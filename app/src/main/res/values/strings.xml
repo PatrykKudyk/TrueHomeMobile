@@ -34,7 +34,7 @@
     <string name="add_apartment_name">Name</string>
     <string name="add_apartment_city">City</string>
     <string name="add_apartment_street">Street</string>
-    <string name="add_apartment_street_number">Street number</string>
+    <string name="add_apartment_street_number">Number</string>
     <string name="add_apartment_price">Price</string>
     <string name="add_apartment_description">Description</string>
     <string name="add_apartment_images">Add images</string>
