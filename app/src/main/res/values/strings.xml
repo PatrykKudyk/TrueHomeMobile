@@ -29,4 +29,6 @@
     <string name="menu_account">Account</string>
     <string name="nav_open">Open Navigation Drawer</string>
     <string name="nav_close">Close Navigation Drawer</string>
+    <string name="button_add_apartment">Add apartment</string>
+    <string name="logout">Log out</string>
 </resources>

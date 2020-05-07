@@ -37,7 +37,7 @@
 
         <ScrollView
             android:id="@+id/languages_scroll_view"
-            android:layout_width="176dp"
+            android:layout_width="225dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,53 +49,71 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/polish_linear_layout"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/polish_card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp">
 
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_gravity="left"
-                        android:src="@drawable/poland_640" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/polish_linear_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/josefinsansregular"
-                        android:gravity="left"
-                        android:text="@string/lang_polish"
-                        android:textSize="20sp" />
-                </LinearLayout>
+                        android:background="@color/colorBaseBackground">
 
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/poland_640" />
 
-                <LinearLayout
-                    android:id="@+id/english_linear_layout"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/josefinsansregular"
+                            android:text="@string/lang_polish"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/english_card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="10dp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:cardCornerRadius="12dp"
+                    app:strokeColor="@color/colorPrimaryDark"
+                    app:strokeWidth="2dp">
 
-                    <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_gravity="left"
-                        android:src="@drawable/united_kingdom_640" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/english_linear_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/josefinsansregular"
-                        android:gravity="left"
-                        android:text="@string/lang_english"
-                        android:textSize="20sp" />
-                </LinearLayout>
+                        android:background="@color/colorBaseBackground">
 
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/united_kingdom_640" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/josefinsansregular"
+                            android:text="@string/lang_english"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
         </ScrollView>

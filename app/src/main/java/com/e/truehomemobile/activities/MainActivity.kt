@@ -3,35 +3,36 @@ package com.e.truehomemobile.activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.view.isEmpty
 import androidx.drawerlayout.widget.DrawerLayout
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
-import com.e.truehomemobile.fragments.ApartmentListFragment
-import com.e.truehomemobile.fragments.LanguageFragment
-import com.e.truehomemobile.fragments.LoginFragment
-import com.e.truehomemobile.fragments.RegistrationFragment
+import com.e.truehomemobile.fragments.*
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.content_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     ApartmentListFragment.OnFragmentInteractionListener,
     LanguageFragment.OnFragmentInteractionListener,
     LoginFragment.OnFragmentInteractionListener,
-    RegistrationFragment.OnFragmentInteractionListener {
+    RegistrationFragment.OnFragmentInteractionListener,
+    LogoFragment.OnFragmentInteractionListener,
+    AccountFragment.OnFragmentInteractionListener{
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
+    lateinit var menu: Menu
 
     lateinit var apartmentListFragment: ApartmentListFragment
     lateinit var languageFragment: LanguageFragment
     lateinit var loginFragment: LoginFragment
+    lateinit var logoFragment: LogoFragment
+    lateinit var accountFragment: AccountFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
+        menu = navView.menu
 
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, 0, 0
@@ -53,40 +55,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         apartmentListFragment = ApartmentListFragment.newInstance()
         languageFragment = LanguageFragment.newInstance()
         loginFragment = LoginFragment.newInstance()
+        logoFragment = LogoFragment.newInstance()
+        accountFragment = AccountFragment.newInstance()
 
-        if(!MyApp.hasAppStarted){
-            supportFragmentManager
+        supportFragmentManager
             .beginTransaction()
-            .add(R.id.frame_layout, apartmentListFragment)
+            .add(R.id.frame_layout, logoFragment)
             .commit()
-            MyApp.hasAppStarted = true
-        }
 
-//        supportFragmentManager
-//            .beginTransaction()
-//            .add(R.id.frame_layout, apartmentListFragment)
-//            .commit()
-//        apartmentListFragment.initFragment()
-//
-//        loginFragment.login_button.setOnClickListener {
-////            MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
-////            clearFieldsErrors()
-////            if(areFieldsFilled()){
-////                if(checkUserDataCorrectness()){
-////                    login_field.text = null
-////                    password_field.text = null
-//                    supportFragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.frame_layout, registrationFragment)
-//                        .addToBackStack(registrationFragment.toString())
-//                        .commit()
-////                }
-////            }
-//        }
-//
-//        registrationFragment.register_button.setOnClickListener {
-//            finish()
-//        }
+        navView.setCheckedItem(menu.findItem(R.id.menu_apartments))
+
+        if(MyApp.isLogged){
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+        }else{
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_login)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -108,6 +91,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frame_layout, loginFragment)
+                        .commit()
+                }else{
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, accountFragment)
                         .commit()
                 }
             }
