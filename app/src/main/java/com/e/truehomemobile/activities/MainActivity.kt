@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     LanguageFragment.OnFragmentInteractionListener,
     LoginFragment.OnFragmentInteractionListener,
     RegistrationFragment.OnFragmentInteractionListener,
-    LogoFragment.OnFragmentInteractionListener{
+    LogoFragment.OnFragmentInteractionListener,
+    AccountFragment.OnFragmentInteractionListener{
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
