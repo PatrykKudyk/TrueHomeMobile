@@ -8,17 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.core.app.ActivityCompat.recreate
 import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
-import com.e.truehomemobile.activities.MainActivity
-import com.e.truehomemobile.activityHolders.AnimationsHolder
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.fragment_language.*
-import kotlinx.android.synthetic.main.fragment_language.view.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,9 +33,10 @@ class LanguageFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
     private lateinit var rootView: View
-    private lateinit var polishbutton: View
-    private lateinit var englishbutton: View
     private lateinit var navigationView: NavigationView
+
+    private lateinit var polishCardView: View
+    private lateinit var englishCardView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,14 +109,32 @@ class LanguageFragment : Fragment() {
 
 
     private fun initFragment(){
-        polishbutton = rootView.findViewById(R.id.polish_linear_layout)
-        englishbutton = rootView.findViewById(R.id.english_linear_layout)
+        polishCardView = rootView.findViewById(R.id.polish_card_view)
+        englishCardView = rootView.findViewById(R.id.english_card_view)
 
-        polishbutton.setOnClickListener {
-            setLocale("pl")
+        when(MyApp.language){
+            "pl" -> {
+
+            }
+            "en" -> {
+
+            }
+            else ->{
+
+            }
         }
-        englishbutton.setOnClickListener {
-            setLocale("en")
+
+        polishCardView.setOnClickListener {
+            if(MyApp.language != "pl"){
+                MyApp.language = "pl"
+                setLocale("pl")
+            }
+        }
+        englishCardView.setOnClickListener {
+            if(MyApp.language != "en"){
+                MyApp.language = "en"
+                setLocale("en")
+            }
         }
 
     }
