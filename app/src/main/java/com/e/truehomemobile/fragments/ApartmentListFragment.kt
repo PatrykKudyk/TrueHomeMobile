@@ -3,18 +3,34 @@ package com.e.truehomemobile.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
+import com.e.truehomemobile.activityHolders.JsonHolder
 import com.e.truehomemobile.adapters.ApartmentListAdapter
 import com.e.truehomemobile.models.apartment.Apartment
+import com.e.truehomemobile.models.authorization.LoginResponse
 import com.e.truehomemobile.models.classes.MarginItemDecoration
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_apartment_list.*
+import kotlinx.android.synthetic.main.fragment_apartment_list.view.*
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
+import java.security.cert.CertificateException
+import java.sql.Types
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +50,15 @@ class ApartmentListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
     private lateinit var rootView: View
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var jsonHolder: JsonHolder
+
+    private lateinit var apartments: Array<Apartment>
+    private var loading = false
+    private var pageNumber: Int = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +68,11 @@ class ApartmentListFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         rootView = inflater.inflate(R.layout.fragment_apartment_list, container, false);
         initFragment()
         return rootView
@@ -74,7 +101,7 @@ class ApartmentListFragment : Fragment() {
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
-     * 
+     *
      *
      *
      * See the Android Training lesson [Communicating with Other Fragments]
@@ -105,32 +132,138 @@ class ApartmentListFragment : Fragment() {
     }
 
 
-    fun initFragment(){
+    fun initFragment() {
         recyclerView = rootView.findViewById(R.id.apartment_list_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
+        recyclerView.layoutManager = mLayoutManager
+
         recyclerView.addItemDecoration(
             MarginItemDecoration(
                 12
             )
         )
-        recyclerView.adapter = ApartmentListAdapter(initApartmentList())
+
+
+        fetchApartments(pageNumber)
+
+//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+////                if (dy > 0) { //check for scroll down
+//                    val visibleItemCount = mLayoutManager.childCount
+//                    val totalItemCount = mLayoutManager.itemCount
+//                    val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
+//
+//                    if (!loading) {
+//                        if (visibleItemCount + pastVisibleItems >= totalItemCount) {
+//                            pageNumber++
+//                            fetchApartments(pageNumber)
+////                             Do pagination.. i.e. fetch new data
+//                        }
+//                    }
+//                }
+////            }
+//        })
+
     }
 
+    private fun fetchApartments(page: Int) {
+        loading = true
+        if(page != 1){
+            rootView.secondProgressBar.visibility = View.VISIBLE
+        }
+        jsonHolder = JsonHolder()
+        val url = MyApp.apiUrl +
+                "Apartments/GetAllApartments" +
+                "?PageNumber=1" +
+             //   page.toString() +
+                "&PageSize=6"
 
-    private fun initApartmentList(): ArrayList<Apartment>{               // metoda testowa, bez bazy
-        val apartment1 = Apartment(0, "Dobry apartment", "Wroclaw",
-            "Bzowa", "21", "37a", "51-132",
-            300,"Opis apartamentu, który jest właśnie opisywany bla bla" +
-                    "bla bla bla")
-        val apartmentList = ArrayList<Apartment>()
-        apartmentList.add(apartment1)
-        apartmentList.add(apartment1)
-        apartmentList.add(apartment1)
-        apartmentList.add(apartment1)
-        apartmentList.add(apartment1)
-        apartmentList.add(apartment1)
-        apartmentList.add(apartment1)
+        val request = Request.Builder()
+            .url(url)
+            .header("Content-Type", "application/json")
+            .get()
+            .build()
 
-        return apartmentList
+        val client: OkHttpClient = getUnsafeOkHttpClient().build()
+
+        val response = client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                when (response.code) {
+
+                    200 -> {
+                        val body = response.body?.string()
+
+                        val gson = GsonBuilder().create()
+
+                        val apartmentsFetched = gson.fromJson(body, Array<Apartment>::class.java)
+
+                        activity?.runOnUiThread {
+                            if(page == 1){
+                                rootView.firstProgressBar.visibility = View.GONE
+                                apartments = apartmentsFetched
+                                recyclerView.adapter = ApartmentListAdapter(apartments)
+                            } else{
+                                apartments += apartmentsFetched
+                                recyclerView.adapter?.notifyDataSetChanged()
+                            }
+                            loading = false
+                            rootView.secondProgressBar.visibility = View.GONE
+                        }
+                    }
+
+
+                    else -> {
+
+                    }
+                }
+            }
+
+        })
+    }
+
+    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+
+        try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+                @Throws(CertificateException::class)
+                override fun checkClientTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
+                }
+
+                @Throws(CertificateException::class)
+                override fun checkServerTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
+                }
+
+                override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {
+                    return arrayOf()
+                }
+            })
+
+            // Install the all-trusting trust manager
+            val sslContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+            // Create an ssl socket factory with our all-trusting manager
+            val sslSocketFactory = sslContext.socketFactory
+
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier(HostnameVerifier { _, _ -> true })
+
+            return builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+
     }
 }

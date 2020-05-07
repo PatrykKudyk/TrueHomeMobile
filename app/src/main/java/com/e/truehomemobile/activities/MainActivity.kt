@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         apartmentListFragment = ApartmentListFragment.newInstance()
         languageFragment = LanguageFragment.newInstance()
-        loginFragment = LoginFragment.newInstance("param 1", "param 2")
+        loginFragment = LoginFragment.newInstance()
 
         if(!MyApp.hasAppStarted){
             supportFragmentManager
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //            .add(R.id.frame_layout, apartmentListFragment)
 //            .commit()
 //        apartmentListFragment.initFragment()
-
+//
 //        loginFragment.login_button.setOnClickListener {
 ////            MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
 ////            clearFieldsErrors()
