@@ -9,6 +9,6 @@ class MyApp(): Application() {
         lateinit var loginResponse: LoginResponse
         var isResponseReceived: Boolean = false
         var isLogged: Boolean = false
-        var hasAppStarted: Boolean = false
+        var language: String = "en"
     }
 }
