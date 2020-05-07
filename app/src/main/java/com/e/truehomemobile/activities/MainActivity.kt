@@ -7,23 +7,19 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.view.isEmpty
 import androidx.drawerlayout.widget.DrawerLayout
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
-import com.e.truehomemobile.fragments.ApartmentListFragment
-import com.e.truehomemobile.fragments.LanguageFragment
-import com.e.truehomemobile.fragments.LoginFragment
-import com.e.truehomemobile.fragments.RegistrationFragment
+import com.e.truehomemobile.fragments.*
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.content_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     ApartmentListFragment.OnFragmentInteractionListener,
     LanguageFragment.OnFragmentInteractionListener,
     LoginFragment.OnFragmentInteractionListener,
-    RegistrationFragment.OnFragmentInteractionListener {
+    RegistrationFragment.OnFragmentInteractionListener,
+    LogoFragment.OnFragmentInteractionListener{
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -32,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var apartmentListFragment: ApartmentListFragment
     lateinit var languageFragment: LanguageFragment
     lateinit var loginFragment: LoginFragment
+    lateinit var logoFragment: LogoFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,22 +50,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         apartmentListFragment = ApartmentListFragment.newInstance()
         languageFragment = LanguageFragment.newInstance()
         loginFragment = LoginFragment.newInstance()
+        logoFragment = LogoFragment.newInstance()
 
-        if(!MyApp.hasAppStarted){
-            supportFragmentManager
-            .beginTransaction()
-            .add(R.id.frame_layout, apartmentListFragment)
-            .commit()
-            MyApp.hasAppStarted = true
-        }
+//        if(!MyApp.hasAppStarted){
+        supportFragmentManager
+        .beginTransaction()
+        .add(R.id.frame_layout, logoFragment)
+        .commit()
+        MyApp.hasAppStarted = true
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val menu = navigationView.menu
+        menu.findItem(R.id.menu_apartments).isChecked = true
+//        }
 
         if(MyApp.isLogged){
-            val navigationView = findViewById<NavigationView>(R.id.nav_view)
-            val menu = navigationView.menu
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
         }else{
-            val navigationView = findViewById<NavigationView>(R.id.nav_view)
-            val menu = navigationView.menu
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_login)
         }
     }
