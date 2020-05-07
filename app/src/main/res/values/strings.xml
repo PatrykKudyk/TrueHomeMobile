@@ -31,4 +31,12 @@
     <string name="nav_close">Close Navigation Drawer</string>
     <string name="button_add_apartment">Add apartment</string>
     <string name="logout">Log out</string>
+    <string name="add_apartment_name">Name</string>
+    <string name="add_apartment_city">City</string>
+    <string name="add_apartment_street">Street</string>
+    <string name="add_apartment_street_number">Street number</string>
+    <string name="add_apartment_price">Price</string>
+    <string name="add_apartment_description">Description</string>
+    <string name="add_apartment_images">Add images</string>
+    <string name="add_apartment_back">Back</string>
 </resources>
