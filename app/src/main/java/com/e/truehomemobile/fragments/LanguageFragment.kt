@@ -39,10 +39,10 @@ class LanguageFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-//    lateinit var animationHolder: AnimationsHolder
     private lateinit var rootView: View
     private lateinit var polishbutton: View
     private lateinit var englishbutton: View
+    private lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,10 +114,7 @@ class LanguageFragment : Fragment() {
 
 
 
-    fun initFragment(){
-//        animationHolder = AnimationsHolder(context)
-//        makeStartAnimations()
-
+    private fun initFragment(){
         polishbutton = rootView.findViewById(R.id.polish_linear_layout)
         englishbutton = rootView.findViewById(R.id.english_linear_layout)
 
@@ -130,13 +127,6 @@ class LanguageFragment : Fragment() {
 
     }
 
-//    private fun makeStartAnimations(){
-//        animationHolder.fallFromTop(requireView().rootView.logoImageView, 200, 20)
-//        animationHolder.popUp(requireView().rootView.language_text_view, 300,40)
-//        animationHolder.popUp(requireView().rootView.languages_scroll_view, 400, 50)
-//    }
-
-
     private fun setLocale(langCode: String) {
         val locale = Locale(langCode)
         val config = Configuration(resources.configuration)
@@ -145,16 +135,11 @@ class LanguageFragment : Fragment() {
         resources.updateConfiguration(config,
             resources.displayMetrics
         )
+
+        navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+        val menu = navigationView.menu
+        menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+        navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
         activity?.recreate()
-        if(MyApp.isLogged){
-            val navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
-            val menu = navigationView.menu
-            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
-        }
-        fragmentManager
-            ?.beginTransaction()
-            ?.detach(this)
-            ?.attach(this)
-            ?.commit()
     }
 }

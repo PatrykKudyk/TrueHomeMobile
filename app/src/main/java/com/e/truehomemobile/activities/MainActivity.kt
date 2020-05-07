@@ -3,6 +3,7 @@ package com.e.truehomemobile.activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
+    lateinit var menu: Menu
 
     lateinit var apartmentListFragment: ApartmentListFragment
     lateinit var languageFragment: LanguageFragment
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
+        menu = navView.menu
 
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, 0, 0
@@ -52,16 +55,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         loginFragment = LoginFragment.newInstance()
         logoFragment = LogoFragment.newInstance()
 
-//        if(!MyApp.hasAppStarted){
         supportFragmentManager
-        .beginTransaction()
-        .add(R.id.frame_layout, logoFragment)
-        .commit()
-        MyApp.hasAppStarted = true
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        val menu = navigationView.menu
-        menu.findItem(R.id.menu_apartments).isChecked = true
-//        }
+            .beginTransaction()
+            .add(R.id.frame_layout, logoFragment)
+            .commit()
+
+        navView.setCheckedItem(menu.findItem(R.id.menu_apartments))
 
         if(MyApp.isLogged){
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)

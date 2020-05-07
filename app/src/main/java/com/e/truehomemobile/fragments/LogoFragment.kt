@@ -100,6 +100,7 @@ class LogoFragment : Fragment() {
     private fun initFragment(){
         Handler().postDelayed({
             apartmentListFragment = ApartmentListFragment.newInstance()
+
             fragmentManager
                 ?.beginTransaction()
                 ?.replace(R.id.frame_layout, apartmentListFragment)
