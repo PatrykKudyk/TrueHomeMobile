@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 import com.e.truehomemobile.R
 
@@ -23,6 +24,8 @@ class AddApartmentFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
+    private lateinit var addButton: View
+    private lateinit var backButton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +74,20 @@ class AddApartmentFragment : Fragment() {
     }
 
     private fun initFragment(){
+        addButton = rootView.findViewById(R.id.add_apartment_button)
+        backButton = rootView.findViewById(R.id.back_text_view)
+
+        addButton.setOnClickListener {
+            addApartment()
+        }
+
+        backButton.setOnClickListener {
+            fragmentManager
+                ?.popBackStackImmediate()
+        }
+    }
+
+    private fun addApartment(){
 
     }
 }

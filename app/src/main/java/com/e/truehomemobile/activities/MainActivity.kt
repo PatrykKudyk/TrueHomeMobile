@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     LoginFragment.OnFragmentInteractionListener,
     RegistrationFragment.OnFragmentInteractionListener,
     LogoFragment.OnFragmentInteractionListener,
-    AccountFragment.OnFragmentInteractionListener{
+    AccountFragment.OnFragmentInteractionListener,
+    AddApartmentFragment.OnFragmentInteractionListener{
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
