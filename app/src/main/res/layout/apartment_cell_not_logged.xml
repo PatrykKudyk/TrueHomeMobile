@@ -44,8 +44,8 @@
 
                     <ImageView
                         android:id="@+id/image_main_apartment"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp" />
+                        android:layout_width="130dp"
+                        android:layout_height="130dp" />
                 </com.google.android.material.card.MaterialCardView>
 
 
@@ -78,16 +78,31 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="3dp"
+                            android:textSize="14sp"
                             android:fontFamily="@font/josefinsansregular"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/apartment_name_text_view" />
 
                         <TextView
+                            android:id="@+id/apartment_zip_code_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="3dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/josefinsansregular"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/apartment_address_text_view" />
+
+
+                        <TextView
                             android:id="@+id/apartment_price_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:textSize="16sp"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/josefinsanslight"
                             app:layout_constraintBottom_toBottomOf="parent"

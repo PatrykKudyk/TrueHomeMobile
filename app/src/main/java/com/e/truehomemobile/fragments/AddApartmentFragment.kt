@@ -7,35 +7,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.e.truehomemobile.MyApp
+import android.widget.Button
 
 import com.e.truehomemobile.R
-import com.google.android.material.navigation.NavigationView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [AccountFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [AccountFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AccountFragment : Fragment() {
+
+class AddApartmentFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private lateinit var navigationView: NavigationView
     private lateinit var rootView: View
     private lateinit var addButton: View
-    private lateinit var logoutButton: View
-    private lateinit var addApartmentFragment: AddApartmentFragment
+    private lateinit var backButton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +36,12 @@ class AccountFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.fragment_account, container, false);
+        rootView = inflater.inflate(R.layout.fragment_add_apartment, container, false);
         initFragment()
         return rootView
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
@@ -70,39 +61,33 @@ class AccountFragment : Fragment() {
     }
 
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
         @JvmStatic
         fun newInstance() =
-            AccountFragment().apply {
+            AddApartmentFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment(){
-        addButton = rootView.findViewById(R.id.add_apartment_button_account)
-        logoutButton = rootView.findViewById(R.id.logout_text_view)
+        addButton = rootView.findViewById(R.id.add_apartment_button)
+        backButton = rootView.findViewById(R.id.back_text_view)
 
         addButton.setOnClickListener {
-            addApartmentFragment = AddApartmentFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.frame_layout, addApartmentFragment)
-                ?.addToBackStack(RegistrationFragment.toString())
-                ?.commit()
+            addApartment()
         }
 
-        logoutButton.setOnClickListener {
-            MyApp.isLogged = false
-            navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
-            val menu = navigationView.menu
-            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
-            navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
-            activity?.recreate()
+        backButton.setOnClickListener {
+            fragmentManager
+                ?.popBackStackImmediate()
         }
+    }
+
+    private fun addApartment(){
+
     }
 }

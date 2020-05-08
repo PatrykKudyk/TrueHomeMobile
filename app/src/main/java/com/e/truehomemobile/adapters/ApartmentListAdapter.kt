@@ -44,8 +44,8 @@ class ApartmentListAdapter(val apartmentList: Array<Apartment>): RecyclerView.Ad
     private fun handleNotLoggedUser(holder: ApartmentListViewHolder, position: Int){
         holder.view.apartment_name_text_view.text = apartmentList[position].apartmentName
         holder.view.apartment_address_text_view.text = apartmentList[position].apartmentCity + ", " +
-                apartmentList[position].apartmentStreet + " " + apartmentList[position].apartmentStreetNumber +
-                "/" //+ apartmentList[position].apartmentNumber
+                apartmentList[position].apartmentStreet + " " + apartmentList[position].apartmentStreetNumber
+        holder.view.apartment_zip_code_text_view.text = apartmentList[position].apartmentZipCode
         holder.view.apartment_price_text_view.text = apartmentList[position].apartmentPrice.toString() + " zł"
         holder.view.description_text_view.text = apartmentList[position].apartmentDescription
 
@@ -57,7 +57,7 @@ class ApartmentListAdapter(val apartmentList: Array<Apartment>): RecyclerView.Ad
             if(decodedImage != null){
                 holder.view.image_main_apartment.setImageBitmap(
                     Bitmap.createScaledBitmap(
-                        decodedImage, 100, 100, false
+                        decodedImage, 130, 130, false
                     )
                 )
             }else{
