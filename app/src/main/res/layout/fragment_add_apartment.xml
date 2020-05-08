@@ -121,8 +121,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/add_apartment_zip_code"
                                 android:inputType="text"
-                                android:textColor="@color/colorPrimaryDark"
                                 android:maxLength="6"
+                                android:textColor="@color/colorPrimaryDark"
                                 android:textSize="22sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,8 +171,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/add_apartment_street_number"
-                                android:maxLength="7"
                                 android:inputType="text"
+                                android:maxLength="7"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:textSize="22sp" />
                         </com.google.android.material.textfield.TextInputLayout>
