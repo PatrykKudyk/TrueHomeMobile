@@ -36,6 +36,7 @@
     <string name="add_apartment_street">Street</string>
     <string name="add_apartment_street_number">Number</string>
     <string name="add_apartment_price">Price</string>
+    <string name="add_apartment_zip_code">Zip Code</string>
     <string name="add_apartment_description">Description</string>
     <string name="add_apartment_images">Add images</string>
     <string name="add_apartment_back">Back</string>

@@ -36,6 +36,7 @@
     <string name="add_apartment_street">Ulica</string>
     <string name="add_apartment_street_number">Numer</string>
     <string name="add_apartment_price">Cena</string>
+    <string name="add_apartment_zip_code">Kod Pocztowy</string>
     <string name="add_apartment_description">Opis</string>
     <string name="add_apartment_images">Dodaj zdjęcia</string>
     <string name="add_apartment_back">Wróć</string>
