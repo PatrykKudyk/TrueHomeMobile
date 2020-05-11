@@ -1,9 +1,8 @@
-package com.e.truehomemobile.fragments
+package com.e.truehomemobile.fragments.Apartment
 
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,17 +15,12 @@ import com.e.truehomemobile.R
 import com.e.truehomemobile.activityHolders.JsonHolder
 import com.e.truehomemobile.adapters.ApartmentListAdapter
 import com.e.truehomemobile.models.apartment.Apartment
-import com.e.truehomemobile.models.authorization.LoginResponse
 import com.e.truehomemobile.models.classes.MarginItemDecoration
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.fragment_apartment_list.*
 import kotlinx.android.synthetic.main.fragment_apartment_list.view.*
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 import java.security.cert.CertificateException
-import java.sql.Types
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager

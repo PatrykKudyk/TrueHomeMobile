@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ApartmentListFragment">
+    tools:context=".fragments.Apartment.ApartmentListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
@@ -12,63 +12,58 @@
         android:layout_height="match_parent"
         android:background="@color/colorBaseBackground">
 
-        <ImageView
-            android:id="@+id/logoImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon" />
-
-
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logoImageView"
-            app:layout_constraintVertical_bias="0.07">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/logoImageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icon" />
 
                 <TextView
                     android:id="@+id/apartment_details_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/josefinsansbold"
                     android:gravity="center"
                     android:text="Nazwa apartamentu elo elo elo"
                     android:textAllCaps="true"
                     android:textSize="36sp" />
 
-
                 <View
+                    android:id="@+id/apartment_details_top_line"
                     android:layout_width="185dp"
-                    android:layout_height="4dp"
+                    android:layout_height="3dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="26dp"
                     android:layout_marginBottom="6dp"
-                    android:background="@color/colorPrimaryDark"
-                    app:layout_constraintBottom_toTopOf="@id/description_text_view_logged"
-                    app:layout_constraintTop_toBottomOf="parent" />
-
+                    android:background="@color/colorPrimaryDark" />
 
                 <ScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="182dp"
-                    android:layout_marginTop="24dp"
-                    >
+                    android:layout_marginTop="24dp">
 
                     <LinearLayout
                         android:id="@+id/images_linear_layout"
@@ -116,36 +111,53 @@
                 <TextView
                     android:id="@+id/apartment_details_price"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="16dp"
                     android:layout_height="wrap_content"
-                    android:textSize="32sp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/josefinsansbold"
-                    android:text="1200 zł"
                     android:gravity="center"
-                    />
+                    android:text="1200 zł"
+                    android:textSize="32sp" />
 
                 <TextView
-                    android:layout_marginTop="24dp"
                     android:id="@+id/apartment_details_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/josefinsanslight"
                     android:gravity="center"
                     android:text="Wrocław, Filasiewicza 8"
-                    android:fontFamily="@font/josefinsanslight"
-                    />
+                    android:textSize="30sp" />
 
                 <TextView
-                    android:layout_marginTop="24dp"
                     android:id="@+id/apartment_details_zip_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/josefinsanssemibold"
                     android:gravity="center"
                     android:text="51-132"
-                    android:fontFamily="@font/josefinsanssemibold"
-                    />
+                    android:textSize="30sp" />
 
+                <View
+                    android:layout_width="90dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@color/colorPrimaryDark"
+                    app:layout_constraintBottom_toTopOf="@id/description_text_view_logged"
+                    app:layout_constraintTop_toBottomOf="parent" />
+
+                <TextView
+                    android:id="@+id/apartment_details_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="24dp"
+                    android:fontFamily="@font/josefinsanssemibold"
+                    android:gravity="center"
+                    android:text="Opis bardzo długi i wgl bla bla afnoqfr f nerogn ekgaeg oawag jao gwoar gsz gos go awg waog oea dgo"
+                    android:textSize="26sp" />
             </LinearLayout>
 
         </ScrollView>

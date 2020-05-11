@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments
+package com.e.truehomemobile.fragments.Apartment
 
 import android.content.Context
 import android.net.Uri

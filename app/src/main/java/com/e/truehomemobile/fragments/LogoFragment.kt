@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.e.truehomemobile.R
+import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

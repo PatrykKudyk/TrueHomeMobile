@@ -12,6 +12,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
 import com.e.truehomemobile.fragments.*
+import com.e.truehomemobile.fragments.Account.AccountFragment
+import com.e.truehomemobile.fragments.Account.LoginFragment
+import com.e.truehomemobile.fragments.Account.RegistrationFragment
+import com.e.truehomemobile.fragments.Apartment.AddApartmentFragment
+import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
 import com.google.android.material.navigation.NavigationView
 
 

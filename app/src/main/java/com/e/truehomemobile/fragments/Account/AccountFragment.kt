@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments
+package com.e.truehomemobile.fragments.Account
 
 import android.content.Context
 import android.net.Uri
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
+import com.e.truehomemobile.fragments.Apartment.AddApartmentFragment
 import com.google.android.material.navigation.NavigationView
 
 // TODO: Rename parameter arguments, choose names that match
