@@ -100,7 +100,9 @@ class ApartmentListAdapter(val apartmentList: Array<Apartment>): RecyclerView.Ad
         val mainCardView = holder.view.apartment_not_logged_cell_card_view_logged
 
         mainCardView.setOnClickListener{
-            val apartmentDetailsFragment = ApartmentDetailsFragment.newInstance()
+            val apartmentDetailsFragment = ApartmentDetailsFragment.newInstance(
+                apartmentList[position].apartmentId
+            )
             val manager = (holder.itemView.context as MainActivity).supportFragmentManager
             manager
                 ?.beginTransaction()
