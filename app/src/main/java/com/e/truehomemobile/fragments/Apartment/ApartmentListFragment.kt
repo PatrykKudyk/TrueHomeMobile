@@ -13,7 +13,7 @@ import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activityHolders.JsonHolder
-import com.e.truehomemobile.adapters.ApartmentListAdapter
+import com.e.truehomemobile.adapters.recycler.ApartmentListAdapter
 import com.e.truehomemobile.models.apartment.Apartment
 import com.e.truehomemobile.models.classes.MarginItemDecoration
 import com.google.gson.GsonBuilder
@@ -200,7 +200,10 @@ class ApartmentListFragment : Fragment() {
                             if(page == 1){
                                 rootView.firstProgressBar.visibility = View.GONE
                                 apartments = apartmentsFetched
-                                recyclerView.adapter = ApartmentListAdapter(apartments)
+                                recyclerView.adapter =
+                                    ApartmentListAdapter(
+                                        apartments
+                                    )
                             } else{
                                 apartments += apartmentsFetched
                                 recyclerView.adapter?.notifyDataSetChanged()

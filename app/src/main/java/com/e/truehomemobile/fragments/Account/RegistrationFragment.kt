@@ -369,7 +369,6 @@ class RegistrationFragment : Fragment() {
     private fun makeSuccessActions() {
         animationHolder.flyaway(rootView.registration_card_view, 500, 0, 3)
         rootView.registration_card_view.visibility = View.GONE
-        rootView.registeredTextView.visibility = View.VISIBLE
     }
 
 //    private fun makeStartAnimations(){
