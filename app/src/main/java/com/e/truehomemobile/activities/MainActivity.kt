@@ -18,6 +18,7 @@ import com.e.truehomemobile.fragments.Account.RegistrationFragment
 import com.e.truehomemobile.fragments.Apartment.AddApartmentFragment
 import com.e.truehomemobile.fragments.Apartment.ApartmentDetailsFragment
 import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
+import com.e.truehomemobile.fragments.Apartment.ImageFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     LogoFragment.OnFragmentInteractionListener,
     AccountFragment.OnFragmentInteractionListener,
     AddApartmentFragment.OnFragmentInteractionListener,
-    ApartmentDetailsFragment.OnFragmentInteractionListener{
+    ApartmentDetailsFragment.OnFragmentInteractionListener,
+    ImageFragment.OnFragmentInteractionListener{
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout

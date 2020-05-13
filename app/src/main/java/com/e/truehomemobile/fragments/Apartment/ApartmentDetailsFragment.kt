@@ -47,7 +47,7 @@ class ApartmentDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_apartment_list, container, false);
+        rootView = inflater.inflate(R.layout.fragment_apartment_details, container, false);
         initFragment()
         return rootView
     }
@@ -85,7 +85,7 @@ class ApartmentDetailsFragment : Fragment() {
     }
 
     private fun initFragment(){
-        recyclerView = rootView.findViewById(R.id.apartment_list_recycler_view)
+        recyclerView = rootView.apartment_details_recycler_view
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager

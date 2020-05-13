@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activities.MainActivity
+import com.e.truehomemobile.fragments.Apartment.ImageFragment
 import com.e.truehomemobile.viewHolders.ApartmentImagesViewHolder
 import kotlinx.android.synthetic.main.apartment_image.view.*
 
 class ApartmentImagesAdapter(val imagesList: Array<String>) :
     RecyclerView.Adapter<ApartmentImagesViewHolder>() {
     override fun getItemCount(): Int {
-        return 3
+        return imagesList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApartmentImagesViewHolder {
@@ -26,8 +27,8 @@ class ApartmentImagesAdapter(val imagesList: Array<String>) :
     override fun onBindViewHolder(holder: ApartmentImagesViewHolder, position: Int) {
         holder.view.apartment_details_image
 
-        if (imagesList[0] != null) {
-            val string = imagesList[0].substring(21)
+        if (imagesList[position] != null) {
+            val string = imagesList[position].substring(21)
             val imageBytes = Base64.decode(string, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
@@ -45,14 +46,12 @@ class ApartmentImagesAdapter(val imagesList: Array<String>) :
         }
 
         holder.view.apartment_details_image.setOnClickListener {
-            val apartmentDetailsFragment = ApartmentDetailsFragment.newInstance(
-                apartmentList[position].apartmentId
-            )
+            val imageFragment = ImageFragment.newInstance(imagesList[position])
             val manager = (holder.itemView.context as MainActivity).supportFragmentManager
             manager
                 ?.beginTransaction()
-                ?.replace(R.id.frame_layout, apartmentDetailsFragment)
-                ?.addToBackStack(ApartmentDetailsFragment.toString())
+                ?.replace(R.id.frame_layout, imageFragment)
+                ?.addToBackStack(ImageFragment.toString())
                 ?.commit()
         }
     }
