@@ -1,13 +1,12 @@
-package com.e.truehomemobile.adapters
+package com.e.truehomemobile.adapters.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.e.truehomemobile.R
+import com.e.truehomemobile.adapters.page.ImagesViewPagerAdapter
 import com.e.truehomemobile.models.apartment.ApartmentWithImages
-import com.e.truehomemobile.models.classes.MarginItemDecorationHorizontal
 import com.e.truehomemobile.viewHolders.ApartmentDetailsViewHolder
 import kotlinx.android.synthetic.main.apartment_show_details.view.*
 
@@ -30,7 +29,10 @@ class ApartmentDetailsAdapter(val apartment: ApartmentWithImages): RecyclerView.
         holder.view.apartment_details_price.text = apartment.apartmentPrice.toString() + " zł"
         holder.view.apartment_details_description.text = apartment.apartmentDescription
 
-        var adapter: PagerAdapter = ImagesViewPagerAdapter(holder.view.context, apartment.apartmentImages)
+        var adapter: PagerAdapter = ImagesViewPagerAdapter(
+            holder.view.context,
+            apartment.apartmentImages
+        )
         holder.view.apartment_details_view_pager.adapter = adapter
     }
 }

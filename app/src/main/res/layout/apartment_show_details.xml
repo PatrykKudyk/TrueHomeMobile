@@ -47,6 +47,7 @@
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_title" />
 
@@ -62,9 +63,10 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="end"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/colorPrimaryDark" />
 
@@ -77,6 +79,7 @@
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_price" />
 
@@ -92,9 +95,10 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="end"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/colorPrimaryDark" />
 
@@ -107,6 +111,7 @@
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_city" />
 
@@ -122,9 +127,10 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="end"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/colorPrimaryDark" />
 
@@ -137,6 +143,7 @@
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="8dp"
                         android:src="@drawable/ic_home" />
 
@@ -152,9 +159,10 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="end"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/colorPrimaryDark" />
 

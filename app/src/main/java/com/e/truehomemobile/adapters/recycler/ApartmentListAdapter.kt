@@ -1,12 +1,9 @@
-package com.e.truehomemobile.adapters
+package com.e.truehomemobile.adapters.recycler
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.transition.AutoTransition
-import android.transition.TransitionManager
 import android.util.Base64
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.e.truehomemobile.MyApp

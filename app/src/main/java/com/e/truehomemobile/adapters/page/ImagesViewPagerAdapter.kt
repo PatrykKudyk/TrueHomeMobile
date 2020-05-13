@@ -1,4 +1,4 @@
-package com.e.truehomemobile.adapters
+package com.e.truehomemobile.adapters.page
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activities.MainActivity

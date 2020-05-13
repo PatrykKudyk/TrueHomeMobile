@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
-import com.e.truehomemobile.adapters.ApartmentDetailsAdapter
+import com.e.truehomemobile.adapters.recycler.ApartmentDetailsAdapter
 import com.e.truehomemobile.models.apartment.ApartmentWithImages
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_apartment_details.view.*
@@ -122,7 +122,10 @@ class ApartmentDetailsFragment : Fragment() {
 
                         activity?.runOnUiThread {
                                 rootView.firstProgressBar.visibility = View.GONE
-                                recyclerView.adapter = ApartmentDetailsAdapter(apartmentFetched)
+                                recyclerView.adapter =
+                                    ApartmentDetailsAdapter(
+                                        apartmentFetched
+                                    )
                         }
                     }
 
