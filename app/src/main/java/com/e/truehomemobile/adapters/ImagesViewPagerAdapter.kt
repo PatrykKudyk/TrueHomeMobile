@@ -12,6 +12,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.e.truehomemobile.R
+import com.e.truehomemobile.activities.MainActivity
+import com.e.truehomemobile.fragments.Apartment.ImageFragment
 import kotlinx.android.synthetic.main.apartment_image.view.*
 
 class ImagesViewPagerAdapter : PagerAdapter {
@@ -29,7 +31,7 @@ class ImagesViewPagerAdapter : PagerAdapter {
     override fun getCount(): Int = images.size
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean =
-        view == `object` as RelativeLayout
+        view == `object` as LinearLayout
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         var image: ImageView
@@ -45,10 +47,21 @@ class ImagesViewPagerAdapter : PagerAdapter {
             Bitmap.createBitmap(decodedImage)
         )
         container!!.addView(view)
+
+        view.setOnClickListener {
+            val imageFragment = ImageFragment.newInstance(images[position])
+            val manager = (context as MainActivity).supportFragmentManager
+            manager
+                ?.beginTransaction()
+                ?.replace(R.id.frame_layout, imageFragment)
+                ?.addToBackStack(ImageFragment.toString())
+                ?.commit()
+        }
+
         return view
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container!!.removeView(`object` as RelativeLayout)
+        container!!.removeView(`object` as LinearLayout)
     }
 }

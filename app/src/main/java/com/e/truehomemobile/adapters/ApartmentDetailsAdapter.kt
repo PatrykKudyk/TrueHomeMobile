@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import com.e.truehomemobile.R
 import com.e.truehomemobile.models.apartment.ApartmentWithImages
 import com.e.truehomemobile.models.classes.MarginItemDecorationHorizontal
@@ -28,16 +29,8 @@ class ApartmentDetailsAdapter(val apartment: ApartmentWithImages): RecyclerView.
         holder.view.apartment_details_address.text = apartment.apartmentStreet + " " + apartment.apartmentStreetNumber
         holder.view.apartment_details_price.text = apartment.apartmentPrice.toString() + " zł"
         holder.view.apartment_details_description.text = apartment.apartmentDescription
-//        if(apartment.apartmentImages != null){
-//            val recyclerView: RecyclerView = holder.view.images_recycler_view
-//            val mLayoutManager: LinearLayoutManager = LinearLayoutManager(holder.view.context, LinearLayoutManager.HORIZONTAL, false)
-//            recyclerView.layoutManager = mLayoutManager
-//            recyclerView.addItemDecoration(
-//                MarginItemDecorationHorizontal(
-//                    12
-//                )
-//            )
-//            recyclerView.adapter = ApartmentImagesAdapter(apartment.apartmentImages)
-//        }
+
+        var adapter: PagerAdapter = ImagesViewPagerAdapter(holder.view.context, apartment.apartmentImages)
+        holder.view.apartment_details_view_pager.adapter = adapter
     }
 }
