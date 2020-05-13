@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/apartment_not_logged_cell_card_view"
+        android:id="@+id/apartment_not_logged_cell_card_view_not_logged"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -19,13 +19,13 @@
         tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main_constraint_layout"
+            android:id="@+id/main_constraint_layout_not_logged"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="6dp">
 
             <LinearLayout
-                android:id="@+id/main_linear_layout"
+                android:id="@+id/main_linear_layout_not_logged"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="4dp"
@@ -35,7 +35,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/image_card_view"
+                    android:id="@+id/image_card_view_not_logged"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="4dp"
@@ -43,7 +43,7 @@
                     app:strokeWidth="1dp">
 
                     <ImageView
-                        android:id="@+id/image_main_apartment"
+                        android:id="@+id/image_main_apartment_not_logged"
                         android:layout_width="130dp"
                         android:layout_height="130dp" />
                 </com.google.android.material.card.MaterialCardView>
@@ -58,7 +58,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/apartment_name_text_view"
+                            android:id="@+id/apartment_name_text_view_not_logged"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="6dp"
@@ -73,7 +73,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/apartment_address_text_view"
+                            android:id="@+id/apartment_address_text_view_not_logged"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -82,23 +82,10 @@
                             android:fontFamily="@font/josefinsansregular"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/apartment_name_text_view" />
+                            app:layout_constraintTop_toBottomOf="@+id/apartment_name_text_view_not_logged" />
 
                         <TextView
-                            android:id="@+id/apartment_zip_code_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="3dp"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/josefinsansregular"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/apartment_address_text_view" />
-
-
-                        <TextView
-                            android:id="@+id/apartment_price_text_view"
+                            android:id="@+id/apartment_price_text_view_not_logged"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -114,49 +101,6 @@
                 </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/description_card_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:visibility="gone"
-                app:cardCornerRadius="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/main_linear_layout">
-
-                <LinearLayout
-                    android:id="@+id/description_linear_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="4dp">
-
-                    <View
-                        android:layout_width="300dp"
-                        android:layout_height="2dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="6dp"
-                        android:background="@color/colorPrimaryDark"
-                        app:layout_constraintBottom_toTopOf="@id/description_text_view"
-                        app:layout_constraintTop_toBottomOf="parent" />
-
-                    <TextView
-                        android:id="@+id/description_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/josefinsansregular"
-                        android:gravity="center"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

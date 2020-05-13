@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments
+package com.e.truehomemobile.fragments.Account
 
 import android.content.Context
 import android.net.Uri
@@ -13,17 +13,14 @@ import androidx.core.content.res.ResourcesCompat
 import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
-import com.e.truehomemobile.activityHolders.AnimationsHolder
 import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.JsonHolder
 import com.e.truehomemobile.activityHolders.ValidationHolder
+import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
 import com.e.truehomemobile.models.authorization.LoginRequest
 import com.e.truehomemobile.models.authorization.LoginResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_main_layout.*
-import kotlinx.android.synthetic.main.activity_main_layout.view.*
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import okhttp3.*
@@ -138,7 +135,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun handleRegisterButton(){
-        registrationFragment = RegistrationFragment.newInstance()
+        registrationFragment =
+            RegistrationFragment.newInstance()
         clearFields()
         fragmentManager
             ?.beginTransaction()

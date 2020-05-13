@@ -1,11 +1,8 @@
-package com.e.truehomemobile.fragments
+package com.e.truehomemobile.fragments.Account
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -22,7 +19,6 @@ import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.JsonHolder
 import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.models.authorization.RegistrationRequest
-import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 import okhttp3.*
