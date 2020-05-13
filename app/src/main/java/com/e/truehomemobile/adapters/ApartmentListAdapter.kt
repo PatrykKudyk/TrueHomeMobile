@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
+import com.e.truehomemobile.activities.MainActivity
+import com.e.truehomemobile.fragments.Apartment.ApartmentDetailsFragment
 import com.e.truehomemobile.models.apartment.Apartment
 import com.e.truehomemobile.viewHolders.ApartmentListViewHolder
 import kotlinx.android.synthetic.main.apartment_cell_logged.view.*
@@ -95,17 +97,18 @@ class ApartmentListAdapter(val apartmentList: Array<Apartment>): RecyclerView.Ad
             holder.view.image_main_apartment_logged.setImageResource(R.drawable.icon)
         }
 
-//        val mainCardView = holder.view.apartment_not_logged_cell_card_view_logged
-//        val descriptionCardView = holder.view.description_card_view_logged
-//
-//        mainCardView.setOnClickListener{
-//            if(descriptionCardView.visibility == View.GONE){
-//                TransitionManager.beginDelayedTransition(mainCardView, AutoTransition())
-//                descriptionCardView.visibility = View.VISIBLE
-//            }else{
-//                TransitionManager.beginDelayedTransition(mainCardView, AutoTransition())
-//                descriptionCardView.visibility = View.GONE
-//            }
-//        }
+        val mainCardView = holder.view.apartment_not_logged_cell_card_view_logged
+
+        mainCardView.setOnClickListener{
+            val apartmentDetailsFragment = ApartmentDetailsFragment.newInstance(
+                apartmentList[position].apartmentId
+            )
+            val manager = (holder.itemView.context as MainActivity).supportFragmentManager
+            manager
+                ?.beginTransaction()
+                ?.replace(R.id.frame_layout, apartmentDetailsFragment)
+                ?.addToBackStack(ApartmentDetailsFragment.toString())
+                ?.commit()
+        }
     }
 }

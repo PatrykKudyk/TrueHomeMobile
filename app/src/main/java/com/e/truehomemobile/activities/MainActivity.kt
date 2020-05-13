@@ -12,6 +12,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
 import com.e.truehomemobile.fragments.*
+import com.e.truehomemobile.fragments.Account.AccountFragment
+import com.e.truehomemobile.fragments.Account.LoginFragment
+import com.e.truehomemobile.fragments.Account.RegistrationFragment
+import com.e.truehomemobile.fragments.Apartment.AddApartmentFragment
+import com.e.truehomemobile.fragments.Apartment.ApartmentDetailsFragment
+import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
+import com.e.truehomemobile.fragments.Apartment.ImageFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -22,7 +29,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     RegistrationFragment.OnFragmentInteractionListener,
     LogoFragment.OnFragmentInteractionListener,
     AccountFragment.OnFragmentInteractionListener,
-    AddApartmentFragment.OnFragmentInteractionListener{
+    AddApartmentFragment.OnFragmentInteractionListener,
+    ApartmentDetailsFragment.OnFragmentInteractionListener,
+    ImageFragment.OnFragmentInteractionListener{
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
