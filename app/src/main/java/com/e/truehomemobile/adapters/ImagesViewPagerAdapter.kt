@@ -1,0 +1,54 @@
+package com.e.truehomemobile.adapters
+
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import androidx.viewpager.widget.PagerAdapter
+import com.e.truehomemobile.R
+import kotlinx.android.synthetic.main.apartment_image.view.*
+
+class ImagesViewPagerAdapter : PagerAdapter {
+
+    var context: Context
+    var images: Array<String>
+    lateinit var inflater: LayoutInflater
+
+    constructor(context: Context, images: Array<String>) : super() {
+        this.context = context
+        this.images = images
+    }
+
+
+    override fun getCount(): Int = images.size
+
+    override fun isViewFromObject(view: View, `object`: Any): Boolean =
+        view == `object` as RelativeLayout
+
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        var image: ImageView
+        inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        var view: View = inflater.inflate(R.layout.apartment_image, container, false)
+        image = view.apartment_details_image
+
+        val string = images[position].substring(21)
+        val imageBytes = Base64.decode(string, Base64.DEFAULT)
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+        image.setImageBitmap(
+            Bitmap.createBitmap(decodedImage)
+        )
+        container!!.addView(view)
+        return view
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container!!.removeView(`object` as RelativeLayout)
+    }
+}
