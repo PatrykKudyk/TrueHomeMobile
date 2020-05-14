@@ -6,10 +6,10 @@
     tools:context=".fragments.apartment.ImageFragment"
     android:background="@color/colorBaseBackground">
 
-    <ImageView
-        android:id="@+id/apartment_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp" />
+   <androidx.viewpager.widget.ViewPager
+       android:id="@+id/images_view_pager"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_margin="16dp"/>
 
 </FrameLayout>
