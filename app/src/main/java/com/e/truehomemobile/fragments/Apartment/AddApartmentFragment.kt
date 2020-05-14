@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.e.truehomemobile.R
+import com.e.truehomemobile.activityHolders.ErrorsHandler
+import com.e.truehomemobile.activityHolders.ValidationHolder
+import kotlinx.android.synthetic.main.fragment_add_apartment.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +29,9 @@ class AddApartmentFragment : Fragment() {
     private lateinit var addButton: View
     private lateinit var backButton: View
 
+    private lateinit var errorsHandler: ErrorsHandler
+    private val validationHolder = ValidationHolder()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +40,11 @@ class AddApartmentFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         rootView = inflater.inflate(R.layout.fragment_add_apartment, container, false);
         initFragment()
         return rootView
@@ -72,9 +82,10 @@ class AddApartmentFragment : Fragment() {
             }
     }
 
-    private fun initFragment(){
+    private fun initFragment() {
         addButton = rootView.findViewById(R.id.add_apartment_button)
         backButton = rootView.findViewById(R.id.back_text_view)
+        errorsHandler = ErrorsHandler(rootView.context)
 
         addButton.setOnClickListener {
             addApartment()
@@ -86,7 +97,74 @@ class AddApartmentFragment : Fragment() {
         }
     }
 
-    private fun addApartment(){
+    private fun addApartment() {
+        if (areFieldsCorrect()) {
 
+        }
+    }
+
+    private fun areFieldsCorrect(): Boolean {
+        clearFieldErrors()
+        var correct = areFieldsFilled()
+        if (!correct) {
+            return correct
+        }
+
+        correct = validationHolder.isZipCodeCorrect(rootView.add_apartment_zip_code.text.toString())
+        if(!correct){
+            errorsHandler.setIncorrectZipCodeError(rootView.add_apartment_zip_code_layout)
+        }
+
+        return correct
+    }
+
+    private fun areFieldsFilled(): Boolean {
+        var correct = true
+        if (!validationHolder.isFieldFilled(rootView.add_apartment_name)) {
+            correct = false
+            errorsHandler.setEmptyFieldError(rootView.add_apartment_name_layout)
+        }
+        if (!validationHolder.isFieldFilled(rootView.add_apartment_city)) {
+            correct = false
+            errorsHandler.setEmptyFieldError(rootView.add_apartment_city_layout)
+        }
+        if (!validationHolder.isFieldFilled(rootView.add_apartment_zip_code)) {
+            correct = false
+            errorsHandler.setEmptyFieldError(rootView.add_apartment_zip_code_layout)
+        }
+        if (!validationHolder.isFieldFilled(rootView.add_apartment_street)) {
+            correct = false
+            errorsHandler.setEmptyFieldError(rootView.add_apartment_street_layout)
+        }
+        if (!validationHolder.isFieldFilled(rootView.add_apartment_street_number)) {
+            correct = false
+            errorsHandler.setEmptyFieldError(rootView.add_apartment_street_number_layout)
+        }
+        if (!validationHolder.isFieldFilled(rootView.add_apartment_price)) {
+            correct = false
+            errorsHandler.setEmptyFieldError(rootView.add_apartment_price_layout)
+        }
+        if (!validationHolder.isFieldFilled(rootView.add_apartment_description)) {
+            correct = false
+            errorsHandler.setEmptyFieldError(rootView.add_apartment_description_layout)
+        }
+        return correct
+    }
+
+    private fun clearFieldErrors() {
+        errorsHandler.clearError(rootView.add_apartment_name_layout)
+        rootView.add_apartment_name.clearFocus()
+        errorsHandler.clearError(rootView.add_apartment_city_layout)
+        rootView.add_apartment_city.clearFocus()
+        errorsHandler.clearError(rootView.add_apartment_zip_code_layout)
+        rootView.add_apartment_zip_code.clearFocus()
+        errorsHandler.clearError(rootView.add_apartment_street_layout)
+        rootView.add_apartment_street.clearFocus()
+        errorsHandler.clearError(rootView.add_apartment_street_number_layout)
+        rootView.add_apartment_street_number.clearFocus()
+        errorsHandler.clearError(rootView.add_apartment_price_layout)
+        rootView.add_apartment_price.clearFocus()
+        errorsHandler.clearError(rootView.add_apartment_description_layout)
+        rootView.add_apartment_description.clearFocus()
     }
 }

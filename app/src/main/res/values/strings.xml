@@ -19,6 +19,7 @@
     <string name="field_error_password_incorrect_symbols">Password has to contain 1 lower and uppercase letter plus a digit </string>
     <string name="field_error_password_incorrect_length">Password must be at least 8 characters long</string>
     <string name="field_error_email_incorrect">Given e-mail is incorrect</string>
+    <string name="field_error_zip_code_incorrect">Given zip code is incorrect</string>
     <string name="prompt_registration_successful">Sign up successful</string>
     <string name="lang_polish">Polish</string>
     <string name="lang_english">English</string>

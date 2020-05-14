@@ -4,64 +4,79 @@ import android.widget.EditText
 
 class ValidationHolder {
 
-    fun isFieldFilled(editText: EditText): Boolean{
-        if(editText.text.toString() == ""){
+    fun isFieldFilled(editText: EditText): Boolean {
+        if (editText.text.toString() == "") {
             return false
         }
         return true
     }
 
-    fun isEmailCorrect(email: String): Boolean{
+    fun isEmailCorrect(email: String): Boolean {
         val emailSplitted = email.split("@")
-        if(emailSplitted.size != 2){
+        if (emailSplitted.size != 2) {
             return false
         }
-        if(emailSplitted[1].isEmpty()){
+        if (emailSplitted[1].isEmpty()) {
             return false
         }
         val secondEmailSplit = emailSplitted[1].split(".")
-        if(secondEmailSplit.size < 2){
+        if (secondEmailSplit.size < 2) {
             return false
         }
-        for(string in secondEmailSplit){
-            if(string.isEmpty()){
+        for (string in secondEmailSplit) {
+            if (string.isEmpty()) {
                 return false
             }
         }
         return true
     }
 
-    fun areFieldsEqual(editText: EditText, editText2: EditText): Boolean{
-        if(editText.text.toString() == editText2.text.toString()){
+    fun areFieldsEqual(editText: EditText, editText2: EditText): Boolean {
+        if (editText.text.toString() == editText2.text.toString()) {
             return true
         }
         return false
     }
 
-    fun isLengthCorrect(string: String, length: Int): Boolean{
-        if(string.length < length){
+    fun isLengthCorrect(string: String, length: Int): Boolean {
+        if (string.length < length) {
             return false
         }
         return true
     }
 
-    fun isPasswordCorrect(string: String): Boolean{
+    fun isPasswordCorrect(string: String): Boolean {
         val password = string.toCharArray()
         var lowerCaseFlag = false
         var upperCaseFlag = false
         var numberFlag = false
-        for( c in password){
-            if(Character.isDigit(c)){
+        for (c in password) {
+            if (Character.isDigit(c)) {
                 numberFlag = true
-            }else if(Character.isLowerCase(c)){
+            } else if (Character.isLowerCase(c)) {
                 lowerCaseFlag = true
-            }else if(Character.isUpperCase(c)){
+            } else if (Character.isUpperCase(c)) {
                 upperCaseFlag = true
             }
         }
-        if(numberFlag && lowerCaseFlag && upperCaseFlag){
+        if (numberFlag && lowerCaseFlag && upperCaseFlag) {
             return true
         }
         return false
+    }
+
+    fun isZipCodeCorrect(string: String): Boolean {
+        val zipCodeSplit = string.split("-")
+        if (zipCodeSplit.size != 2) {
+            return false
+        } else {
+            if (zipCodeSplit[0].length != 2) {
+                return false
+            }
+            if (zipCodeSplit[1].length != 3) {
+                return false
+            }
+        }
+        return true
     }
 }
