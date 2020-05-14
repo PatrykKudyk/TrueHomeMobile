@@ -109,15 +109,6 @@ class ImageFragment : Fragment() {
     }
 
     private fun initFragment() {
-//        val apartmentImage = rootView.apartment_image
-//        val string = param1?.substring(21)
-//        val imageBytes = Base64.decode(string, Base64.DEFAULT)
-//        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-//
-//        apartmentImage.setImageBitmap(
-//            Bitmap.createBitmap(decodedImage)
-//        )
-
         val images = param1 as Array<String>
         val position = param2 as Int
 
