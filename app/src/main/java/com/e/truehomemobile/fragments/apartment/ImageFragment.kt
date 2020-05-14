@@ -1,17 +1,17 @@
 package com.e.truehomemobile.fragments.apartment
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager.widget.PagerAdapter
 
 import com.e.truehomemobile.R
+import com.e.truehomemobile.adapters.page.BigImagesViewPagerAdapter
+import kotlinx.android.synthetic.main.fragment_image.*
 import kotlinx.android.synthetic.main.fragment_image.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,8 +29,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class ImageFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var param1: Array<String>? = null
+    private var param2: Int? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
@@ -38,8 +38,8 @@ class ImageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            param1 = it.getStringArray(ARG_PARAM1)
+            param2 = it.getInt(ARG_PARAM2)
         }
     }
 
@@ -48,7 +48,7 @@ class ImageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_image, container, false);
+        rootView = inflater.inflate(R.layout.fragment_image, container, false)
         initFragment()
         return rootView
     }
@@ -99,23 +99,34 @@ class ImageFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String) =
+        fun newInstance(param1: Array<String>, param2: Int) =
             ImageFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+                    putStringArray(ARG_PARAM1, param1)
+                    putInt(ARG_PARAM2, param2)
                 }
             }
     }
 
     private fun initFragment() {
-        val apartmentImage = rootView.apartment_image
-        val string = param1?.substring(21)
-        val imageBytes = Base64.decode(string, Base64.DEFAULT)
-        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+//        val apartmentImage = rootView.apartment_image
+//        val string = param1?.substring(21)
+//        val imageBytes = Base64.decode(string, Base64.DEFAULT)
+//        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+//
+//        apartmentImage.setImageBitmap(
+//            Bitmap.createBitmap(decodedImage)
+//        )
 
-        apartmentImage.setImageBitmap(
-            Bitmap.createBitmap(decodedImage)
+        val images = param1 as Array<String>
+        val position = param2 as Int
+
+        var adapter: PagerAdapter = BigImagesViewPagerAdapter(
+            rootView.context, images
         )
+        val imagesViewPager = rootView.images_view_pager
+        imagesViewPager.adapter = adapter
+        imagesViewPager.currentItem = position
 
     }
 }

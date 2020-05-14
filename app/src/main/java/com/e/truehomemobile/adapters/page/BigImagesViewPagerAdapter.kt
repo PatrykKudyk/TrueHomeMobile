@@ -15,7 +15,7 @@ import com.e.truehomemobile.activities.MainActivity
 import com.e.truehomemobile.fragments.apartment.ImageFragment
 import kotlinx.android.synthetic.main.apartment_image.view.*
 
-class ImagesViewPagerAdapter : PagerAdapter {
+class BigImagesViewPagerAdapter : PagerAdapter {
 
     var context: Context
     var images: Array<String>
@@ -46,16 +46,6 @@ class ImagesViewPagerAdapter : PagerAdapter {
             Bitmap.createBitmap(decodedImage)
         )
         container!!.addView(view)
-
-        view.setOnClickListener {
-            val imageFragment = ImageFragment.newInstance(images, position)
-            val manager = (context as MainActivity).supportFragmentManager
-            manager
-                ?.beginTransaction()
-                ?.replace(R.id.frame_layout, imageFragment)
-                ?.addToBackStack(ImageFragment.toString())
-                ?.commit()
-        }
 
         return view
     }
