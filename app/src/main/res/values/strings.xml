@@ -42,4 +42,5 @@
     <string name="add_apartment_images">Add images</string>
     <string name="add_apartment_back">Back</string>
     <string name="error_no_data">Couldn\'t get data from server\nClick to try again</string>
+    <string name="toast_add_image">Add at least one image</string>
 </resources>
