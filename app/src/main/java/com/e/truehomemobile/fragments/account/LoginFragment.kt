@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments.Account
+package com.e.truehomemobile.fragments.account
 
 import android.content.Context
 import android.net.Uri
@@ -16,7 +16,7 @@ import com.e.truehomemobile.R
 import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.JsonHolder
 import com.e.truehomemobile.activityHolders.ValidationHolder
-import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
+import com.e.truehomemobile.fragments.apartment.ApartmentListFragment
 import com.e.truehomemobile.models.authorization.LoginRequest
 import com.e.truehomemobile.models.authorization.LoginResponse
 import com.google.android.material.navigation.NavigationView
@@ -48,14 +48,14 @@ class LoginFragment : Fragment() {
     private lateinit var apartmentListFragment: ApartmentListFragment
 
 
-//    private lateinit var animationHolder : AnimationsHolder
+    //    private lateinit var animationHolder : AnimationsHolder
     private val validationHolder = ValidationHolder()
-    private lateinit var errorsHandler : ErrorsHandler
+    private lateinit var errorsHandler: ErrorsHandler
     private val jsonHolder = JsonHolder()
 
 
     private lateinit var rootView: View
-//    private lateinit var loginField: View
+    //    private lateinit var loginField: View
 //    private lateinit var loginFieldLayout: View
 //    private lateinit var passwordField: View
 //    private lateinit var passwordFieldLayout: View
@@ -71,7 +71,11 @@ class LoginFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         rootView = inflater.inflate(R.layout.fragment_login, container, false);
         initFragment()
         return rootView
@@ -104,14 +108,14 @@ class LoginFragment : Fragment() {
         fun newInstance() =
             LoginFragment().apply {
                 arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
+                    //                    putString(ARG_PARAM1, param1)
 //                    putString(ARG_PARAM2, param2)
                 }
             }
     }
 
 
-    private fun initFragment(){
+    private fun initFragment() {
         errorsHandler = ErrorsHandler(rootView.context)
 //        animationHolder = AnimationsHolder(frame_layout.context)
 //        makeStartAnimations()
@@ -134,7 +138,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun handleRegisterButton(){
+    private fun handleRegisterButton() {
         registrationFragment =
             RegistrationFragment.newInstance()
         clearFields()
@@ -145,7 +149,7 @@ class LoginFragment : Fragment() {
             ?.commit()
     }
 
-    private fun handleLoginButton(){
+    private fun handleLoginButton() {
 //        MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
 //        clearFieldsErrors()
 //        if(areFieldsFilled()){
@@ -154,8 +158,8 @@ class LoginFragment : Fragment() {
 //                password_field.text = null
 //            }
 //        }
-        if(rootView.login_field.text.toString() == "admin" && rootView.password_field.text.toString() == "admin"){
-            Toast.makeText(rootView.context,"Pomyślnie zalogowano", Toast.LENGTH_SHORT).show()
+        if (rootView.login_field.text.toString() == "admin" && rootView.password_field.text.toString() == "admin") {
+            Toast.makeText(rootView.context, "Pomyślnie zalogowano", Toast.LENGTH_SHORT).show()
             clearFields()
             MyApp.isLogged = true
 
@@ -171,45 +175,45 @@ class LoginFragment : Fragment() {
                 ?.replace(R.id.frame_layout, apartmentListFragment)
                 ?.commit()
 
-        }else{
+        } else {
             clearFields()
-            Toast.makeText(rootView.context,"Błędne dane logowania", Toast.LENGTH_SHORT).show()
+            Toast.makeText(rootView.context, "Błędne dane logowania", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun areFieldsFilled(): Boolean {
         var isCorrect = false
-        if(!validationHolder.isFieldFilled(login_field)){
+        if (!validationHolder.isFieldFilled(login_field)) {
             errorsHandler.setEmptyFieldError(login_field_layout)
-        }else{
+        } else {
             isCorrect = true
         }
-        if(!validationHolder.isFieldFilled(password_field)) {
+        if (!validationHolder.isFieldFilled(password_field)) {
             errorsHandler.setEmptyFieldError(password_field_layout)
             isCorrect = false
         }
         return isCorrect
     }
 
-    private fun clearFields(){
+    private fun clearFields() {
         clearFieldsErrors()
         rootView.login_field.text = null
         rootView.password_field.text = null
     }
 
-    private fun clearFieldsErrors(){
+    private fun clearFieldsErrors() {
         errorsHandler.clearError(rootView.login_field_layout)
         errorsHandler.clearError(rootView.password_field_layout)
         rootView.login_field.clearFocus()
         rootView.password_field.clearFocus()
     }
 
-    private fun initFonts(){
+    private fun initFonts() {
         val typeface = ResourcesCompat.getFont(rootView.context, R.font.josefinsansregular)
         rootView.password_field_layout.typeface = typeface
     }
 
-    private fun checkUserDataCorrectness(): Boolean{
+    private fun checkUserDataCorrectness(): Boolean {
         val loginRequest = LoginRequest(
             login_field.text.toString(),
             password_field.text.toString()
@@ -218,18 +222,18 @@ class LoginFragment : Fragment() {
         MyApp.isResponseReceived = false
         fetchApiLoginResponse(loginRequest)
 
-        do{
+        do {
             Thread.sleep(100)
-        }while(!MyApp.isResponseReceived)
+        } while (!MyApp.isResponseReceived)
 
-        if(MyApp.loginResponse.token != ""){
+        if (MyApp.loginResponse.token != "") {
             MyApp.isLogged = true
             return true
         }
         return false
     }
 
-    private fun fetchApiLoginResponse(loginRequest: LoginRequest){
+    private fun fetchApiLoginResponse(loginRequest: LoginRequest) {
         val url = MyApp.apiUrl + "security/login"
         val json = jsonHolder.createLoginRequestJson(loginRequest).trimIndent()
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
@@ -241,7 +245,7 @@ class LoginFragment : Fragment() {
 
         val client: OkHttpClient = getUnsafeOkHttpClient().build()
 
-        val response = client.newCall(request).enqueue(object: Callback {
+        val response = client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -259,8 +263,9 @@ class LoginFragment : Fragment() {
 
                     else -> {
                         MyApp.loginResponse = LoginResponse(
-                            Types.NULL,"","","",
-                            Types.NULL,ArrayList())
+                            Types.NULL, "", "", "",
+                            Types.NULL, ArrayList()
+                        )
                     }
                 }
                 MyApp.isResponseReceived = true
@@ -269,17 +274,23 @@ class LoginFragment : Fragment() {
     }
 
 
-    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder{
+    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
 
         try {
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
                 @Throws(CertificateException::class)
-                override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                override fun checkClientTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
                 }
 
                 @Throws(CertificateException::class)
-                override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                override fun checkServerTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
                 }
 
                 override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {

@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments.Apartment
+package com.e.truehomemobile.fragments.apartment
 
 import android.content.Context
 import android.net.Uri
@@ -163,14 +163,14 @@ class ApartmentListFragment : Fragment() {
 
     private fun fetchApartments(page: Int) {
         loading = true
-        if(page != 1){
+        if (page != 1) {
             rootView.secondProgressBar.visibility = View.VISIBLE
         }
         jsonHolder = JsonHolder()
         val url = MyApp.apiUrl +
                 "Apartments/GetAllApartments" +
                 "?PageNumber=1" +
-             //   page.toString() +
+                //   page.toString() +
                 "&PageSize=6"
 
         val request = Request.Builder()
@@ -197,14 +197,14 @@ class ApartmentListFragment : Fragment() {
                         val apartmentsFetched = gson.fromJson(body, Array<Apartment>::class.java)
 
                         activity?.runOnUiThread {
-                            if(page == 1){
+                            if (page == 1) {
                                 rootView.firstProgressBar.visibility = View.GONE
                                 apartments = apartmentsFetched
                                 recyclerView.adapter =
                                     ApartmentListAdapter(
                                         apartments
                                     )
-                            } else{
+                            } else {
                                 apartments += apartmentsFetched
                                 recyclerView.adapter?.notifyDataSetChanged()
                             }

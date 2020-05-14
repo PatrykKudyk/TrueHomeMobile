@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments
+package com.e.truehomemobile.fragments.extras
 
 import android.content.Context
 import android.content.res.Configuration
@@ -12,7 +12,6 @@ import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.fragment_language.*
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,7 +48,11 @@ class LanguageFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         rootView = inflater.inflate(R.layout.fragment_language, container, false);
         initFragment()
         return rootView
@@ -110,34 +113,33 @@ class LanguageFragment : Fragment() {
     }
 
 
-
-    private fun initFragment(){
+    private fun initFragment() {
         polishCardView = rootView.findViewById(R.id.polish_card_view)
         englishCardView = rootView.findViewById(R.id.english_card_view)
 
         polishLinearLayout = rootView.findViewById(R.id.polish_linear_layout)
         englishLinearLayout = rootView.findViewById(R.id.english_linear_layout)
 
-        when(MyApp.language){
+        when (MyApp.language) {
             "pl" -> {
                 polishLinearLayout.setBackgroundColor(R.color.colorPrimary)
             }
             "en" -> {
                 englishLinearLayout.setBackgroundColor(R.color.colorPrimary)
             }
-            else ->{
+            else -> {
 
             }
         }
 
         polishCardView.setOnClickListener {
-            if(MyApp.language != "pl"){
+            if (MyApp.language != "pl") {
                 MyApp.language = "pl"
                 setLocale("pl")
             }
         }
         englishCardView.setOnClickListener {
-            if(MyApp.language != "en"){
+            if (MyApp.language != "en") {
                 MyApp.language = "en"
                 setLocale("en")
             }
@@ -150,7 +152,8 @@ class LanguageFragment : Fragment() {
         val config = Configuration(resources.configuration)
         Locale.setDefault(locale)
         config.setLocale(locale)
-        resources.updateConfiguration(config,
+        resources.updateConfiguration(
+            config,
             resources.displayMetrics
         )
 

@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments.Apartment
+package com.e.truehomemobile.fragments.apartment
 
 import android.content.Context
 import android.net.Uri
@@ -111,7 +111,7 @@ class AddApartmentFragment : Fragment() {
         }
 
         correct = validationHolder.isZipCodeCorrect(rootView.add_apartment_zip_code.text.toString())
-        if(!correct){
+        if (!correct) {
             errorsHandler.setIncorrectZipCodeError(rootView.add_apartment_zip_code_layout)
         }
 

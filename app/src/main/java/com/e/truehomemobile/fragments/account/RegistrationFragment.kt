@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments.Account
+package com.e.truehomemobile.fragments.account
 
 import android.content.Context
 import android.net.Uri
@@ -50,9 +50,9 @@ class RegistrationFragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private lateinit var animationHolder : AnimationsHolder
+    private lateinit var animationHolder: AnimationsHolder
     private val validationHolder = ValidationHolder()
-    private lateinit var errorsHandler : ErrorsHandler
+    private lateinit var errorsHandler: ErrorsHandler
     private val jsonHolder = JsonHolder()
 
 
@@ -67,7 +67,11 @@ class RegistrationFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         rootView = inflater.inflate(R.layout.fragment_registration, container, false);
         initFragment()
         return rootView
@@ -127,8 +131,7 @@ class RegistrationFragment : Fragment() {
     }
 
 
-
-    fun initFragment(){
+    fun initFragment() {
         errorsHandler = ErrorsHandler(rootView.context)
         animationHolder = AnimationsHolder(rootView.context)
 //        makeStartAnimations()
@@ -136,26 +139,26 @@ class RegistrationFragment : Fragment() {
         rootView.register_button.setOnClickListener {
             handleRegisterButton()
         }
-        rootView.backTextView.setOnClickListener{
+        rootView.backTextView.setOnClickListener {
             fragmentManager
                 ?.popBackStackImmediate()
         }
         handleFieldsListeners()
     }
 
-    fun handleRegisterButton(){
-        if(areFieldsCorrect()){
+    fun handleRegisterButton() {
+        if (areFieldsCorrect()) {
             //if(checkApiResponse()){
 //                makeSuccessActions()
-                Toast.makeText(rootView.context, "Pomyślnie zarejestrowano", Toast.LENGTH_SHORT).show()
-                fragmentManager
-                    ?.popBackStackImmediate()
+            Toast.makeText(rootView.context, "Pomyślnie zarejestrowano", Toast.LENGTH_SHORT).show()
+            fragmentManager
+                ?.popBackStackImmediate()
 
             //}
         }
     }
 
-    fun handleFieldsListeners(){
+    fun handleFieldsListeners() {
         handleLoginField()
         handleEmailField()
         handleEmailRepeatField()
@@ -186,7 +189,7 @@ class RegistrationFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(isPasswordLengthCorrect()){
+                if (isPasswordLengthCorrect()) {
                     isPasswordCorrect()
                 }
             }
@@ -227,7 +230,7 @@ class RegistrationFragment : Fragment() {
         })
     }
 
-    private fun handleLoginField(){
+    private fun handleLoginField() {
         rootView.login_field.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -243,7 +246,7 @@ class RegistrationFragment : Fragment() {
 
     private fun isEmailCorrect(): Boolean {
         errorsHandler.clearError(rootView.email_field_layout)
-        if(validationHolder.isEmailCorrect(rootView.email_field.text.toString())){
+        if (validationHolder.isEmailCorrect(rootView.email_field.text.toString())) {
             return true
         }
         errorsHandler.setIncorrectEmailError(rootView.email_field_layout)
@@ -251,7 +254,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun isPasswordCorrect(): Boolean {
-        if(validationHolder.isPasswordCorrect(rootView.password_field.text.toString())){
+        if (validationHolder.isPasswordCorrect(rootView.password_field.text.toString())) {
             errorsHandler.clearError(rootView.password_field_layout)
             return true
         }
@@ -259,8 +262,8 @@ class RegistrationFragment : Fragment() {
         return false
     }
 
-    private fun isPasswordLengthCorrect(): Boolean{
-        if(validationHolder.isLengthCorrect(rootView.password_field.text.toString(), 8)){
+    private fun isPasswordLengthCorrect(): Boolean {
+        if (validationHolder.isLengthCorrect(rootView.password_field.text.toString(), 8)) {
             errorsHandler.clearError(rootView.password_field_layout)
             return true
         }
@@ -269,7 +272,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun isLoginLengthCorrect(): Boolean {
-        if(validationHolder.isLengthCorrect(rootView.login_field.text.toString(), 4)){
+        if (validationHolder.isLengthCorrect(rootView.login_field.text.toString(), 4)) {
             errorsHandler.clearError(rootView.login_field_layout)
             return true
         }
@@ -278,7 +281,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun areEmailsEqual(): Boolean {
-        if(validationHolder.areFieldsEqual(rootView.email_field, rootView.email_repeat_field)){
+        if (validationHolder.areFieldsEqual(rootView.email_field, rootView.email_repeat_field)) {
             errorsHandler.clearError(rootView.email_repeat_field_layout)
             return true
         }
@@ -287,7 +290,11 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun arePasswordsEqual(): Boolean {
-        if(validationHolder.areFieldsEqual(rootView.password_field, rootView.password_repeat_field)){
+        if (validationHolder.areFieldsEqual(
+                rootView.password_field,
+                rootView.password_repeat_field
+            )
+        ) {
             errorsHandler.clearError(rootView.password_repeat_field_layout)
             return true
         }
@@ -295,29 +302,29 @@ class RegistrationFragment : Fragment() {
         return false
     }
 
-    private fun makeFirstLayerFieldTests(): Boolean{
+    private fun makeFirstLayerFieldTests(): Boolean {
         var isPassed = arePasswordsEqual()
-        if(!areEmailsEqual()){
+        if (!areEmailsEqual()) {
             isPassed = false
         }
-        if(!isLoginLengthCorrect()){
+        if (!isLoginLengthCorrect()) {
             isPassed = false
         }
         return isPassed
     }
 
-    private fun makeSecondLayerFieldTests(): Boolean{
+    private fun makeSecondLayerFieldTests(): Boolean {
         var isPassed = isPasswordCorrect()
-        if(!isEmailCorrect()) {
+        if (!isEmailCorrect()) {
             isPassed = false
         }
         return isPassed
     }
 
     private fun areFieldsCorrect(): Boolean {
-        if(areAllFieldsFilled()){
-            if(makeFirstLayerFieldTests()){  //i had to create a method there otherwise, the test were not ran simultaneously
-                if(makeSecondLayerFieldTests()){                        //same as previously
+        if (areAllFieldsFilled()) {
+            if (makeFirstLayerFieldTests()) {  //i had to create a method there otherwise, the test were not ran simultaneously
+                if (makeSecondLayerFieldTests()) {                        //same as previously
                     return true
                 }
                 return false
@@ -330,30 +337,30 @@ class RegistrationFragment : Fragment() {
     private fun areAllFieldsFilled(): Boolean {
         clearFieldErrors()
         var isCorrect = true
-        if(!validationHolder.isFieldFilled(rootView.login_field)){
+        if (!validationHolder.isFieldFilled(rootView.login_field)) {
             isCorrect = false
             errorsHandler.setEmptyFieldError(rootView.login_field_layout)
         }
-        if(!validationHolder.isFieldFilled(rootView.email_field)){
+        if (!validationHolder.isFieldFilled(rootView.email_field)) {
             isCorrect = false
             errorsHandler.setEmptyFieldError(rootView.email_field_layout)
         }
-        if(!validationHolder.isFieldFilled(rootView.email_repeat_field)){
+        if (!validationHolder.isFieldFilled(rootView.email_repeat_field)) {
             isCorrect = false
             errorsHandler.setEmptyFieldError(rootView.email_repeat_field_layout)
         }
-        if(!validationHolder.isFieldFilled(rootView.password_field)){
+        if (!validationHolder.isFieldFilled(rootView.password_field)) {
             isCorrect = false
             errorsHandler.setEmptyFieldError(rootView.password_field_layout)
         }
-        if(!validationHolder.isFieldFilled(rootView.password_repeat_field)){
+        if (!validationHolder.isFieldFilled(rootView.password_repeat_field)) {
             isCorrect = false
             errorsHandler.setEmptyFieldError(rootView.password_repeat_field_layout)
         }
         return isCorrect
     }
 
-    private fun clearFieldErrors(){
+    private fun clearFieldErrors() {
         errorsHandler.clearError(rootView.login_field_layout)
         rootView.login_field.clearFocus()
         errorsHandler.clearError(rootView.email_field_layout)
@@ -376,7 +383,7 @@ class RegistrationFragment : Fragment() {
 //        animationHolder.flyFromBottom(logoImageView, 700, 900)
 //    }
 
-    private fun initFonts(){
+    private fun initFonts() {
         val typeface = ResourcesCompat.getFont(rootView.context, R.font.josefinsansregular)
         rootView.password_field_layout.typeface = typeface
         rootView.password_repeat_field_layout.typeface = typeface
@@ -390,14 +397,14 @@ class RegistrationFragment : Fragment() {
         )
         MyApp.isResponseReceived = false
         fetchApiResponse(registrationRequest)
-        do{
+        do {
             Thread.sleep(100)
-        }while(!MyApp.isResponseReceived)
+        } while (!MyApp.isResponseReceived)
 
         return true
     }
 
-    private fun fetchApiResponse(registrationRequest: RegistrationRequest){
+    private fun fetchApiResponse(registrationRequest: RegistrationRequest) {
         val url = MyApp.apiUrl + "security/registration"
         val json = jsonHolder.createRegistrationRequestJson(registrationRequest).trimIndent()
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
@@ -409,7 +416,7 @@ class RegistrationFragment : Fragment() {
 
         val client: OkHttpClient = getUnsafeOkHttpClient().build()
 
-        val response = client.newCall(request).enqueue(object: Callback {
+        val response = client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -420,11 +427,9 @@ class RegistrationFragment : Fragment() {
                     200 -> {
 
 
-
                     }
 
                     else -> {
-
 
 
                     }
@@ -434,17 +439,23 @@ class RegistrationFragment : Fragment() {
         })
     }
 
-    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder{
+    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
 
         try {
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
                 @Throws(CertificateException::class)
-                override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                override fun checkClientTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
                 }
 
                 @Throws(CertificateException::class)
-                override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                override fun checkServerTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
                 }
 
                 override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {
