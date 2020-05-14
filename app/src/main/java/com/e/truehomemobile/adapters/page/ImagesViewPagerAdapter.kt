@@ -12,7 +12,7 @@ import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activities.MainActivity
-import com.e.truehomemobile.fragments.Apartment.ImageFragment
+import com.e.truehomemobile.fragments.apartment.ImageFragment
 import kotlinx.android.synthetic.main.apartment_image.view.*
 
 class ImagesViewPagerAdapter : PagerAdapter {

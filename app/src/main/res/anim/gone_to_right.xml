@@ -3,12 +3,10 @@
 
     <translate
         android:fromXDelta="0"
-        android:toXDelta="2000"
-        />
+        android:toXDelta="2000" />
 
     <alpha
         android:fromAlpha="1.0"
-        android:toAlpha="0.0"
-        />
+        android:toAlpha="0.0" />
 
 </set>

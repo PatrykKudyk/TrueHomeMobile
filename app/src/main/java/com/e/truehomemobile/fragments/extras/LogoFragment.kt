@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments
+package com.e.truehomemobile.fragments.extras
 
 import android.content.Context
 import android.net.Uri
@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.e.truehomemobile.R
-import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
+import com.e.truehomemobile.fragments.apartment.ApartmentListFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -98,7 +98,7 @@ class LogoFragment : Fragment() {
             }
     }
 
-    private fun initFragment(){
+    private fun initFragment() {
         Handler().postDelayed({
             apartmentListFragment = ApartmentListFragment.newInstance()
 
@@ -106,6 +106,6 @@ class LogoFragment : Fragment() {
                 ?.beginTransaction()
                 ?.replace(R.id.frame_layout, apartmentListFragment)
                 ?.commit()
-        },3700)
+        }, 3700)
     }
 }

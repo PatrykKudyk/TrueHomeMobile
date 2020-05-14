@@ -1,18 +1,17 @@
-package com.e.truehomemobile.fragments.Apartment
+package com.e.truehomemobile.fragments.account
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
-import kotlinx.android.synthetic.main.fragment_image.view.*
+import com.e.truehomemobile.fragments.apartment.AddApartmentFragment
+import com.google.android.material.navigation.NavigationView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,18 +21,22 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [ImageFragment.OnFragmentInteractionListener] interface
+ * [AccountFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [ImageFragment.newInstance] factory method to
+ * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ImageFragment : Fragment() {
+class AccountFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    private lateinit var navigationView: NavigationView
     private lateinit var rootView: View
+    private lateinit var addButton: View
+    private lateinit var logoutButton: View
+    private lateinit var addApartmentFragment: AddApartmentFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +51,11 @@ class ImageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_image, container, false);
+        rootView = inflater.inflate(R.layout.fragment_account, container, false);
         initFragment()
         return rootView
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
@@ -72,50 +74,40 @@ class ImageFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ImageFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String) =
-            ImageFragment().apply {
+        fun newInstance() =
+            AccountFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
                 }
             }
     }
 
     private fun initFragment() {
-        val apartmentImage = rootView.apartment_image
-        val string = param1?.substring(21)
-        val imageBytes = Base64.decode(string, Base64.DEFAULT)
-        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        addButton = rootView.findViewById(R.id.add_apartment_button_account)
+        logoutButton = rootView.findViewById(R.id.logout_text_view)
 
-        apartmentImage.setImageBitmap(
-            Bitmap.createBitmap(decodedImage)
-        )
+        addButton.setOnClickListener {
+            addApartmentFragment = AddApartmentFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.frame_layout, addApartmentFragment)
+                ?.addToBackStack(RegistrationFragment.toString())
+                ?.commit()
+        }
 
+        logoutButton.setOnClickListener {
+            MyApp.isLogged = false
+            navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+            val menu = navigationView.menu
+            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+            navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
+            activity?.recreate()
+        }
     }
 }

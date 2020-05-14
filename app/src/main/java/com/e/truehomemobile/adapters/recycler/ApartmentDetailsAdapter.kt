@@ -10,7 +10,8 @@ import com.e.truehomemobile.models.apartment.ApartmentWithImages
 import com.e.truehomemobile.viewHolders.ApartmentDetailsViewHolder
 import kotlinx.android.synthetic.main.apartment_show_details.view.*
 
-class ApartmentDetailsAdapter(val apartment: ApartmentWithImages): RecyclerView.Adapter<ApartmentDetailsViewHolder>() {
+class ApartmentDetailsAdapter(val apartment: ApartmentWithImages) :
+    RecyclerView.Adapter<ApartmentDetailsViewHolder>() {
     override fun getItemCount(): Int {
         return 1
     }
@@ -25,7 +26,8 @@ class ApartmentDetailsAdapter(val apartment: ApartmentWithImages): RecyclerView.
         holder.view.apartment_details_name.text = apartment.apartmentName
         holder.view.apartment_details_city.text = apartment.apartmentCity + ", " +
                 apartment.apartmentZipCode
-        holder.view.apartment_details_address.text = apartment.apartmentStreet + " " + apartment.apartmentStreetNumber
+        holder.view.apartment_details_address.text =
+            apartment.apartmentStreet + " " + apartment.apartmentStreetNumber
         holder.view.apartment_details_price.text = apartment.apartmentPrice.toString() + " zł"
         holder.view.apartment_details_description.text = apartment.apartmentDescription
 

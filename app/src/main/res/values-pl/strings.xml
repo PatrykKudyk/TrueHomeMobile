@@ -19,6 +19,7 @@
     <string name="field_error_password_incorrect_symbols">Hasło musi zawierać dużą i małą literę oraz cyfrę</string>
     <string name="field_error_password_incorrect_length">Hasło musi posiadać conajmniej 8 znaków</string>
     <string name="field_error_email_incorrect">Podany e-mail jest niepoprawny</string>
+    <string name="field_error_zip_code_incorrect">Podany kod pocztowy jest niepoprawny</string>
     <string name="prompt_registration_successful">Pomyślnie zarejestrowano</string>
     <string name="lang_polish">Polski</string>
     <string name="lang_english">Angielski</string>

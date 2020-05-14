@@ -11,14 +11,15 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
-import com.e.truehomemobile.fragments.*
-import com.e.truehomemobile.fragments.Account.AccountFragment
-import com.e.truehomemobile.fragments.Account.LoginFragment
-import com.e.truehomemobile.fragments.Account.RegistrationFragment
-import com.e.truehomemobile.fragments.Apartment.AddApartmentFragment
-import com.e.truehomemobile.fragments.Apartment.ApartmentDetailsFragment
-import com.e.truehomemobile.fragments.Apartment.ApartmentListFragment
-import com.e.truehomemobile.fragments.Apartment.ImageFragment
+import com.e.truehomemobile.fragments.account.AccountFragment
+import com.e.truehomemobile.fragments.account.LoginFragment
+import com.e.truehomemobile.fragments.account.RegistrationFragment
+import com.e.truehomemobile.fragments.apartment.AddApartmentFragment
+import com.e.truehomemobile.fragments.apartment.ApartmentDetailsFragment
+import com.e.truehomemobile.fragments.apartment.ApartmentListFragment
+import com.e.truehomemobile.fragments.apartment.ImageFragment
+import com.e.truehomemobile.fragments.extras.LanguageFragment
+import com.e.truehomemobile.fragments.extras.LogoFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     AccountFragment.OnFragmentInteractionListener,
     AddApartmentFragment.OnFragmentInteractionListener,
     ApartmentDetailsFragment.OnFragmentInteractionListener,
-    ImageFragment.OnFragmentInteractionListener{
+    ImageFragment.OnFragmentInteractionListener {
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -75,9 +76,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setCheckedItem(menu.findItem(R.id.menu_apartments))
 
-        if(MyApp.isLogged){
+        if (MyApp.isLogged) {
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
-        }else{
+        } else {
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_login)
         }
     }
@@ -97,12 +98,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .commitAllowingStateLoss()
             }
             R.id.menu_account -> {
-                if(!MyApp.isLogged){
+                if (!MyApp.isLogged) {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frame_layout, loginFragment)
                         .commit()
-                }else{
+                } else {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frame_layout, accountFragment)

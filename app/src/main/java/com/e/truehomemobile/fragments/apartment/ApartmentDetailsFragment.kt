@@ -1,4 +1,4 @@
-package com.e.truehomemobile.fragments.Apartment
+package com.e.truehomemobile.fragments.apartment
 
 import android.content.Context
 import android.net.Uri
@@ -84,7 +84,7 @@ class ApartmentDetailsFragment : Fragment() {
             }
     }
 
-    private fun initFragment(){
+    private fun initFragment() {
         recyclerView = rootView.apartment_details_recycler_view
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
@@ -93,7 +93,7 @@ class ApartmentDetailsFragment : Fragment() {
         fetchApartment()
     }
 
-    private fun fetchApartment(){
+    private fun fetchApartment() {
         val url = MyApp.apiUrl +
                 "Apartments/GetPartOfApartments/" + param1.toString()
 
@@ -121,11 +121,11 @@ class ApartmentDetailsFragment : Fragment() {
                         val apartmentFetched = gson.fromJson(body, ApartmentWithImages::class.java)
 
                         activity?.runOnUiThread {
-                                rootView.firstProgressBar.visibility = View.GONE
-                                recyclerView.adapter =
-                                    ApartmentDetailsAdapter(
-                                        apartmentFetched
-                                    )
+                            rootView.firstProgressBar.visibility = View.GONE
+                            recyclerView.adapter =
+                                ApartmentDetailsAdapter(
+                                    apartmentFetched
+                                )
                         }
                     }
 

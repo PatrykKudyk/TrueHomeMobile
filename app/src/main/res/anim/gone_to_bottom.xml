@@ -3,11 +3,9 @@
 
     <translate
         android:fromYDelta="0"
-        android:toYDelta="2000"
-        />
+        android:toYDelta="2000" />
 
     <alpha
         android:fromAlpha="1.0"
-        android:toAlpha="0.0"
-        />
+        android:toAlpha="0.0" />
 </set>
