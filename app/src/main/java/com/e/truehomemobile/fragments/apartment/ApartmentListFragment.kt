@@ -17,6 +17,7 @@ import com.e.truehomemobile.adapters.recycler.ApartmentListAdapter
 import com.e.truehomemobile.models.apartment.Apartment
 import com.e.truehomemobile.models.classes.MarginItemDecoration
 import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.fragment_apartment_list.*
 import kotlinx.android.synthetic.main.fragment_apartment_list.view.*
 import okhttp3.*
 import java.io.IOException
@@ -162,6 +163,9 @@ class ApartmentListFragment : Fragment() {
     }
 
     private fun fetchApartments(page: Int) {
+        rootView.no_data_error_text_view.visibility = View.GONE
+        rootView.firstProgressBar.visibility = View.VISIBLE
+
         loading = true
         if (page != 1) {
             rootView.secondProgressBar.visibility = View.VISIBLE
@@ -183,7 +187,13 @@ class ApartmentListFragment : Fragment() {
 
         val response = client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                activity?.runOnUiThread {
+                    rootView.firstProgressBar.visibility = View.GONE
+                    rootView.no_data_error_text_view.visibility = View.VISIBLE
+                    no_data_error_text_view.setOnClickListener {
+                        fetchApartments(1)
+                    }
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -197,6 +207,7 @@ class ApartmentListFragment : Fragment() {
                         val apartmentsFetched = gson.fromJson(body, Array<Apartment>::class.java)
 
                         activity?.runOnUiThread {
+                            rootView.no_data_error_text_view.visibility = View.GONE
                             if (page == 1) {
                                 rootView.firstProgressBar.visibility = View.GONE
                                 apartments = apartmentsFetched

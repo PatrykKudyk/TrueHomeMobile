@@ -41,5 +41,5 @@
     <string name="add_apartment_description">Opis</string>
     <string name="add_apartment_images">Dodaj zdjęcia</string>
     <string name="add_apartment_back">Wróć</string>
-
+    <string name="error_no_data">Nie udało się pobrać danych z serwera\nNaciśnij aby spróbować ponownie</string>
 </resources>
