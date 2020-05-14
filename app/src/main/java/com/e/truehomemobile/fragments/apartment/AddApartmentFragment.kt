@@ -1,12 +1,18 @@
 package com.e.truehomemobile.fragments.apartment
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activityHolders.ErrorsHandler
@@ -26,8 +32,11 @@ class AddApartmentFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
-    private lateinit var addButton: View
+    private lateinit var addButton: Button
     private lateinit var backButton: View
+    private lateinit var addImageButton: Button
+
+    private var imagesArray = ArrayList<Bitmap>()
 
     private lateinit var errorsHandler: ErrorsHandler
     private val validationHolder = ValidationHolder()
@@ -85,7 +94,12 @@ class AddApartmentFragment : Fragment() {
     private fun initFragment() {
         addButton = rootView.findViewById(R.id.add_apartment_button)
         backButton = rootView.findViewById(R.id.back_text_view)
+        addImageButton = rootView.findViewById(R.id.add_images_button)
         errorsHandler = ErrorsHandler(rootView.context)
+
+        addImageButton.setOnClickListener {
+            startGallery()
+        }
 
         addButton.setOnClickListener {
             addApartment()
@@ -99,7 +113,37 @@ class AddApartmentFragment : Fragment() {
 
     private fun addApartment() {
         if (areFieldsCorrect()) {
+            if (isImageGiven()) {
 
+            }
+        }
+    }
+
+    private fun isImageGiven(): Boolean {
+        if(imagesArray.size == 0){
+            Toast.makeText(rootView.context, getString(getStringIdentifier(rootView.context,
+                "toast_add_image")), Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
+    private fun startGallery() {
+        val cameraIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        cameraIntent.type = "image/*"
+        if (cameraIntent.resolveActivity(activity!!.packageManager) != null) {
+            startActivityForResult(cameraIntent, 1000)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1000) {
+                val returnUri = data?.data
+                val bitmapImage =
+                    MediaStore.Images.Media.getBitmap(activity!!.contentResolver, returnUri)
+                imagesArray.add(bitmapImage)
+            }
         }
     }
 
@@ -166,5 +210,9 @@ class AddApartmentFragment : Fragment() {
         rootView.add_apartment_price.clearFocus()
         errorsHandler.clearError(rootView.add_apartment_description_layout)
         rootView.add_apartment_description.clearFocus()
+    }
+
+    private fun getStringIdentifier(context: Context, name: String): Int {
+        return context.resources.getIdentifier(name, "string", context.packageName)
     }
 }
