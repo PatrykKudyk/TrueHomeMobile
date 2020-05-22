@@ -150,7 +150,9 @@ class RegistrationFragment : Fragment() {
         if (areFieldsCorrect()) {
             //if(checkApiResponse()){
 //                makeSuccessActions()
-            Toast.makeText(rootView.context, "Pomyślnie zarejestrowano", Toast.LENGTH_SHORT).show()
+            Toast.makeText(rootView.context,
+                getString(getStringIdentifier(rootView.context, "toast_successfully_registered")),
+                Toast.LENGTH_SHORT).show()
             fragmentManager
                 ?.popBackStackImmediate()
 
@@ -480,5 +482,7 @@ class RegistrationFragment : Fragment() {
 
     }
 
-
+    private fun getStringIdentifier(context: Context, name: String): Int {
+        return context.resources.getIdentifier(name, "string", context.packageName)
+    }
 }

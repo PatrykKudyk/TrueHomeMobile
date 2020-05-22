@@ -12,12 +12,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.marginLeft
+import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.ValidationHolder
+import kotlinx.android.synthetic.main.fragment_add_apartment.*
 import kotlinx.android.synthetic.main.fragment_add_apartment.view.*
+import okhttp3.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -119,10 +124,41 @@ class AddApartmentFragment : Fragment() {
         }
     }
 
+    private fun sendApartment() {
+        val url = MyApp.apiUrl +
+                "Apartments/AddApartment"
+
+        val formBody = FormBody.Builder()
+            .add("ApartmentName", rootView.add_apartment_name.text.toString())
+            .add("ApartmentCity", rootView.add_apartment_city.text.toString())
+            .add("ApartmentStreet", rootView.add_apartment_street.text.toString())
+            .add("ApartmentStreetNumber", rootView.add_apartment_street_number.text.toString())
+            .add("ApartmentZipCode", rootView.add_apartment_zip_code.text.toString())
+            .add("ApartmentPrice", rootView.add_apartment_price.text.toString())
+            .add("ApartmentDescription", rootView.add_apartment_description.text.toString())
+            .build()
+
+//        val imagesPart = MultipartBody.Builder()
+//            .
+
+
+        val request = Request.Builder()
+            .url(url)
+            .header("Content-Type", "application/json")
+            .get()
+            .build()
+    }
+
     private fun isImageGiven(): Boolean {
-        if(imagesArray.size == 0){
-            Toast.makeText(rootView.context, getString(getStringIdentifier(rootView.context,
-                "toast_add_image")), Toast.LENGTH_SHORT).show()
+        if (imagesArray.size == 0) {
+            Toast.makeText(
+                rootView.context, getString(
+                    getStringIdentifier(
+                        rootView.context,
+                        "toast_add_image"
+                    )
+                ), Toast.LENGTH_SHORT
+            ).show()
             return false
         }
         return true
@@ -143,8 +179,20 @@ class AddApartmentFragment : Fragment() {
                 val bitmapImage =
                     MediaStore.Images.Media.getBitmap(activity!!.contentResolver, returnUri)
                 imagesArray.add(bitmapImage)
+                addImageToLayout(bitmapImage)
             }
         }
+    }
+
+    private fun addImageToLayout(imageBitmap: Bitmap) {
+        if (images_scroll_view.visibility == View.GONE) {
+            images_scroll_view.visibility = View.VISIBLE
+        }
+        val image = ImageView(rootView.context)
+        image.setImageBitmap(imageBitmap)
+        images_linear_layout.addView(image)
+        image.layoutParams.width = 240
+        image.layoutParams.height = 240
     }
 
     private fun areFieldsCorrect(): Boolean {
