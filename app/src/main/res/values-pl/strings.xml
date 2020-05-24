@@ -43,4 +43,9 @@
     <string name="add_apartment_back">Wróć</string>
     <string name="error_no_data">Nie udało się pobrać danych z serwera\nNaciśnij aby spróbować ponownie</string>
     <string name="toast_add_image">Dodaj conajmniej jedno zdjęcie</string>
+    <string name="toast_successfully_logged">Zalogowano!</string>
+    <string name="toast_successfully_registered">Pomyślnie zarejestrowano!</string>
+    <string name="toast_not_logged">Niepoprawny login i/lub hasło</string>
+    <string name="toast_add_apartment">Pomyślnie dodano mieszkanie</string>
+    <string name="toast_add_apartment_failure">Nie udało się dodać mieszkania</string>
 </resources>

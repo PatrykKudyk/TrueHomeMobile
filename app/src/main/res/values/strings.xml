@@ -43,4 +43,9 @@
     <string name="add_apartment_back">Back</string>
     <string name="error_no_data">Couldn\'t get data from server\nClick to try again</string>
     <string name="toast_add_image">Add at least one image</string>
+    <string name="toast_successfully_logged">Logged In!</string>
+    <string name="toast_successfully_registered">Successfully registered!</string>
+    <string name="toast_not_logged">Incorrect login and/or password</string>
+    <string name="toast_add_apartment">Apartment successfully added</string>
+    <string name="toast_add_apartment_failure">Apartment add failed</string>
 </resources>

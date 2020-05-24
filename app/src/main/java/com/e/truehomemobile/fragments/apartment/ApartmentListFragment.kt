@@ -50,7 +50,7 @@ class ApartmentListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var jsonHolder: JsonHolder
 
-    private lateinit var apartments: Array<Apartment>
+    private lateinit var apartments: ArrayList<Apartment>
     private var loading = false
     private var pageNumber: Int = 1
 
@@ -139,32 +139,34 @@ class ApartmentListFragment : Fragment() {
             )
         )
 
-
+        pageNumber = 1
         fetchApartments(pageNumber)
 
-//        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-////                if (dy > 0) { //check for scroll down
-//                    val visibleItemCount = mLayoutManager.childCount
-//                    val totalItemCount = mLayoutManager.itemCount
-//                    val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
-//
-//                    if (!loading) {
-//                        if (visibleItemCount + pastVisibleItems >= totalItemCount) {
-//                            pageNumber++
-//                            fetchApartments(pageNumber)
-////                             Do pagination.. i.e. fetch new data
-//                        }
-//                    }
-//                }
-////            }
-//        })
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) { //check for scroll down
+                val visibleItemCount = mLayoutManager.childCount
+                val totalItemCount = mLayoutManager.itemCount
+                val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
+
+                if (!loading) {
+                    if (visibleItemCount + pastVisibleItems >= totalItemCount) {
+                        pageNumber++
+                        fetchApartments(pageNumber)
+//                             Do pagination.. i.e. fetch new data
+                    }
+                }
+            }
+            }
+        })
 
     }
 
     private fun fetchApartments(page: Int) {
-        rootView.no_data_error_text_view.visibility = View.GONE
-        rootView.firstProgressBar.visibility = View.VISIBLE
+        if (rootView.no_data_error_text_view.visibility == View.VISIBLE) {
+            rootView.no_data_error_text_view.visibility = View.GONE
+            rootView.firstProgressBar.visibility = View.VISIBLE
+        }
 
         loading = true
         if (page != 1) {
@@ -173,9 +175,9 @@ class ApartmentListFragment : Fragment() {
         jsonHolder = JsonHolder()
         val url = MyApp.apiUrl +
                 "Apartments/GetAllApartments" +
-                "?PageNumber=1" +
-                //   page.toString() +
-                "&PageSize=6"
+                "?PageNumber=" +
+                page.toString() +
+                "&PageSize=5"
 
         val request = Request.Builder()
             .url(url)
@@ -206,17 +208,22 @@ class ApartmentListFragment : Fragment() {
 
                         val apartmentsFetched = gson.fromJson(body, Array<Apartment>::class.java)
 
+//                        val apartmentList: ArrayList<Apartment> = apartmentsFetched
+                        val apartmentList = apartmentsFetched.toCollection(ArrayList())
+
                         activity?.runOnUiThread {
                             rootView.no_data_error_text_view.visibility = View.GONE
                             if (page == 1) {
                                 rootView.firstProgressBar.visibility = View.GONE
-                                apartments = apartmentsFetched
+                                apartments = apartmentList
                                 recyclerView.adapter =
                                     ApartmentListAdapter(
                                         apartments
                                     )
                             } else {
-                                apartments += apartmentsFetched
+                                for (apartment in apartmentList) {
+                                    apartments.add(apartment)
+                                }
                                 recyclerView.adapter?.notifyDataSetChanged()
                             }
                             loading = false

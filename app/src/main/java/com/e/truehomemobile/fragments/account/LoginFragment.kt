@@ -159,7 +159,9 @@ class LoginFragment : Fragment() {
 //            }
 //        }
         if (rootView.login_field.text.toString() == "admin" && rootView.password_field.text.toString() == "admin") {
-            Toast.makeText(rootView.context, "Pomyślnie zalogowano", Toast.LENGTH_SHORT).show()
+            Toast.makeText(rootView.context,
+                getString(getStringIdentifier(rootView.context, "toast_successfully_logged")),
+                Toast.LENGTH_SHORT).show()
             clearFields()
             MyApp.isLogged = true
 
@@ -177,7 +179,9 @@ class LoginFragment : Fragment() {
 
         } else {
             clearFields()
-            Toast.makeText(rootView.context, "Błędne dane logowania", Toast.LENGTH_SHORT).show()
+            Toast.makeText(rootView.context,
+                getString(getStringIdentifier(rootView.context, "toast_not_logged"))
+                , Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -313,5 +317,9 @@ class LoginFragment : Fragment() {
             throw RuntimeException(e)
         }
 
+    }
+
+    private fun getStringIdentifier(context: Context, name: String): Int {
+        return context.resources.getIdentifier(name, "string", context.packageName)
     }
 }
