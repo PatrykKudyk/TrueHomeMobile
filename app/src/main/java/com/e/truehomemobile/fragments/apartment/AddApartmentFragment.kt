@@ -147,9 +147,9 @@ class AddApartmentFragment : Fragment() {
                 "Apartments/AddApartment"
 
 
-        val fileImage = File(imagesArray[0].picturePath)
-
-        val requestBody = fileImage.asRequestBody("image/*".toMediaTypeOrNull())
+//        val fileImage = File(imagesArray[0].picturePath)
+//
+//        val requestBody = fileImage.asRequestBody("image/*".toMediaTypeOrNull())
 
 //        val filePart = MultipartBody.Part.createFormData("ApartmentImages", fileImage.name, requestBody)
 
@@ -168,8 +168,15 @@ class AddApartmentFragment : Fragment() {
                 "ApartmentDescription",
                 rootView.add_apartment_description.text.toString()
             )
-            .addFormDataPart("ApartmentImages", fileImage.name, requestBody)
-            .build()
+//            .addFormDataPart("ApartmentImages", fileImage.name, requestBody)
+
+        for (image in imagesArray) {
+            val fileImage = File(image.picturePath)
+            val requestBody = fileImage.asRequestBody("image/*".toMediaTypeOrNull())
+            multipartBody.addFormDataPart("ApartmentImages", fileImage.name, requestBody)
+        }
+
+        val requestBody =  multipartBody.build()
 
 //        for(image in imagesArray){
 //
@@ -197,7 +204,7 @@ class AddApartmentFragment : Fragment() {
         val request = Request.Builder()
             .url(url)
             .header("Content-Type", "multipart/form-data")
-            .post(multipartBody)
+            .post(requestBody)
             .build()
 
         val client: OkHttpClient = getUnsafeOkHttpClient().build()
