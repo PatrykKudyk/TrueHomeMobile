@@ -21,11 +21,14 @@ import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.ValidationHolder
+import com.e.truehomemobile.models.apartment.Picture
+import com.e.truehomemobile.models.classes.ImageFilePath
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_add_apartment.*
 import kotlinx.android.synthetic.main.fragment_add_apartment.view.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
 import java.security.cert.CertificateException
@@ -51,7 +54,7 @@ class AddApartmentFragment : Fragment() {
     private lateinit var backButton: View
     private lateinit var addImageButton: Button
 
-    private var imagesArray = ArrayList<Bitmap>()
+    private var imagesArray = ArrayList<Picture>()
 
     private lateinit var errorsHandler: ErrorsHandler
     private val validationHolder = ValidationHolder()
@@ -129,6 +132,11 @@ class AddApartmentFragment : Fragment() {
     private fun addApartment() {
         if (areFieldsCorrect()) {
             if (isImageGiven()) {
+//                val MY_READ_EXTERNAL_REQUEST : Int = 1
+//                if (checkSelfPermission(
+//                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), MY_READ_EXTERNAL_REQUEST)
+//                }
                 sendApartment()
             }
         }
@@ -139,9 +147,9 @@ class AddApartmentFragment : Fragment() {
                 "Apartments/AddApartment"
 
 
-        val fileImage = File(imagesArray[0].toString())
+        val fileImage = File(imagesArray[0].picturePath)
 
-        val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), fileImage)
+        val requestBody = fileImage.asRequestBody("image/*".toMediaTypeOrNull())
 
 //        val filePart = MultipartBody.Part.createFormData("ApartmentImages", fileImage.name, requestBody)
 
@@ -214,7 +222,7 @@ class AddApartmentFragment : Fragment() {
             override fun onResponse(call: Call, response: Response) {
                 when (response.code) {
 
-                    201 -> {
+                    200 -> {
                         activity?.runOnUiThread {
                             Toast.makeText(
                                 rootView.context,
@@ -226,6 +234,8 @@ class AddApartmentFragment : Fragment() {
                                 ),
                                 Toast.LENGTH_SHORT
                             ).show()
+                            fragmentManager
+                                ?.popBackStackImmediate()
                         }
                     }
 
@@ -270,7 +280,9 @@ class AddApartmentFragment : Fragment() {
                 val returnUri = data?.data
                 val bitmapImage =
                     MediaStore.Images.Media.getBitmap(activity!!.contentResolver, returnUri)
-                imagesArray.add(bitmapImage)
+                val imagePath = ImageFilePath.getPath(rootView.context, data?.data)
+                val picture = Picture(imagePath, bitmapImage)
+                imagesArray.add(picture)
                 addImageToLayout(bitmapImage)
             }
         }

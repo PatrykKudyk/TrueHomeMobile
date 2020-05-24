@@ -139,7 +139,7 @@ class ApartmentListFragment : Fragment() {
             )
         )
 
-
+        pageNumber = 1
         fetchApartments(pageNumber)
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
