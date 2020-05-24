@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,9 +21,18 @@ import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.ValidationHolder
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_add_apartment.*
 import kotlinx.android.synthetic.main.fragment_add_apartment.view.*
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import java.io.File
+import java.io.IOException
+import java.security.cert.CertificateException
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -119,7 +129,7 @@ class AddApartmentFragment : Fragment() {
     private fun addApartment() {
         if (areFieldsCorrect()) {
             if (isImageGiven()) {
-
+                sendApartment()
             }
         }
     }
@@ -128,15 +138,49 @@ class AddApartmentFragment : Fragment() {
         val url = MyApp.apiUrl +
                 "Apartments/AddApartment"
 
-        val formBody = FormBody.Builder()
-            .add("ApartmentName", rootView.add_apartment_name.text.toString())
-            .add("ApartmentCity", rootView.add_apartment_city.text.toString())
-            .add("ApartmentStreet", rootView.add_apartment_street.text.toString())
-            .add("ApartmentStreetNumber", rootView.add_apartment_street_number.text.toString())
-            .add("ApartmentZipCode", rootView.add_apartment_zip_code.text.toString())
-            .add("ApartmentPrice", rootView.add_apartment_price.text.toString())
-            .add("ApartmentDescription", rootView.add_apartment_description.text.toString())
+
+        val fileImage = File(imagesArray[0].toString())
+
+        val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), fileImage)
+
+//        val filePart = MultipartBody.Part.createFormData("ApartmentImages", fileImage.name, requestBody)
+
+        val multipartBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("ApartmentName", rootView.add_apartment_name.text.toString())
+            .addFormDataPart("ApartmentCity", rootView.add_apartment_city.text.toString())
+            .addFormDataPart("ApartmentStreet", rootView.add_apartment_street.text.toString())
+            .addFormDataPart(
+                "ApartmentStreetNumber",
+                rootView.add_apartment_street_number.text.toString()
+            )
+            .addFormDataPart("ApartmentZipCode", rootView.add_apartment_zip_code.text.toString())
+            .addFormDataPart("ApartmentPrice", rootView.add_apartment_price.text.toString())
+            .addFormDataPart(
+                "ApartmentDescription",
+                rootView.add_apartment_description.text.toString()
+            )
+            .addFormDataPart("ApartmentImages", fileImage.name, requestBody)
             .build()
+
+//        for(image in imagesArray){
+//
+//            val fileImage = File(image.toString())
+//
+//            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), fileImage)
+//
+//            val filePart = MultipartBody.Part.createFormData("ApartmentImages", fileImage.name, requestBody)
+//        }
+////
+//        val formBody = FormBody.Builder()
+//            .add("ApartmentName", rootView.add_apartment_name.text.toString())
+//            .add("ApartmentCity", rootView.add_apartment_city.text.toString())
+//            .add("ApartmentStreet", rootView.add_apartment_street.text.toString())
+//            .add("ApartmentStreetNumber", rootView.add_apartment_street_number.text.toString())
+//            .add("ApartmentZipCode", rootView.add_apartment_zip_code.text.toString())
+//            .add("ApartmentPrice", rootView.add_apartment_price.text.toString())
+//            .add("ApartmentDescription", rootView.add_apartment_description.text.toString())
+//            .build()
 
 //        val imagesPart = MultipartBody.Builder()
 //            .
@@ -144,9 +188,57 @@ class AddApartmentFragment : Fragment() {
 
         val request = Request.Builder()
             .url(url)
-            .header("Content-Type", "application/json")
-            .get()
+            .header("Content-Type", "multipart/form-data")
+            .post(multipartBody)
             .build()
+
+        val client: OkHttpClient = getUnsafeOkHttpClient().build()
+
+        val response = client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                activity?.runOnUiThread {
+                    Toast.makeText(
+                        rootView.context,
+                        getString(
+                            getStringIdentifier(
+                                rootView.context,
+                                "toast_add_apartment_failure"
+                            )
+                        ),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+
+            override fun onResponse(call: Call, response: Response) {
+                when (response.code) {
+
+                    201 -> {
+                        activity?.runOnUiThread {
+                            Toast.makeText(
+                                rootView.context,
+                                getString(
+                                    getStringIdentifier(
+                                        rootView.context,
+                                        "toast_add_apartment"
+                                    )
+                                ),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+
+                    else -> {
+
+                    }
+                }
+            }
+        }
+
+        )
+
     }
 
     private fun isImageGiven(): Boolean {
@@ -259,6 +351,48 @@ class AddApartmentFragment : Fragment() {
         errorsHandler.clearError(rootView.add_apartment_description_layout)
         rootView.add_apartment_description.clearFocus()
     }
+
+    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+
+        try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+                @Throws(CertificateException::class)
+                override fun checkClientTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
+                }
+
+                @Throws(CertificateException::class)
+                override fun checkServerTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
+                }
+
+                override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {
+                    return arrayOf()
+                }
+            })
+
+            // Install the all-trusting trust manager
+            val sslContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+            // Create an ssl socket factory with our all-trusting manager
+            val sslSocketFactory = sslContext.socketFactory
+
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier(HostnameVerifier { _, _ -> true })
+
+            return builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+
+    }
+
 
     private fun getStringIdentifier(context: Context, name: String): Int {
         return context.resources.getIdentifier(name, "string", context.packageName)

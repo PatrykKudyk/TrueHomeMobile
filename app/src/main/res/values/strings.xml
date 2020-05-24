@@ -46,4 +46,6 @@
     <string name="toast_successfully_logged">Logged In!</string>
     <string name="toast_successfully_registered">Successfully registered!</string>
     <string name="toast_not_logged">Incorrect login and/or password</string>
+    <string name="toast_add_apartment">Apartment successfully added</string>
+    <string name="toast_add_apartment_failure">Apartment add failed</string>
 </resources>

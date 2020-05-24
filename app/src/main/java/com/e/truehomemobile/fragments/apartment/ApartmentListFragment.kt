@@ -206,6 +206,8 @@ class ApartmentListFragment : Fragment() {
 
                         val apartmentsFetched = gson.fromJson(body, Array<Apartment>::class.java)
 
+//                        val apartmentList: ArrayList<Apartment> = apartmentsFetched
+
                         activity?.runOnUiThread {
                             rootView.no_data_error_text_view.visibility = View.GONE
                             if (page == 1) {

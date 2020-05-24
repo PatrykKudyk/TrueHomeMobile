@@ -7,7 +7,7 @@ class ApartmentWithImages(
     var apartmentStreet: String,
     var apartmentStreetNumber: String,
     var apartmentZipCode: String,
-    var apartmentPrice: Int,
+    var apartmentPrice: Double,
     var apartmentDescription: String,
     var apartmentImages: Array<String>
 ) {
