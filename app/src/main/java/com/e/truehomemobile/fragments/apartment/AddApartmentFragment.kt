@@ -1,13 +1,17 @@
 package com.e.truehomemobile.fragments.apartment
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +19,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.marginLeft
 import com.e.truehomemobile.MyApp
 
@@ -48,6 +54,8 @@ class AddApartmentFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    private val READ_EXTERNAL_STORAGE_REQUEST_CODE = 101
 
     private lateinit var rootView: View
     private lateinit var addButton: Button
@@ -137,8 +145,27 @@ class AddApartmentFragment : Fragment() {
 //                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 //                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), MY_READ_EXTERNAL_REQUEST)
 //                }
-                sendApartment()
+                val permission = ContextCompat.checkSelfPermission(
+                    rootView.context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+
+                if (permission != PackageManager.PERMISSION_GRANTED) {
+                    makeRequest()
+                } else {
+                    sendApartment()
+                }
             }
+        }
+    }
+
+    private fun makeRequest() {
+        activity?.let {
+            ActivityCompat.requestPermissions(
+                it,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                READ_EXTERNAL_STORAGE_REQUEST_CODE
+            )
         }
     }
 
@@ -176,7 +203,7 @@ class AddApartmentFragment : Fragment() {
             multipartBody.addFormDataPart("ApartmentImages", fileImage.name, requestBody)
         }
 
-        val requestBody =  multipartBody.build()
+        val requestBody = multipartBody.build()
 
 //        for(image in imagesArray){
 //
@@ -410,6 +437,23 @@ class AddApartmentFragment : Fragment() {
             throw RuntimeException(e)
         }
 
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            READ_EXTERNAL_STORAGE_REQUEST_CODE -> {
+
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(TAG, "Permission has been denied by user")
+                } else {
+                    Log.i(TAG, "Permission has been granted by user")
+                    sendApartment()
+                }
+            }
+        }
     }
 
 
