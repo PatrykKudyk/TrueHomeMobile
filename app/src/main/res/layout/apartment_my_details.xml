@@ -178,18 +178,46 @@
                     android:gravity="center_horizontal"
                     android:textSize="24sp" />
 
-                <Button
-                    android:id="@+id/delete_apartment_button"
-                    android:layout_width="150dp"
-                    android:layout_gravity="center"
-                    android:layout_height="30dp"
-                    android:background="@drawable/red_button_background"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/josefinsansregular"
-                    android:textSize="16sp"
-                    android:text="@string/button_delete_apartment"
-                    android:textAllCaps="false"
-                    android:textColor="@color/cardview_light_background" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/edit_apartment_button"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/ligh_purple_button_background"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/button_edit_apartment"
+                        android:textAllCaps="false"
+                        android:textColor="@color/cardview_light_background"
+                        android:textSize="16sp" />
+                    <Button
+                        android:id="@+id/delete_apartment_button"
+                        android:layout_width="150dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/red_button_background"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/button_delete_apartment"
+                        android:textAllCaps="false"
+                        android:textColor="@color/cardview_light_background"
+                        android:textSize="16sp" />
+
+
+
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
         </ScrollView>

@@ -97,7 +97,7 @@ class ApartmentDetailsFragment : Fragment() {
     private fun fetchApartment() {
         rootView.no_data_error_text_view.visibility = View.GONE
         rootView.firstProgressBar.visibility = View.VISIBLE
-        val url = MyApp.apiUrl +
+        val url = MyApp.homeUrl +
                 "Apartments/GetPartOfApartments/" + param1.toString()
 
         val request = Request.Builder()

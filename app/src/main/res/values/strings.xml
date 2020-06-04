@@ -50,4 +50,5 @@
     <string name="toast_add_apartment_failure">Apartment add failed</string>
     <string name="button_show_my_apartments">Show my apartments</string>
     <string name="button_delete_apartment">Delete</string>
+    <string name="button_edit_apartment">Edit</string>
 </resources>

@@ -238,7 +238,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun fetchApiLoginResponse(loginRequest: LoginRequest) {
-        val url = MyApp.apiUrl + "security/login"
+        val url = MyApp.homeUrl + "security/login"
         val json = jsonHolder.createLoginRequestJson(loginRequest).trimIndent()
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 

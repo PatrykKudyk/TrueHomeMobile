@@ -407,7 +407,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun fetchApiResponse(registrationRequest: RegistrationRequest) {
-        val url = MyApp.apiUrl + "security/registration"
+        val url = MyApp.homeUrl + "security/registration"
         val json = jsonHolder.createRegistrationRequestJson(registrationRequest).trimIndent()
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
