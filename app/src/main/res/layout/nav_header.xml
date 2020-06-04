@@ -15,7 +15,7 @@
         android:paddingLeft="8dp"
         android:textColor="@color/colorLayoutBackgroundLightPurple"
         android:fontFamily="@font/josefinsansbold"
-        android:textSize="22sp" />
+        android:textSize="30sp" />
 
 
 </LinearLayout>
