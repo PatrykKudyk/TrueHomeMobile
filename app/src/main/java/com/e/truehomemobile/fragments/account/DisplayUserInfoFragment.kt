@@ -78,7 +78,7 @@ class DisplayUserInfoFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            AccountFragment().apply {
+            DisplayUserInfoFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

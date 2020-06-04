@@ -11,6 +11,7 @@ import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.fragments.apartment.AddApartmentFragment
+import com.e.truehomemobile.fragments.apartment.MyApartmentsFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_account.view.*
 
@@ -37,7 +38,9 @@ class AccountFragment : Fragment() {
     private lateinit var rootView: View
     private lateinit var addButton: View
     private lateinit var logoutButton: View
+    private lateinit var myApartmentsButton: View
     private lateinit var addApartmentFragment: AddApartmentFragment
+    private lateinit var myApartmentsFragment: MyApartmentsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,8 +95,18 @@ class AccountFragment : Fragment() {
     private fun initFragment() {
         addButton = rootView.findViewById(R.id.add_apartment_button_account)
         logoutButton = rootView.findViewById(R.id.logout_text_view)
+        myApartmentsButton = rootView.findViewById(R.id.show_my_apartments_button)
 
-        rootView.user_login_text_view.text =  MyApp.userLogin
+        rootView.user_login_text_view.text = MyApp.userLogin
+
+        myApartmentsButton.setOnClickListener {
+            myApartmentsFragment = MyApartmentsFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.frame_layout, myApartmentsFragment)
+                ?.addToBackStack(MyApartmentsFragment.toString())
+                ?.commit()
+        }
 
         addButton.setOnClickListener {
             addApartmentFragment = AddApartmentFragment.newInstance()
@@ -112,5 +125,6 @@ class AccountFragment : Fragment() {
             navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
             activity?.recreate()
         }
+
     }
 }

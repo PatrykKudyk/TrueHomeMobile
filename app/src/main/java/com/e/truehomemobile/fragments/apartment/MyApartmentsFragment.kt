@@ -102,11 +102,9 @@ class MyApartmentsFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: Array<String>, param2: Int) =
-            ImageFragment().apply {
+        fun newInstance() =
+            MyApartmentsFragment().apply {
                 arguments = Bundle().apply {
-                    putStringArray(ARG_PARAM1, param1)
-                    putInt(ARG_PARAM2, param2)
                 }
             }
     }

@@ -16,9 +16,7 @@ import com.e.truehomemobile.adapters.recycler.ApartmentDetailsAdapter
 import com.e.truehomemobile.models.apartment.ApartmentWithImages
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.apartment_my_details.view.*
-import kotlinx.android.synthetic.main.fragment_apartment_details.*
-import kotlinx.android.synthetic.main.fragment_apartment_details.view.*
-import kotlinx.android.synthetic.main.fragment_apartment_details.view.no_data_error_text_view
+import kotlinx.android.synthetic.main.fragment_my_apartment_details.view.*
 import okhttp3.*
 import java.io.IOException
 import java.security.cert.CertificateException
@@ -115,7 +113,7 @@ class MyApartmentDetailsFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: Long) =
-            ImageFragment().apply {
+            MyApartmentDetailsFragment().apply {
                 arguments = Bundle().apply {
                     putLong(ARG_PARAM1, param1)
                 }
@@ -123,7 +121,7 @@ class MyApartmentDetailsFragment : Fragment() {
     }
 
     private fun initFragment() {
-        recyclerView = rootView.apartment_details_recycler_view
+        recyclerView = rootView.my_apartment_details_recycler_view
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
@@ -158,7 +156,7 @@ class MyApartmentDetailsFragment : Fragment() {
                 activity?.runOnUiThread {
                     rootView.firstProgressBar.visibility = View.GONE
                     rootView.no_data_error_text_view.visibility = View.VISIBLE
-                    no_data_error_text_view.setOnClickListener {
+                    rootView.no_data_error_text_view.setOnClickListener {
                         fetchApartment()
                     }
                 }
