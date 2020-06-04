@@ -10,7 +10,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +20,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginLeft
 import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
@@ -29,7 +27,6 @@ import com.e.truehomemobile.activityHolders.ErrorsHandler
 import com.e.truehomemobile.activityHolders.ValidationHolder
 import com.e.truehomemobile.models.apartment.Picture
 import com.e.truehomemobile.models.classes.ImageFilePath
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_add_apartment.*
 import kotlinx.android.synthetic.main.fragment_add_apartment.view.*
 import okhttp3.*
@@ -170,7 +167,7 @@ class AddApartmentFragment : Fragment() {
     }
 
     private fun sendApartment() {
-        val url = MyApp.apiUrl +
+        val url = MyApp.homeUrl +
                 "Apartments/AddApartment"
 
 

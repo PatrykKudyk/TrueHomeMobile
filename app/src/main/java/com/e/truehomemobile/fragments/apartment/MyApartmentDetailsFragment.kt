@@ -15,8 +15,10 @@ import com.e.truehomemobile.R
 import com.e.truehomemobile.adapters.recycler.ApartmentDetailsAdapter
 import com.e.truehomemobile.models.apartment.ApartmentWithImages
 import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.apartment_my_details.view.*
 import kotlinx.android.synthetic.main.fragment_apartment_details.*
 import kotlinx.android.synthetic.main.fragment_apartment_details.view.*
+import kotlinx.android.synthetic.main.fragment_apartment_details.view.no_data_error_text_view
 import okhttp3.*
 import java.io.IOException
 import java.security.cert.CertificateException
@@ -26,11 +28,23 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
-class ApartmentDetailsFragment : Fragment() {
+/**
+ * A simple [Fragment] subclass.
+ * Activities that contain this fragment must implement the
+ * [ImageFragment.OnFragmentInteractionListener] interface
+ * to handle interaction events.
+ * Use the [ImageFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class MyApartmentDetailsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: Long? = null
+    private var param2: Int? = null
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var rootView: View
@@ -40,6 +54,7 @@ class ApartmentDetailsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getLong(ARG_PARAM1)
+            param2 = it.getInt(ARG_PARAM2)
         }
     }
 
@@ -48,11 +63,12 @@ class ApartmentDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_apartment_details, container, false);
+        rootView = inflater.inflate(R.layout.fragment_image, container, false)
         initFragment()
         return rootView
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
@@ -71,14 +87,35 @@ class ApartmentDetailsFragment : Fragment() {
         listener = null
     }
 
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     *
+     *
+     * See the Android Training lesson [Communicating with Other Fragments]
+     * (http://developer.android.com/training/basics/fragments/communicating.html)
+     * for more information.
+     */
     interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment ImageFragment.
+         */
+        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: Long) =
-            ApartmentDetailsFragment().apply {
+            ImageFragment().apply {
                 arguments = Bundle().apply {
                     putLong(ARG_PARAM1, param1)
                 }
@@ -91,7 +128,15 @@ class ApartmentDetailsFragment : Fragment() {
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
 
+        rootView.delete_apartment_button.setOnClickListener{
+            deleteApartment()
+        }
+
         fetchApartment()
+    }
+
+    private fun deleteApartment(){
+
     }
 
     private fun fetchApartment() {

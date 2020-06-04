@@ -173,7 +173,7 @@ class ApartmentListFragment : Fragment() {
             rootView.secondProgressBar.visibility = View.VISIBLE
         }
         jsonHolder = JsonHolder()
-        val url = MyApp.apiUrl +
+        val url = MyApp.homeUrl +
                 "Apartments/GetAllApartments" +
                 "?PageNumber=" +
                 page.toString() +
