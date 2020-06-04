@@ -25,7 +25,7 @@
     <string name="lang_english">Angielski</string>
     <string name="language">Język</string>
     <string name="menu_language">Język</string>
-    <string name="menu_apartments">Apartamenty</string>
+    <string name="menu_apartments">Mieszkania</string>
     <string name="menu_login">Zaloguj</string>
     <string name="menu_account">Konto</string>
     <string name="nav_open">Otwórz Navigation Drawer</string>
@@ -48,4 +48,6 @@
     <string name="toast_not_logged">Niepoprawny login i/lub hasło</string>
     <string name="toast_add_apartment">Pomyślnie dodano mieszkanie</string>
     <string name="toast_add_apartment_failure">Nie udało się dodać mieszkania</string>
+    <string name="button_show_my_apartments">Pokaż moje mieszkania</string>
+    <string name="button_delete_apartment">Usuń</string>
 </resources>

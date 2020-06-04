@@ -6,4 +6,5 @@
     <color name="colorLayoutBackgroundLightPurple">#E1D7EB</color>
     <color name="colorProgressBarStart">#38225e</color>
     <color name="colorProgressBarEnd">#7e57c1</color>
+    <color name="colorRed">#D73D3D</color>
 </resources>

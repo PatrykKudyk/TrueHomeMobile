@@ -101,7 +101,7 @@ class ApartmentListAdapter(var apartmentList: ArrayList<Apartment>) :
             holder.view.image_main_apartment_logged.setImageResource(R.drawable.icon)
         }
 
-        val mainCardView = holder.view.apartment_not_logged_cell_card_view_logged
+        val mainCardView = holder.view.apartment_logged_cell_card_view_logged
 
         mainCardView.setOnClickListener {
             val apartmentDetailsFragment = ApartmentDetailsFragment.newInstance(
