@@ -12,6 +12,7 @@ import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
 import com.e.truehomemobile.fragments.apartment.AddApartmentFragment
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.fragment_account.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,6 +92,8 @@ class AccountFragment : Fragment() {
     private fun initFragment() {
         addButton = rootView.findViewById(R.id.add_apartment_button_account)
         logoutButton = rootView.findViewById(R.id.logout_text_view)
+
+        rootView.user_login_text_view.text =  MyApp.userLogin
 
         addButton.setOnClickListener {
             addApartmentFragment = AddApartmentFragment.newInstance()

@@ -21,8 +21,12 @@ import com.e.truehomemobile.models.authorization.LoginRequest
 import com.e.truehomemobile.models.authorization.LoginResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.activity_main_layout.view.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.nav_header.*
+import kotlinx.android.synthetic.main.nav_header.view.*
+import kotlinx.android.synthetic.main.nav_header.view.user_name_text_view
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -162,8 +166,10 @@ class LoginFragment : Fragment() {
             Toast.makeText(rootView.context,
                 getString(getStringIdentifier(rootView.context, "toast_successfully_logged")),
                 Toast.LENGTH_SHORT).show()
-            clearFields()
             MyApp.isLogged = true
+            MyApp.userLogin = login_field.text.toString()
+            clearFields()
+
 
             apartmentListFragment = ApartmentListFragment.newInstance()
             navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
@@ -171,6 +177,8 @@ class LoginFragment : Fragment() {
             val menu = navigationView.menu
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
             navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
+
+            navigationView.user_name_text_view.text = MyApp.userLogin
 
             fragmentManager
                 ?.beginTransaction()

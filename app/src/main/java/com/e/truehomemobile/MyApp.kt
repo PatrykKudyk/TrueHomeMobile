@@ -14,5 +14,6 @@ class MyApp() : Application() {
         var token: String = ""
         var refreshToken: String = ""
         var language: String = "en"
+        var userLogin: String = ""
     }
 }
