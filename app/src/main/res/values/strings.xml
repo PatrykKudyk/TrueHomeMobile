@@ -64,4 +64,6 @@
     <string name="user_info_age">Age</string>
     <string name="user_info_address">Address</string>
     <string name="user_info_phone_number">Phone number</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

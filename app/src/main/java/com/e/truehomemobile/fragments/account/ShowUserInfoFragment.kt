@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.e.truehomemobile.MyApp
 import com.e.truehomemobile.R
 import com.e.truehomemobile.adapters.recycler.UserInfoShowAdapter
-import com.e.truehomemobile.models.apartment.ApartmentPartialResult
 import com.e.truehomemobile.models.classes.MarginItemDecoration
 import com.e.truehomemobile.models.user.User
 import com.google.gson.GsonBuilder
@@ -43,8 +42,7 @@ class ShowUserInfoFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
-    private lateinit var editButton: View
-    private lateinit var 
+    private lateinit var editUserInfoFragment: EditUserInfoFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,16 +96,6 @@ class ShowUserInfoFragment : Fragment() {
 
     private fun initFragment() {
         recyclerView = rootView.findViewById(R.id.user_info_show_recycler_view)
-        editButton = rootView.findViewById(R.id.edit_user_button)
-
-        editButton.setOnClickListener {
-            showUserInfoFragment = ShowUserInfoFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.frame_layout, showUserInfoFragment)
-                ?.addToBackStack(ShowUserInfoFragment.toString())
-                ?.commit()
-        }
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
