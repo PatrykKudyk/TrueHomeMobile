@@ -66,6 +66,7 @@
     <string name="button_edit_apartment">Edit</string>
     <string name="button_show_user_details">My info</string>
     <string name="button_save_changes">Save changes</string>
+    <string name="button_contact">Contact</string>
     <string name="hello_text_view_message">Hello</string>
     <string name="user_info_name">Name</string>
     <string name="user_info_last_name">Last name</string>

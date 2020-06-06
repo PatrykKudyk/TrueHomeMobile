@@ -37,7 +37,7 @@
     <string name="menu_account">Konto</string>
     <string name="nav_open">Otwórz Navigation Drawer</string>
     <string name="nav_close">Zamknij Navigation Drawer</string>
-    <string name="button_add_apartment">Dodaj apartament</string>
+    <string name="button_add_apartment">Dodaj mieszkanie</string>
     <string name="logout">Wyloguj</string>
     <string name="add_apartment_name">Nazwa</string>
     <string name="add_apartment_city">Miasto</string>
@@ -66,6 +66,7 @@
     <string name="button_edit_apartment">Edytuj</string>
     <string name="button_show_user_details">Moje informacje</string>
     <string name="button_save_changes">Zapisz zmiany</string>
+    <string name="button_contact">Dane kontaktowe</string>
     <string name="hello_text_view_message">Cześć</string>
     <string name="user_info_name">Imię</string>
     <string name="user_info_last_name">Nazwisko</string>

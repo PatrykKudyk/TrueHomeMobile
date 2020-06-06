@@ -1,6 +1,7 @@
 package com.e.truehomemobile.adapters.recycler
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
@@ -39,5 +40,12 @@ class ApartmentDetailsAdapter(val apartment: ApartmentWithImages) :
             apartment.apartmentPartialResult.apartmentImages
         )
         holder.view.apartment_details_view_pager.adapter = adapter
+
+        holder.view.contact_button.setOnClickListener {
+            holder.view.contact_mail.text = apartment.user.emailAddress
+            holder.view.contact_phone.text = apartment.user.telephoneNumber
+            holder.view.contact_card_view.visibility = View.VISIBLE
+            holder.view.contact_button.visibility = View.GONE
+        }
     }
 }

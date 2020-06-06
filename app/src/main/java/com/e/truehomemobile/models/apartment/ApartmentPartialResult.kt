@@ -12,7 +12,6 @@ class ApartmentPartialResult(
     var apartmentPrice: Double,
     var apartmentDescription: String,
     var apartmentImage: String,
-    var apartmentImages: Array<String>,
-    var user: User
+    var apartmentImages: Array<String>
 ) {
 }
