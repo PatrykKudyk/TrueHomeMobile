@@ -3,6 +3,7 @@ package com.e.truehomemobile.fragments.account
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +22,12 @@ import com.e.truehomemobile.models.authorization.LoginRequest
 import com.e.truehomemobile.models.authorization.LoginResponse
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.activity_main_layout.view.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.nav_header.*
+import kotlinx.android.synthetic.main.nav_header.view.*
+import kotlinx.android.synthetic.main.nav_header.view.user_name_text_view
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -55,6 +60,7 @@ class LoginFragment : Fragment() {
 
 
     private lateinit var rootView: View
+
     //    private lateinit var loginField: View
 //    private lateinit var loginFieldLayout: View
 //    private lateinit var passwordField: View
@@ -117,13 +123,7 @@ class LoginFragment : Fragment() {
 
     private fun initFragment() {
         errorsHandler = ErrorsHandler(rootView.context)
-//        animationHolder = AnimationsHolder(frame_layout.context)
-//        makeStartAnimations()
 
-//        loginField = rootView.findViewById(R.id.login_field)
-//        loginFieldLayout = rootView.findViewById(R.id.login_field_layout)
-//        passwordField = rootView.findViewById(R.id.password_field)
-//        passwordFieldLayout = rootView.findViewById(R.id.password_field_layout)
         loginButton = rootView.findViewById(R.id.login_button)
         registerButton = rootView.findViewById(R.id.register_button)
 
@@ -150,39 +150,37 @@ class LoginFragment : Fragment() {
     }
 
     private fun handleLoginButton() {
-//        MyApp.isLogged = false                   // USUNĄĆ TO JAK JUŻ BĘDZIE LOGOWANIE
-//        clearFieldsErrors()
-//        if(areFieldsFilled()){
-//            if(checkUserDataCorrectness()){
-//                login_field.text = null
-//                password_field.text = null
-//            }
-//        }
-        if (rootView.login_field.text.toString() == "admin" && rootView.password_field.text.toString() == "admin") {
-            Toast.makeText(rootView.context,
-                getString(getStringIdentifier(rootView.context, "toast_successfully_logged")),
-                Toast.LENGTH_SHORT).show()
-            clearFields()
-            MyApp.isLogged = true
+        if (areFieldsFilled()) {
+            //     if (checkUserDataCorrectness()) {
+            if (rootView.login_field.text.toString() == "papryk" && rootView.password_field.text.toString() == "Papryk12") {
+                Toast.makeText(
+                    rootView.context,
+                    getString(getStringIdentifier(rootView.context, "toast_successfully_logged")),
+                    Toast.LENGTH_SHORT
+                ).show()
+                MyApp.isLogged = true
+                MyApp.userLogin = login_field.text.toString()
+                MyApp.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwidW5pcXVlX25hbWUiOiI2IiwianRpIjoiMDIyZmI0OWYtNmVkMS00ZTNmLTg4MzgtNmExZDc3NzNkZmY2IiwiaWF0IjoxNTkxNDUzODY0MDc5LCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNTkxNDUzODY0LCJleHAiOjE1OTE0NTU2NjQsImlzcyI6Imh0dHA6Ly81NC4zOC41NS44MjoxODc2NSIsImF1ZCI6Imh0dHBzOi8veW91cl9hcHA6NDQzIn0.rnd6QIYeM88N5xTQ8hr_5OEMZyZkuJ1Rd0JDlmWThQU"
+                clearFields()
+                apartmentListFragment = ApartmentListFragment.newInstance()
+                navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
 
-            apartmentListFragment = ApartmentListFragment.newInstance()
-            navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+                val menu = navigationView.menu
+                menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
+                navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
 
-            val menu = navigationView.menu
-            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
-            navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
+                navigationView.user_name_text_view.text = MyApp.userLogin
 
-            fragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.frame_layout, apartmentListFragment)
-                ?.commit()
+                fragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.frame_layout, apartmentListFragment)
+                    ?.commit()
 
-        } else {
-            clearFields()
-            Toast.makeText(rootView.context,
-                getString(getStringIdentifier(rootView.context, "toast_not_logged"))
-                , Toast.LENGTH_SHORT).show()
+            } else {
+                clearFields()
+            }
         }
+
     }
 
     private fun areFieldsFilled(): Boolean {
@@ -230,7 +228,7 @@ class LoginFragment : Fragment() {
             Thread.sleep(100)
         } while (!MyApp.isResponseReceived)
 
-        if (MyApp.loginResponse.token != "") {
+        if (MyApp.token != "") {
             MyApp.isLogged = true
             return true
         }
@@ -238,20 +236,38 @@ class LoginFragment : Fragment() {
     }
 
     private fun fetchApiLoginResponse(loginRequest: LoginRequest) {
-        val url = MyApp.homeUrl + "security/login"
+        val url = MyApp.identityUrl + "Auth/Login"
         val json = jsonHolder.createLoginRequestJson(loginRequest).trimIndent()
         val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
         val request = Request.Builder()
             .url(url)
+            .addHeader("Content-Type", "application/x-www-form-urlencoded")
+//            .addHeader("Accept-Charset", "charset=utf-8")
+//            .addHeader("Accept-Language", "*/*")
+//            .header("Content-Type", "application/json")
             .post(requestBody)
             .build()
+
+//        Log.println(Log.INFO,"INFO", request.toString())
 
         val client: OkHttpClient = getUnsafeOkHttpClient().build()
 
         val response = client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                MyApp.isResponseReceived = true
+                activity?.runOnUiThread {
+                    Toast.makeText(
+                        rootView.context,
+                        getString(
+                            getStringIdentifier(
+                                rootView.context,
+                                "toast_unable_to_get_respond"
+                            )
+                        )
+                        , Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -262,14 +278,39 @@ class LoginFragment : Fragment() {
 
                         val gson = GsonBuilder().create()
 
-                        MyApp.loginResponse = gson.fromJson(body, LoginResponse::class.java)
+                        val loginResponse = gson.fromJson(body, LoginResponse::class.java)
+                        MyApp.token = loginResponse.accessToken
+                        MyApp.refreshToken = loginResponse.refreshToken
+                    }
+
+                    406 -> {
+                        activity?.runOnUiThread {
+                            Toast.makeText(
+                                rootView.context,
+                                getString(
+                                    getStringIdentifier(
+                                        rootView.context,
+                                        "toast_unable_to_log_in"
+                                    )
+                                )
+                                , Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
 
                     else -> {
-                        MyApp.loginResponse = LoginResponse(
-                            Types.NULL, "", "", "",
-                            Types.NULL, ArrayList()
-                        )
+                        activity?.runOnUiThread {
+                            Toast.makeText(
+                                rootView.context,
+                                getString(
+                                    getStringIdentifier(
+                                        rootView.context,
+                                        "toast_unable_to_log_in"
+                                    )
+                                )
+                                , Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
                 MyApp.isResponseReceived = true

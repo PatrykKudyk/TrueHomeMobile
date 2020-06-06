@@ -9,10 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
+import com.e.truehomemobile.adapters.recycler.ApartmentListAdapter
+import com.e.truehomemobile.adapters.recycler.MyApartmentsAdapter
 import com.e.truehomemobile.models.apartment.Apartment
+import com.e.truehomemobile.models.apartment.ApartmentPartialResult
 import com.e.truehomemobile.models.classes.MarginItemDecoration
+import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.fragment_my_apartments.view.*
+import okhttp3.*
+import java.io.IOException
+import java.security.cert.CertificateException
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +48,7 @@ class MyApartmentsFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
-    private lateinit var apartments: ArrayList<Apartment>
+    private lateinit var apartments: ArrayList<ApartmentPartialResult>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +64,7 @@ class MyApartmentsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_image, container, false)
+        rootView = inflater.inflate(R.layout.fragment_my_apartments, container, false)
         initFragment()
         return rootView
     }
@@ -102,11 +115,9 @@ class MyApartmentsFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: Array<String>, param2: Int) =
-            ImageFragment().apply {
+        fun newInstance() =
+            MyApartmentsFragment().apply {
                 arguments = Bundle().apply {
-                    putStringArray(ARG_PARAM1, param1)
-                    putInt(ARG_PARAM2, param2)
                 }
             }
     }
@@ -122,5 +133,112 @@ class MyApartmentsFragment : Fragment() {
                 12
             )
         )
+        fetchApartments()
+    }
+
+    private fun fetchApartments() {
+        if (rootView.no_data_error_text_view.visibility == View.VISIBLE) {
+            rootView.no_data_error_text_view.visibility = View.GONE
+            rootView.firstProgressBar.visibility = View.VISIBLE
+        }
+
+
+        val url = MyApp.homeUrl +
+                "Apartments/GetUserApartments"
+
+        val request = Request.Builder()
+            .url(url)
+            .header("Content-Type", "application/json")
+            .header("Authorization", "Bearer " + MyApp.token)
+            .get()
+            .build()
+
+        val client: OkHttpClient = getUnsafeOkHttpClient().build()
+
+        val response = client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                activity?.runOnUiThread {
+                    rootView.firstProgressBar.visibility = View.GONE
+                    rootView.no_data_error_text_view.visibility = View.VISIBLE
+                    rootView.no_data_error_text_view.setOnClickListener {
+                        fetchApartments()
+                    }
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                when (response.code) {
+
+                    200 -> {
+                        val body = response.body?.string()
+
+                        val gson = GsonBuilder().create()
+
+                        val apartmentsFetched =
+                            gson.fromJson(body, Array<ApartmentPartialResult>::class.java)
+
+//                        val apartmentList: ArrayList<Apartment> = apartmentsFetched
+                        val apartmentList = apartmentsFetched.toCollection(ArrayList())
+
+                        activity?.runOnUiThread {
+                            rootView.no_data_error_text_view.visibility = View.GONE
+                            rootView.firstProgressBar.visibility = View.GONE
+                            apartments = apartmentList
+                            recyclerView.adapter =
+                                MyApartmentsAdapter(
+                                    apartments
+                                )
+                        }
+                    }
+
+
+                    else -> {
+
+                    }
+                }
+            }
+
+        })
+    }
+
+    private fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
+
+        try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+                @Throws(CertificateException::class)
+                override fun checkClientTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
+                }
+
+                @Throws(CertificateException::class)
+                override fun checkServerTrusted(
+                    chain: Array<java.security.cert.X509Certificate>,
+                    authType: String
+                ) {
+                }
+
+                override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {
+                    return arrayOf()
+                }
+            })
+
+            // Install the all-trusting trust manager
+            val sslContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+            // Create an ssl socket factory with our all-trusting manager
+            val sslSocketFactory = sslContext.socketFactory
+
+            val builder = OkHttpClient.Builder()
+            builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+            builder.hostnameVerifier(HostnameVerifier { _, _ -> true })
+
+            return builder
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+
     }
 }

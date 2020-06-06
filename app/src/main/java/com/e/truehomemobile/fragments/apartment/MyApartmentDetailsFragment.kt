@@ -13,12 +13,11 @@ import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.adapters.recycler.ApartmentDetailsAdapter
+import com.e.truehomemobile.adapters.recycler.MyApartmentDetailsAdapter
 import com.e.truehomemobile.models.apartment.ApartmentWithImages
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.apartment_my_details.view.*
-import kotlinx.android.synthetic.main.fragment_apartment_details.*
-import kotlinx.android.synthetic.main.fragment_apartment_details.view.*
-import kotlinx.android.synthetic.main.fragment_apartment_details.view.no_data_error_text_view
+import kotlinx.android.synthetic.main.fragment_my_apartment_details.view.*
 import okhttp3.*
 import java.io.IOException
 import java.security.cert.CertificateException
@@ -49,6 +48,8 @@ class MyApartmentDetailsFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
+//    private lateinit var deleteButton: View
+//    private lateinit var editButton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +64,7 @@ class MyApartmentDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_image, container, false)
+        rootView = inflater.inflate(R.layout.fragment_my_apartment_details, container, false)
         initFragment()
         return rootView
     }
@@ -115,7 +116,7 @@ class MyApartmentDetailsFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: Long) =
-            ImageFragment().apply {
+            MyApartmentDetailsFragment().apply {
                 arguments = Bundle().apply {
                     putLong(ARG_PARAM1, param1)
                 }
@@ -123,16 +124,26 @@ class MyApartmentDetailsFragment : Fragment() {
     }
 
     private fun initFragment() {
-        recyclerView = rootView.apartment_details_recycler_view
+        recyclerView = rootView.my_apartment_details_recycler_view
+//        deleteButton = rootView.findViewById(R.id.delete_apartment_button)
+//        editButton = rootView.findViewById(R.id.edit_apartment_button)
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
 
-        rootView.delete_apartment_button.setOnClickListener{
-            deleteApartment()
-        }
+//        deleteButton.setOnClickListener{
+//            deleteApartment()
+//        }
+//
+//        editButton.setOnClickListener {
+//            editApartment()
+//        }
 
         fetchApartment()
+    }
+
+    private fun editApartment(){
+
     }
 
     private fun deleteApartment(){
@@ -158,7 +169,7 @@ class MyApartmentDetailsFragment : Fragment() {
                 activity?.runOnUiThread {
                     rootView.firstProgressBar.visibility = View.GONE
                     rootView.no_data_error_text_view.visibility = View.VISIBLE
-                    no_data_error_text_view.setOnClickListener {
+                    rootView.no_data_error_text_view.setOnClickListener {
                         fetchApartment()
                     }
                 }
@@ -178,7 +189,7 @@ class MyApartmentDetailsFragment : Fragment() {
                             rootView.no_data_error_text_view.visibility = View.GONE
                             rootView.firstProgressBar.visibility = View.GONE
                             recyclerView.adapter =
-                                ApartmentDetailsAdapter(
+                                MyApartmentDetailsAdapter(
                                     apartmentFetched
                                 )
                         }

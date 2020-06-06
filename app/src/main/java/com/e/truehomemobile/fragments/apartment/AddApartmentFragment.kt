@@ -228,6 +228,7 @@ class AddApartmentFragment : Fragment() {
         val request = Request.Builder()
             .url(url)
             .header("Content-Type", "multipart/form-data")
+            .header("Authorization", "Bearer " + MyApp.token)
             .post(requestBody)
             .build()
 

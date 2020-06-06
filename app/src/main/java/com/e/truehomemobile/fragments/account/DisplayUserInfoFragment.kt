@@ -1,5 +1,4 @@
 package com.e.truehomemobile.fragments.account
-
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -11,10 +10,7 @@ import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.fragments.apartment.AddApartmentFragment
-import com.e.truehomemobile.fragments.apartment.MyApartmentsFragment
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.fragment_account.view.*
-import kotlinx.android.synthetic.main.nav_header.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,19 +25,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AccountFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AccountFragment : Fragment() {
+class DisplayUserInfoFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private lateinit var navigationView: NavigationView
     private lateinit var rootView: View
-    private lateinit var addButton: View
-    private lateinit var logoutButton: View
-    private lateinit var myApartmentsButton: View
-    private lateinit var addApartmentFragment: AddApartmentFragment
-    private lateinit var myApartmentsFragment: MyApartmentsFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +47,7 @@ class AccountFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_account, container, false);
+        rootView = inflater.inflate(R.layout.fragment_display_user_info, container, false);
         initFragment()
         return rootView
     }
@@ -87,48 +78,13 @@ class AccountFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            AccountFragment().apply {
+            DisplayUserInfoFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
     }
 
     private fun initFragment() {
-        addButton = rootView.findViewById(R.id.add_apartment_button_account)
-        logoutButton = rootView.findViewById(R.id.logout_text_view)
-        myApartmentsButton = rootView.findViewById(R.id.show_my_apartments_button)
-
-        rootView.user_login_text_view.text = MyApp.userLogin
-
-        myApartmentsButton.setOnClickListener {
-            myApartmentsFragment = MyApartmentsFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.frame_layout, myApartmentsFragment)
-                ?.addToBackStack(MyApartmentsFragment.toString())
-                ?.commit()
-        }
-
-        addButton.setOnClickListener {
-            addApartmentFragment = AddApartmentFragment.newInstance()
-            fragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.frame_layout, addApartmentFragment)
-                ?.addToBackStack(RegistrationFragment.toString())
-                ?.commit()
-        }
-
-        logoutButton.setOnClickListener {
-            MyApp.isLogged = false
-            MyApp.token = ""
-            MyApp.refreshToken = ""
-            navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
-            navigationView.user_name_text_view.text = ""
-            val menu = navigationView.menu
-            menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
-            navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))
-            activity?.recreate()
-        }
 
     }
 }
