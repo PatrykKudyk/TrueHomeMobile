@@ -160,7 +160,7 @@ class LoginFragment : Fragment() {
                 ).show()
                 MyApp.isLogged = true
                 MyApp.userLogin = login_field.text.toString()
-                MyApp.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwidW5pcXVlX25hbWUiOiI2IiwianRpIjoiMDIyZmI0OWYtNmVkMS00ZTNmLTg4MzgtNmExZDc3NzNkZmY2IiwiaWF0IjoxNTkxNDUzODY0MDc5LCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNTkxNDUzODY0LCJleHAiOjE1OTE0NTU2NjQsImlzcyI6Imh0dHA6Ly81NC4zOC41NS44MjoxODc2NSIsImF1ZCI6Imh0dHBzOi8veW91cl9hcHA6NDQzIn0.rnd6QIYeM88N5xTQ8hr_5OEMZyZkuJ1Rd0JDlmWThQU"
+                MyApp.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwidW5pcXVlX25hbWUiOiI2IiwianRpIjoiMTI3ZjRhZTctYzc4My00MGM4LTk3ZDktZjMzN2JkN2QwZjAzIiwiaWF0IjoxNTkxNDU2MDY5MzIwLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNTkxNDU2MDY5LCJleHAiOjE1OTE0NTc4NjksImlzcyI6Imh0dHA6Ly81NC4zOC41NS44MjoxODc2NSIsImF1ZCI6Imh0dHBzOi8veW91cl9hcHA6NDQzIn0.47nEp1Dlso5C19ettgpWVhcZUa8JKwjopqjgccj5fss"
                 clearFields()
                 apartmentListFragment = ApartmentListFragment.newInstance()
                 navigationView = activity?.findViewById(R.id.nav_view) as NavigationView

@@ -55,5 +55,13 @@
     <string name="button_show_my_apartments">Pokaż moje mieszkania</string>
     <string name="button_delete_apartment">Usuń</string>
     <string name="button_edit_apartment">Edytuj</string>
+    <string name="button_show_user_details">Moje informacje</string>
     <string name="hello_text_view_message">Cześć</string>
+    <string name="user_info_name">Imię</string>
+    <string name="user_info_last_name">Nazwisko</string>
+    <string name="user_info_email">E-mail</string>
+    <string name="user_info_username">Nick</string>
+    <string name="user_info_age">Wiek</string>
+    <string name="user_info_address">Adres</string>
+    <string name="user_info_phone_number">Numer telefonu</string>
 </resources>

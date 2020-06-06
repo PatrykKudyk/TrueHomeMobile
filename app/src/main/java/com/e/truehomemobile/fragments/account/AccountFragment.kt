@@ -40,8 +40,10 @@ class AccountFragment : Fragment() {
     private lateinit var addButton: View
     private lateinit var logoutButton: View
     private lateinit var myApartmentsButton: View
+    private lateinit var userDetailsButton: View
     private lateinit var addApartmentFragment: AddApartmentFragment
     private lateinit var myApartmentsFragment: MyApartmentsFragment
+    private lateinit var showUserInfoFragment: ShowUserInfoFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +99,7 @@ class AccountFragment : Fragment() {
         addButton = rootView.findViewById(R.id.add_apartment_button_account)
         logoutButton = rootView.findViewById(R.id.logout_text_view)
         myApartmentsButton = rootView.findViewById(R.id.show_my_apartments_button)
+        userDetailsButton = rootView.findViewById(R.id.user_details_button)
 
         rootView.user_login_text_view.text = MyApp.userLogin
 
@@ -106,6 +109,15 @@ class AccountFragment : Fragment() {
                 ?.beginTransaction()
                 ?.replace(R.id.frame_layout, myApartmentsFragment)
                 ?.addToBackStack(MyApartmentsFragment.toString())
+                ?.commit()
+        }
+
+        userDetailsButton.setOnClickListener {
+            showUserInfoFragment = ShowUserInfoFragment.newInstance()
+            fragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.frame_layout, showUserInfoFragment)
+                ?.addToBackStack(ShowUserInfoFragment.toString())
                 ?.commit()
         }
 

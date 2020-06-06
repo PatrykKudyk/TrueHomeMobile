@@ -14,6 +14,7 @@ import com.e.truehomemobile.R
 import com.e.truehomemobile.fragments.account.AccountFragment
 import com.e.truehomemobile.fragments.account.LoginFragment
 import com.e.truehomemobile.fragments.account.RegistrationFragment
+import com.e.truehomemobile.fragments.account.ShowUserInfoFragment
 import com.e.truehomemobile.fragments.apartment.*
 import com.e.truehomemobile.fragments.extras.LanguageFragment
 import com.e.truehomemobile.fragments.extras.LogoFragment
@@ -31,7 +32,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     ApartmentDetailsFragment.OnFragmentInteractionListener,
     ImageFragment.OnFragmentInteractionListener,
     MyApartmentsFragment.OnFragmentInteractionListener,
-    MyApartmentDetailsFragment.OnFragmentInteractionListener{
+    MyApartmentDetailsFragment.OnFragmentInteractionListener,
+    ShowUserInfoFragment.OnFragmentInteractionListener{
 
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
