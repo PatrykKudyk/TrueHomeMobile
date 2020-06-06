@@ -26,7 +26,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_info_show_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="462dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="8dp"
@@ -62,7 +62,6 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoImageView" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

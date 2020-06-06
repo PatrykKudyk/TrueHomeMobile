@@ -58,7 +58,7 @@
                     android:id="@+id/add_apartment_button_account"
                     android:layout_width="170dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="150dp"
+                    android:layout_marginTop="110dp"
                     android:background="@drawable/ligh_purple_button_background"
                     android:text="@string/button_add_apartment"
                     android:textColor="@color/colorBaseBackground"
