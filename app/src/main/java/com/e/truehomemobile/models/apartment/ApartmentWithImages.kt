@@ -1,14 +1,6 @@
 package com.e.truehomemobile.models.apartment
 
 class ApartmentWithImages(
-    var apartmentId: Long,
-    var apartmentName: String,
-    var apartmentCity: String,
-    var apartmentStreet: String,
-    var apartmentStreetNumber: String,
-    var apartmentZipCode: String,
-    var apartmentPrice: Double,
-    var apartmentDescription: String,
-    var apartmentImages: Array<String>
+    val apartmentPartialResult: ApartmentPartialResult
 ) {
 }

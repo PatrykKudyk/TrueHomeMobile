@@ -14,6 +14,7 @@ import com.e.truehomemobile.fragments.apartment.AddApartmentFragment
 import com.e.truehomemobile.fragments.apartment.MyApartmentsFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_account.view.*
+import kotlinx.android.synthetic.main.nav_header.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -119,7 +120,10 @@ class AccountFragment : Fragment() {
 
         logoutButton.setOnClickListener {
             MyApp.isLogged = false
+            MyApp.token = ""
+            MyApp.refreshToken = ""
             navigationView = activity?.findViewById(R.id.nav_view) as NavigationView
+            navigationView.user_name_text_view.text = ""
             val menu = navigationView.menu
             menu.findItem(R.id.menu_account).setTitle(R.string.menu_account)
             navigationView.setCheckedItem(menu.findItem(R.id.menu_apartments))

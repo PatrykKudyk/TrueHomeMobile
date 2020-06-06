@@ -13,6 +13,7 @@ import com.e.truehomemobile.MyApp
 
 import com.e.truehomemobile.R
 import com.e.truehomemobile.adapters.recycler.ApartmentDetailsAdapter
+import com.e.truehomemobile.adapters.recycler.MyApartmentDetailsAdapter
 import com.e.truehomemobile.models.apartment.ApartmentWithImages
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.apartment_my_details.view.*
@@ -47,6 +48,8 @@ class MyApartmentDetailsFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
+//    private lateinit var deleteButton: View
+//    private lateinit var editButton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +64,7 @@ class MyApartmentDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.fragment_image, container, false)
+        rootView = inflater.inflate(R.layout.fragment_my_apartment_details, container, false)
         initFragment()
         return rootView
     }
@@ -122,15 +125,25 @@ class MyApartmentDetailsFragment : Fragment() {
 
     private fun initFragment() {
         recyclerView = rootView.my_apartment_details_recycler_view
+//        deleteButton = rootView.findViewById(R.id.delete_apartment_button)
+//        editButton = rootView.findViewById(R.id.edit_apartment_button)
 
         val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = mLayoutManager
 
-        rootView.delete_apartment_button.setOnClickListener{
-            deleteApartment()
-        }
+//        deleteButton.setOnClickListener{
+//            deleteApartment()
+//        }
+//
+//        editButton.setOnClickListener {
+//            editApartment()
+//        }
 
         fetchApartment()
+    }
+
+    private fun editApartment(){
+
     }
 
     private fun deleteApartment(){
@@ -176,7 +189,7 @@ class MyApartmentDetailsFragment : Fragment() {
                             rootView.no_data_error_text_view.visibility = View.GONE
                             rootView.firstProgressBar.visibility = View.GONE
                             recyclerView.adapter =
-                                ApartmentDetailsAdapter(
+                                MyApartmentDetailsAdapter(
                                     apartmentFetched
                                 )
                         }

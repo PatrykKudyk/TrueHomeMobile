@@ -23,17 +23,20 @@ class ApartmentDetailsAdapter(val apartment: ApartmentWithImages) :
     }
 
     override fun onBindViewHolder(holder: ApartmentDetailsViewHolder, position: Int) {
-        holder.view.apartment_details_name.text = apartment.apartmentName
-        holder.view.apartment_details_city.text = apartment.apartmentCity + ", " +
-                apartment.apartmentZipCode
+        holder.view.apartment_details_name.text = apartment.apartmentPartialResult.apartmentName
+        holder.view.apartment_details_city.text = apartment.apartmentPartialResult.apartmentCity + ", " +
+                apartment.apartmentPartialResult.apartmentZipCode
         holder.view.apartment_details_address.text =
-            apartment.apartmentStreet + " " + apartment.apartmentStreetNumber
-        holder.view.apartment_details_price.text = apartment.apartmentPrice.toString() + " zł"
-        holder.view.apartment_details_description.text = apartment.apartmentDescription
+            apartment.apartmentPartialResult.apartmentStreet + " " + apartment.apartmentPartialResult.apartmentStreetNumber
+        holder.view.apartment_details_price.text = apartment.apartmentPartialResult.apartmentPrice.toString() + " zł"
+        holder.view.apartment_details_description.text = apartment.apartmentPartialResult.apartmentDescription
+//        if(apartment.apartmentPartialResult.user.telephoneNumber != null){
+//            holder.view.apartment_details_phone.text = apartment.apartmentPartialResult.user.telephoneNumber
+//        }
 
         var adapter: PagerAdapter = ImagesViewPagerAdapter(
             holder.view.context,
-            apartment.apartmentImages
+            apartment.apartmentPartialResult.apartmentImages
         )
         holder.view.apartment_details_view_pager.adapter = adapter
     }

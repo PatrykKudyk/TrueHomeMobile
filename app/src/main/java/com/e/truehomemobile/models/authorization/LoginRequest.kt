@@ -1,7 +1,7 @@
 package com.e.truehomemobile.models.authorization
 
 data class LoginRequest(
-    val login: String,
+    val username: String,
     val password: String
 ) {
 }

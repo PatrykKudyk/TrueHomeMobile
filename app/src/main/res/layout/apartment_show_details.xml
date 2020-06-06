@@ -166,13 +166,11 @@
                     android:layout_marginEnd="24dp"
                     android:background="@color/colorPrimaryDark" />
 
-
                 <TextView
                     android:id="@+id/apartment_details_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/josefinsansregular"
                     android:gravity="center_horizontal"

@@ -23,67 +23,18 @@ class ApartmentListAdapter(var apartmentList: ArrayList<Apartment>) :
 
 
     override fun onBindViewHolder(holder: ApartmentListViewHolder, position: Int) {
-        if (MyApp.isLogged) {
-            handleLoggedUser(holder, position)
-        } else {
-            handleNotLoggedUser(holder, position)
-        }
-
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApartmentListViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        if (MyApp.isLogged) {
-            val cellForRow = layoutInflater.inflate(R.layout.apartment_cell_logged, parent, false)
-            return ApartmentListViewHolder(cellForRow)
-        } else {
-            val cellForRow =
-                layoutInflater.inflate(R.layout.apartment_cell_not_logged, parent, false)
-            return ApartmentListViewHolder(cellForRow)
-        }
-    }
-
-    private fun handleNotLoggedUser(holder: ApartmentListViewHolder, position: Int) {
-        holder.view.apartment_name_text_view_not_logged.text = apartmentList[position].apartmentName
-        holder.view.apartment_address_text_view_not_logged.text =
-            apartmentList[position].apartmentCity + ", " +
-                    apartmentList[position].apartmentStreet
-        holder.view.apartment_price_text_view_not_logged.text =
-            apartmentList[position].apartmentPrice.toString() + " zł"
-
-        if (apartmentList[position].apartmentImage != null) {
-            val string = apartmentList[position].apartmentImage.substring(21)
-            val imageBytes = Base64.decode(string, Base64.DEFAULT)
-            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-
-            if (decodedImage != null) {
-                holder.view.image_main_apartment_not_logged.setImageBitmap(
-                    Bitmap.createScaledBitmap(
-                        decodedImage, 130, 130, false
-                    )
-                )
-            } else {
-                holder.view.image_main_apartment_not_logged.setImageBitmap(decodedImage)
-            }
-
-        } else {
-            holder.view.image_main_apartment_not_logged.setImageResource(R.drawable.icon)
-        }
-    }
-
-    private fun handleLoggedUser(holder: ApartmentListViewHolder, position: Int) {
-        holder.view.apartment_name_text_view_logged.text = apartmentList[position].apartmentName
+        holder.view.apartment_name_text_view_logged.text = apartmentList[position].apartmentPartialResult.apartmentName
         holder.view.apartment_address_text_view_logged.text =
-            apartmentList[position].apartmentCity + ", " +
-                    apartmentList[position].apartmentStreet + " " + apartmentList[position].apartmentStreetNumber
+            apartmentList[position].apartmentPartialResult.apartmentCity + ", " +
+                    apartmentList[position].apartmentPartialResult.apartmentStreet + " " + apartmentList[position].apartmentPartialResult.apartmentStreetNumber
         holder.view.apartment_zip_code_text_view_logged.text =
-            apartmentList[position].apartmentZipCode
+            apartmentList[position].apartmentPartialResult.apartmentZipCode
         holder.view.apartment_price_text_view_logged.text =
-            apartmentList[position].apartmentPrice.toString() + " zł"
-        holder.view.description_text_view_logged.text = apartmentList[position].apartmentDescription
+            apartmentList[position].apartmentPartialResult.apartmentPrice.toString() + " zł"
+        holder.view.description_text_view_logged.text = apartmentList[position].apartmentPartialResult.apartmentDescription
 
-        if (apartmentList[position].apartmentImage != null) {
-            val string = apartmentList[position].apartmentImage.substring(21)
+        if (apartmentList[position].apartmentPartialResult.apartmentImage != null) {
+            val string = apartmentList[position].apartmentPartialResult.apartmentImage.substring(21)
             val imageBytes = Base64.decode(string, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
@@ -105,7 +56,7 @@ class ApartmentListAdapter(var apartmentList: ArrayList<Apartment>) :
 
         mainCardView.setOnClickListener {
             val apartmentDetailsFragment = ApartmentDetailsFragment.newInstance(
-                apartmentList[position].apartmentId
+                apartmentList[position].apartmentPartialResult.apartmentId
             )
             val manager = (holder.itemView.context as MainActivity).supportFragmentManager
             manager
@@ -115,4 +66,11 @@ class ApartmentListAdapter(var apartmentList: ArrayList<Apartment>) :
                 ?.commit()
         }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApartmentListViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+            val cellForRow = layoutInflater.inflate(R.layout.apartment_cell_logged, parent, false)
+            return ApartmentListViewHolder(cellForRow)
+    }
+
 }

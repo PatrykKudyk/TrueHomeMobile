@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.e.truehomemobile.R
 import com.e.truehomemobile.activities.MainActivity
-import com.e.truehomemobile.fragments.apartment.ApartmentDetailsFragment
 import com.e.truehomemobile.fragments.apartment.MyApartmentDetailsFragment
 import com.e.truehomemobile.models.apartment.Apartment
+import com.e.truehomemobile.models.apartment.ApartmentPartialResult
 import com.e.truehomemobile.viewHolders.MyApartmentsViewHolder
 import kotlinx.android.synthetic.main.apartment_cell_logged.view.*
 
-class MyApartmentsAdapter(var apartmentList: ArrayList<Apartment>) :
+class MyApartmentsAdapter(var apartmentList: ArrayList<ApartmentPartialResult>) :
 
     RecyclerView.Adapter<MyApartmentsViewHolder>() {
     override fun getItemCount(): Int {
@@ -32,8 +32,8 @@ class MyApartmentsAdapter(var apartmentList: ArrayList<Apartment>) :
             apartmentList[position].apartmentPrice.toString() + " zł"
         holder.view.description_text_view_logged.text = apartmentList[position].apartmentDescription
 
-        if (apartmentList[position].apartmentImage != null) {
-            val string = apartmentList[position].apartmentImage.substring(21)
+        if (apartmentList[position].apartmentImages != null) {
+            val string = apartmentList[position].apartmentImages[0].substring(21)
             val imageBytes = Base64.decode(string, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 

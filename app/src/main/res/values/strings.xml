@@ -48,6 +48,10 @@
     <string name="toast_not_logged">Incorrect login and/or password</string>
     <string name="toast_add_apartment">Apartment successfully added</string>
     <string name="toast_add_apartment_failure">Apartment add failed</string>
+    <string name="toast_unable_to_log_in">Unable to log in</string>
+    <string name="toast_unable_to_get_respond">Unable to get response from server</string>
+    <string name="toast_not_deleted">Something went wrong, try again</string>
+    <string name="toast_successfully_deleted">Successfully deleted apartment</string>
     <string name="button_show_my_apartments">Show my apartments</string>
     <string name="button_delete_apartment">Delete</string>
     <string name="button_edit_apartment">Edit</string>
