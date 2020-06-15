@@ -1,1 +1,10 @@
 Mobilna wersja aplikacji TrueHome realizowanej w grupie na I semestrze studiów magisterskich w ramach przedmiotu Zastosowania Informatyki w Gospodarce.
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/1.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/2.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/3.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/4.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/5.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/6.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/7.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/8.png)
+![alt text](https://github.com/PatrykKudyk/TrueHomeMobile/blob/dev_patryk/zdjecia/9.png)
